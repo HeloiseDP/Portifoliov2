@@ -1,0 +1,74 @@
+/* ============================================
+   FRANQ — Design Tokens / CSS Variables
+   ============================================ */
+
+/* ── NIB PRO (heading font — self-hosted) ── */
+@font-face {
+  font-family: 'Nib Pro';
+  src: url('../fonts/NibPro-Regular.woff2') format('woff2'),
+       url('../fonts/NibPro-Regular.ttf')   format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nib Pro';
+  src: url('../fonts/NibPro-Italic.woff2') format('woff2'),
+       url('../fonts/NibPro-Italic.ttf')   format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nib Pro';
+  src: url('../fonts/NibPro-SemiBold.woff2') format('woff2'),
+       url('../fonts/NibPro-SemiBold.ttf')   format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Colors */
+  --color-bg-black:        #000000;
+  --color-bg-dark:         #0a0a0a;
+  --color-text-white:      #fafaff;
+  --color-text-muted:      rgba(250, 250, 255, 0.6);
+  --color-border-white:    rgba(255, 255, 255, 0.8);
+  --color-border-subtle:   rgba(255, 255, 255, 0.2);
+  --color-blue-accent:     #2563EB;
+
+  /* Typography */
+  --font-heading:   'Nib Pro', serif;
+  --font-body:      'DM Sans', sans-serif;
+
+  /* Font sizes */
+  --fs-hero-xl:     clamp(80px, 9.7vw, 140px);   /* Stage 1 title */
+  --fs-hero-lg:     clamp(42px, 4.9vw, 70px);    /* Stage 2 title */
+  --fs-hero-md:     clamp(68px, 8.3vw, 120px);   /* Final heading */
+  --fs-body:        16px;   /* body principal */
+  --fs-secondary:   14px;   /* texto secundário */
+  --fs-caption:     12px;   /* captions / notas de preço */
+  --fs-label:       10px;   /* eyebrows / badges / labels */
+
+  /* Spacing */
+  --sp-xs:   4px;
+  --sp-sm:   8px;
+  --sp-md:   16px;
+  --sp-lg:   24px;
+  --sp-xl:   40px;
+  --sp-2xl:  64px;
+  --sp-3xl:  120px;
+
+  /* Transitions */
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out:     cubic-bezier(0, 0, 0.2, 1);
+  --ease-in:      cubic-bezier(0.4, 0, 1, 1);
+
+  /* Z-index layers */
+  --z-header:   100;
+  --z-hero:     10;
+  --z-content:  1;
+}

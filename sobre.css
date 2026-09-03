@@ -1,0 +1,189 @@
+/* ============================================
+   FRANQ — Seção "Sobre a Franq"
+   Background: #131c25 (azul-dark)
+   ============================================ */
+
+.section-sobre {
+  background: #131c25;
+  color: #ffffff;
+  font-family: var(--font-body);
+  scroll-margin-top: 80px; /* compensa o header fixo */
+}
+
+.sobre__inner {
+  max-width: 1344px;
+  margin: 0 auto;
+  padding: 80px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* ── Cabeçalho ── */
+.sobre__header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 900px;
+}
+
+.sobre__title {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  margin: 0;
+}
+
+.sobre__description {
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0;
+  max-width: 860px;
+}
+
+/* ── Corpo: imagem + features ── */
+.sobre__body {
+  display: flex;
+  gap: 64px;
+  align-items: flex-start;
+}
+
+/* ── Imagem ── */
+.sobre__image-wrap {
+  flex-shrink: 0;
+  width: 470px;
+  height: 400px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.sobre__image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* ── Lista de features ── */
+.sobre__features {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  min-width: 0;
+}
+
+.sobre__feature {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.sobre__feature-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  background: rgba(104,123,234,0.1);
+  border: 1px solid rgba(104,123,234,0.2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #687bea;
+  margin-top: 2px;
+}
+
+.sobre__feature-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sobre__feature-title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  margin: 0;
+}
+
+.sobre__feature-desc {
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+/* ── Divisor ── */
+.sobre__divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin: 0;
+}
+
+/* ── Estatísticas ── */
+.sobre__stats {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 8px 0;
+}
+
+.sobre__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  text-align: center;
+  min-width: 160px;
+  flex: 1;
+}
+
+.sobre__stat-number {
+  font-family: var(--font-heading);
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #687bea;
+  display: block;
+}
+
+.sobre__stat-label {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 180px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .sobre__inner {
+    padding: 60px 24px;
+  }
+
+  .sobre__body {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .sobre__image-wrap {
+    width: 100%;
+    height: 280px;
+  }
+
+  .sobre__stats {
+    gap: 32px;
+  }
+
+  .sobre__stat {
+    min-width: 140px;
+  }
+}

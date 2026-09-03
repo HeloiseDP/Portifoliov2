@@ -1,0 +1,393 @@
+/* ============================================
+   FRANQ — Hero Section (Scroll-driven animation)
+   ============================================
+
+   Animation sequence (driven by scroll progress 0→1):
+
+   [0% – 45%]  Phase 1 — Image shrinks to bottom-right
+               - Photo: full-screen → bottom-right corner
+               - Bg: transparent → black
+               - Title Stage 1 (140px): fades out
+
+   [35% – 65%] Phase 2 — Stage 2 elements enter
+               - Title Stage 2 "Planos Franq" (70px): fades in
+               - Intro body text: slides up from bottom
+
+   [70% – 100%] Phase 3 — Final state
+               - Big heading "Encontre o plano...": slides down from top
+   ============================================ */
+
+/* ---- Wrapper: sets the scroll height ---- */
+.hero-wrapper {
+  position: relative;
+  height: 300vh; /* 3× viewport = scroll budget */
+}
+
+/* ---- Sticky container: stays pinned while scrolling through wrapper ---- */
+.hero-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--color-bg-black);
+  /* explicit containing block for all absolute children */
+  isolation: isolate;
+}
+
+/* ============================================
+   Background Image
+   ============================================ */
+
+.hero-image {
+  position: absolute;
+  inset: 0;
+  /* transform-origin bottom-right so it shrinks toward that corner */
+  transform-origin: bottom right;
+  /* transform is driven by JS: scale(1,1) → scale(0.625, 0.697) */
+  will-change: transform;
+  z-index: 1;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  /* Parallax nudge on initial load (before pin) */
+  will-change: transform;
+}
+
+/* Dark gradient overlay – helps text legibility in Stage 1 */
+.hero-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.05) 0%,
+    rgba(0,0,0,0.15) 60%,
+    rgba(0,0,0,0.45) 100%
+  );
+  pointer-events: none;
+}
+
+/* ============================================
+   Scroll Ruler — redesign moderno
+   ============================================
+
+   Layout (coluna):
+     ┌─────────────────────────────┐
+     │  [track: linha + ticks]     │
+     │  [counter: 01 / 03]         │
+     └─────────────────────────────┘
+   ============================================ */
+
+.hero-ruler {
+  position: fixed;
+  top: calc(var(--header-height, 72px) + 24px);
+  bottom: 48px;
+  right: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  z-index: 100;
+  pointer-events: none;
+}
+
+/* ── Vertical track ── */
+.hero-ruler__track {
+  position: relative;
+  flex: 1;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* White fill that grows from top with scroll */
+.hero-ruler__track-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;          /* set by JS */
+  background: rgba(255, 255, 255, 0.9);
+  transition: height 0.08s linear;
+}
+
+/* ── Phase ticks ── */
+.hero-ruler__tick {
+  position: absolute;
+  top: var(--tick-pos);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.4);
+  transition: background 0.4s, width 0.4s;
+}
+
+.hero-ruler__tick.is-active {
+  background: rgba(255, 255, 255, 0.9);
+  width: 14px;
+}
+
+/* ── Phase label (appears left of the tick) ── */
+.hero-ruler__label {
+  position: absolute;
+  right: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0);
+  white-space: nowrap;
+  transition: color 0.5s var(--ease-out),
+              transform 0.5s var(--ease-out);
+}
+
+.hero-ruler__tick.is-active .hero-ruler__label {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ── Sliding dot ── */
+.hero-ruler__dot {
+  position: absolute;
+  left: 50%;
+  top: 0%;             /* set by JS */
+  transform: translate(-50%, -50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15),
+              0 0 10px rgba(255, 255, 255, 0.5);
+  transition: top 0.08s linear;
+}
+
+/* ── Phase counter ── */
+.hero-ruler__counter {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.hero-ruler__phase-num {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.85);
+  transition: color 0.4s;
+  /* JS updates this text: "01" → "02" → "03" */
+}
+
+.hero-ruler__phase-sep {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.hero-ruler__phase-total {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: 0.05em;
+}
+
+/* ============================================
+   Scroll Hint — mouse icon animado
+   ============================================ */
+
+.hero-scroll-hint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.hero-scroll-hint.is-hidden {
+  opacity: 0;
+}
+
+.hero-scroll-hint__mouse {
+  width: 22px;
+  height: 34px;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  border-radius: 11px;
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+}
+
+.hero-scroll-hint__dot {
+  width: 3px;
+  height: 6px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.8);
+  animation: scroll-hint-drop 1.8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes scroll-hint-drop {
+  0%   { opacity: 1;   transform: translateY(0); }
+  60%  { opacity: 0;   transform: translateY(10px); }
+  61%  { opacity: 0;   transform: translateY(0); }
+  100% { opacity: 1;   transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+  .hero-scroll-hint {
+    bottom: 24px;
+  }
+}
+
+/* ============================================
+   Stage 1: Big "Planos Franq" (140px)
+   Visible at start, fades out during Phase 1
+   ============================================ */
+
+.hero-title-s1 {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  right: auto;          /* prevent centering override */
+  margin: 0;
+  padding: 0;
+  z-index: 5;
+  font-family: var(--font-heading);
+  font-size: var(--fs-hero-xl);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--color-text-white);
+  text-align: left;
+  white-space: nowrap;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+/* ============================================
+   Stage 2: Medium "Planos Franq" (70px)
+   Appears during Phase 2, stays through Phase 3
+   Positioned bottom-right, overlapping the image
+   ============================================ */
+
+.hero-title-s2 {
+  position: absolute;
+  bottom: 40px;
+  /*
+   * A imagem encolhe para 62.5% da largura, ancorada à direita.
+   * Borda esquerda da imagem = 100vw - 62.5vw = 37.5vw.
+   * Título fica logo no início da imagem, com 40px de padding.
+   * Isso espelha o Figma: left: calc(50% - 140px) a 1440px → 580px
+   * que equivale a calc(37.5vw + 40px).
+   */
+  left: calc(37.5vw + 40px);
+  right: auto;
+  margin: 0;
+  padding: 0;
+  z-index: 5;
+  font-family: var(--font-heading);
+  font-size: var(--fs-hero-lg);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--color-text-white);
+  text-align: left;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(12px);
+  will-change: opacity, transform;
+}
+
+/* ============================================
+   Intro body text (bottom-left, black area)
+   Appears during Phase 2
+   ============================================ */
+
+.hero-intro {
+  position: absolute;
+  bottom: var(--sp-xl);
+  left: var(--sp-xl);
+  z-index: 5;
+  width: 380px;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--color-text-white);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(10px);
+  will-change: opacity, transform;
+}
+
+/* ============================================
+   Final heading: "Encontre o plano ideal para você"
+   120px, top-left, appears in Phase 3
+   ============================================ */
+
+.hero-heading-final {
+  position: absolute;
+  /* Push down below the fixed header + breathing room */
+  top: calc(var(--header-height, 72px) + 32px);
+  left: 40px;
+  right: auto;
+  margin: 0;
+  padding: 0;
+  z-index: 5;
+  width: min(1045px, calc(100vw - 440px));  /* leaves room for right-side image */
+  font-family: var(--font-heading);
+  font-size: var(--fs-hero-md);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--color-text-white);
+  text-align: left;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-24px);
+  will-change: opacity, transform;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 900px) {
+  .hero-ruler {
+    display: none; /* hidden on mobile — not enough real estate */
+  }
+
+  .hero-title-s1 {
+    font-size: clamp(48px, 12vw, 100px);
+  }
+
+  .hero-title-s2 {
+    bottom: var(--sp-lg);
+    right: var(--sp-lg);
+    font-size: clamp(28px, 7vw, 56px);
+  }
+
+  .hero-intro {
+    width: calc(100% - var(--sp-xl) * 2 - 40vw);
+    font-size: 14px;
+  }
+
+  .hero-heading-final {
+    width: calc(100% - var(--sp-xl) * 2);
+    font-size: clamp(40px, 9vw, 80px);
+  }
+}

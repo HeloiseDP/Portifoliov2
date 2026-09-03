@@ -1,0 +1,247 @@
+/* ============================================
+   FRANQ — Seção Fale Conosco
+   ============================================ */
+
+.section-contato {
+  background: #000;
+  color: #fff;
+  font-family: var(--font-body);
+  scroll-margin-top: 80px;
+}
+
+.contato__inner {
+  max-width: 1344px;
+  margin: 0 auto;
+  padding: 100px 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+/* ── Coluna esquerda ── */
+.contato__left {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.contato__eyebrow {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #687bea;
+  margin-bottom: 16px;
+}
+
+.contato__title {
+  font-family: var(--font-heading);
+  font-size: clamp(44px, 5vw, 72px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0;
+}
+
+.contato__desc {
+  font-size: 17px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.45);
+  margin: 0;
+  max-width: 420px;
+}
+
+/* ── Cards de canal ── */
+.contato__channels {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contato__channel {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: #0d1117;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.contato__channel:hover {
+  border-color: rgba(104,123,234,0.3);
+  background: #111820;
+}
+
+.contato__channel-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  background: rgba(104,123,234,0.1);
+  border: 1px solid rgba(104,123,234,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #687bea;
+  flex-shrink: 0;
+}
+
+.contato__channel-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.contato__channel-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.contato__channel-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+
+.contato__channel-value {
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.contato__channel-arrow {
+  margin-left: auto;
+  color: rgba(255,255,255,0.2);
+  transition: color 0.2s, transform 0.2s;
+}
+
+.contato__channel:hover .contato__channel-arrow {
+  color: #687bea;
+  transform: translateX(3px);
+}
+
+/* ── Formulário ── */
+.contato__form-wrap {
+  background: #0d1117;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contato__form-title {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 400;
+  color: #fff;
+  margin: 0 0 4px;
+}
+
+.contato__form-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.35);
+  margin: 0 0 8px;
+}
+
+.contato__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contato__field label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+
+.contato__field input,
+.contato__field select,
+.contato__field textarea {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  width: 100%;
+  -webkit-appearance: none;
+}
+
+.contato__field input::placeholder,
+.contato__field textarea::placeholder {
+  color: rgba(255,255,255,0.2);
+}
+
+.contato__field input:focus,
+.contato__field select:focus,
+.contato__field textarea:focus {
+  border-color: rgba(104,123,234,0.5);
+  background: rgba(104,123,234,0.04);
+}
+
+.contato__field select option {
+  background: #0d1117;
+  color: #fff;
+}
+
+.contato__field textarea {
+  resize: none;
+  height: 110px;
+  line-height: 1.6;
+}
+
+.contato__field--row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.contato__submit {
+  display: block;
+  width: 100%;
+  padding: 17px;
+  background: #687bea;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 4px;
+}
+
+.contato__submit:hover {
+  background: #5567d6;
+  transform: translateY(-1px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .contato__inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 64px 24px;
+  }
+
+  .contato__field--row {
+    grid-template-columns: 1fr;
+  }
+}

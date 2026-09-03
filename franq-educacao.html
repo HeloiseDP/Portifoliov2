@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema LMS de Educação — Heloise Demétrio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:#f4f1ea; --bg2:#eae5da; --amber:#1f4b3f; --amber-lt:#2f6d5b;
+      --amber-dim:rgba(31,75,63,0.12); --text:#16130f; --muted:#8a7f70;
+      --border:rgba(31,75,63,0.22);
+      --font-d:'Instrument Serif',serif; --font-b:'Manrope',sans-serif; --font-m:'IBM Plex Mono',monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-b); overflow-x: hidden; }
+    #starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .nebula { position: fixed; pointer-events: none; border-radius: 50%; filter: blur(120px); z-index: 0; opacity: 0.14; }
+    .n1 { width:600px;height:600px;background:radial-gradient(circle,#1f4b3f 0%,transparent 70%);top:-200px;right:-200px; }
+    .n2 { width:400px;height:400px;background:radial-gradient(circle,#c9c0b0 0%,transparent 70%);bottom:20%;left:-100px; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 56px; background: rgba(244,241,234,0.93); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family:var(--font-d); font-size:1.1rem; font-weight:700; color:var(--amber); letter-spacing:0.12em; text-decoration:none; }
+    .nav-logo span { color:var(--text); opacity:0.5; }
+    .nav-back { display: flex; align-items: center; gap: 8px; font-family: var(--font-m); font-size: 0.7rem; letter-spacing: 0.15em; color: var(--muted); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+    .nav-back:hover { color: var(--amber); }
+    .lang-toggle { display:flex; background:rgba(31,75,63,0.1); border:1px solid var(--border); border-radius:4px; overflow:hidden; }
+    .lang-toggle button { background:none; border:none; cursor:pointer; font-family:var(--font-m); font-size:0.65rem; letter-spacing:0.12em; padding:5px 10px; color:var(--text); opacity:0.5; transition:all 0.2s; }
+    .lang-toggle button.active { background:var(--amber); color:#f4f1ea; opacity:1; font-weight:700; }
+    .project-hero { min-height: 65vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 120px 80px 72px; position: relative; z-index: 1; border-bottom: 1px solid var(--border); }
+    .project-hero-top { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .project-num-badge { font-family: var(--font-m); font-size: 0.68rem; letter-spacing: 0.25em; color: var(--amber); border: 1px solid var(--border); padding: 6px 14px; border-radius: 2px; }
+    .project-tag-badge { font-family: var(--font-m); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; }
+    .project-hero-title { font-family: var(--font-d); font-size: clamp(2.4rem, 6vw, 5.5rem); font-weight: 900; line-height: 1.05; letter-spacing: 0.03em; max-width: 900px; animation: fadeUp 0.9s 0.2s both; }
+    .project-hero-meta { margin-top: 36px; display: flex; gap: 48px; flex-wrap: wrap; }
+    .meta-label { font-family:var(--font-m); font-size:0.6rem; letter-spacing:0.25em; color:var(--amber); text-transform:uppercase; margin-bottom:6px; }
+    .meta-value { font-size:0.95rem; color:var(--text); }
+    .project-content { max-width: 900px; margin: 0 auto; padding: 80px 40px; position: relative; z-index: 1; }
+    .content-block { margin-bottom: 72px; }
+    .content-label { font-family: var(--font-m); font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--amber); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+    .content-label::after { content:''; flex:1; height:1px; background:var(--border); }
+    .content-text { font-size: 1.05rem; line-height: 1.8; color: var(--text); font-weight: 300; }
+    .content-text + .content-text { margin-top: 16px; }
+    .image-grid { display: grid; gap: 16px; margin-bottom: 72px; }
+    .image-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+    .image-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .project-shot { border: 1px solid var(--border); border-radius: 4px; overflow: hidden; background: var(--bg2); }
+    .project-shot img { width: 100%; display: block; }
+    .shot-caption { font-family: var(--font-m); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--muted); padding: 10px 14px; text-transform: uppercase; }
+    .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .result-card { background: rgba(22,19,15,0.028); border: 1px solid var(--border); border-radius: 4px; padding: 28px 24px; text-align: center; }
+    .result-number { font-family:var(--font-d); font-size:2.2rem; font-weight:700; color:var(--amber); }
+    .result-label { font-family:var(--font-m); font-size:0.65rem; letter-spacing:0.1em; color:var(--muted); text-transform:uppercase; margin-top:8px; line-height:1.5; }
+    .tags-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .proj-tag { font-family: var(--font-m); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); border: 1px solid var(--border); background: var(--amber-dim); padding: 6px 12px; border-radius: 2px; }
+    .next-project { position: relative; z-index: 1; padding: 72px 80px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: inherit; transition: background 0.3s; }
+    .next-project:hover { background: var(--amber-dim); }
+    .next-label { font-family:var(--font-m); font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+    .next-title { font-family:var(--font-d); font-size:2rem; font-weight:700; color:var(--text); }
+    .next-arrow { font-size:3rem; color:var(--amber); }
+    footer { position:relative;z-index:1; padding:28px 56px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+    .footer-copy { font-family:var(--font-m); font-size:0.62rem; letter-spacing:0.15em; color:var(--muted); }
+    .footer-sig { font-family:var(--font-d); font-size:0.75rem; color:var(--amber); opacity:0.6; }
+    .reveal { opacity:0; transform:translateY(32px); transition:opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
+    @media(max-width:768px){
+      nav { padding:16px 24px; }
+      .project-hero { padding:100px 24px 48px; }
+      .project-content { padding:48px 24px; }
+      .results-grid { grid-template-columns:1fr; }
+      .image-grid.cols-2,.image-grid.cols-3 { grid-template-columns:1fr; }
+      .next-project { padding:48px 24px; flex-direction:column; gap:20px; align-items:flex-start; }
+      footer { padding:20px 24px; flex-direction:column; gap:8px; text-align:center; }
+    }
+    .combo-stage { position: relative; margin: 0 0 8px; padding-bottom: 90px; }
+    .combo-desktop { width: 84%; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: #0b0b18; box-shadow: 0 40px 90px -30px rgba(0,0,0,0.9); }
+    .combo-chrome { display: flex; align-items: center; gap: 7px; padding: 10px 14px; border-bottom: 1px solid var(--border); background: rgba(22,19,15,0.028); }
+    .cdot { width: 9px; height: 9px; border-radius: 50%; } .cr { background:#ff5f57 } .cy { background:#febc2e } .cg { background:#28c840 }
+    .curl { margin-left: 10px; font-family: var(--font-m); font-size: 0.62rem; color: var(--muted); background: rgba(22,19,15,0.035); padding: 4px 12px; border-radius: 4px; }
+    .combo-desktop img { width: 100%; display: block; }
+    .combo-phone { position: absolute; right: 0; bottom: 24px; width: 24%; border: 1px solid var(--border); border-radius: 26px; padding: 8px; background: #05050c; box-shadow: 0 40px 80px -20px rgba(0,0,0,0.95); }
+    .combo-phone img { width: 100%; display: block; border-radius: 20px; }
+    .combo-notch { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); width: 28%; height: 5px; border-radius: 4px; background: #000; z-index: 2; }
+    .combo-cap { text-align: right; margin: 16px 0 72px; }
+    .combo-left .combo-desktop { margin-left: auto; }
+    .combo-left .combo-phone { right: auto; left: 0; }
+    .combo-cap-left { text-align: left; }
+    @media (max-width: 860px) { .combo-left .combo-phone { margin: -18% auto 0 0 } .combo-desktop { width: 100% } .combo-phone { position: static; width: 52%; margin: -18% 0 0 auto } .combo-cap { text-align: left } }
+    .flow-chain { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; margin: 28px 0 8px; }
+    .flow-step { font-family: var(--font-m); font-size: 0.78rem; letter-spacing: 0.04em; color: var(--text); border: 1px solid var(--border); background: rgba(22,19,15,0.028); padding: 10px 16px; border-radius: 4px; }
+    .flow-arrow { color: var(--amber); font-size: 0.9rem; line-height: 1; }
+    .arch-tree { font-family: var(--font-m); font-size: 0.8rem; line-height: 2; color: var(--text); white-space: pre; overflow-x: auto; border: 1px solid var(--border); background: rgba(22,19,15,0.02); padding: 26px 28px; border-radius: 6px; margin: 28px 0 0; }
+    .area-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 28px; }
+    .area-card { border: 1px solid var(--border); background: rgba(22,19,15,0.028); border-radius: 6px; padding: 24px; }
+    .area-card h4 { font-family: var(--font-d); font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .area-card p { font-size: 0.92rem; line-height: 1.7; color: var(--muted); font-weight: 300; }
+    .tp-table { width: 100%; border-collapse: collapse; margin-top: 28px; font-size: 0.9rem; }
+    .tp-table th { font-family: var(--font-m); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border); font-weight: 400; }
+    .tp-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text); font-weight: 300; }
+    .tp-table td:first-child { color: var(--amber); font-family: var(--font-m); font-size: 0.78rem; }
+    .slot-grid { display: grid; gap: 20px; margin: 0 0 72px; }
+    .slot-grid.c1 { grid-template-columns: 1fr; }
+    .slot-grid.c2 { grid-template-columns: repeat(2, 1fr); }
+    .slot-grid.c3 { grid-template-columns: repeat(3, 1fr); }
+    @media (max-width: 860px) { .area-grid, .slot-grid.c2, .slot-grid.c3 { grid-template-columns: 1fr } .tp-table { font-size: 0.82rem } }
+  </style>
+  <script src="../image-slot.js"></script>
+
+<style id="v2-theme">
+:root{--bg:#f4f1ea;--bg2:#eae5da;--amber:#1f4b3f;--amber-lt:#2f6d5b;--amber-dim:rgba(31,75,63,.07);--text:#16130f;--muted:#8a7f70;--border:rgba(22,19,15,.14);--font-d:'Instrument Serif',serif;--font-b:'Manrope',sans-serif;--font-m:'IBM Plex Mono',monospace}
+#starfield,.nebula{display:none!important}
+body{background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+nav{background:rgba(244,241,234,.93)!important;backdrop-filter:blur(10px)}
+h1,h2,h3,h4,.project-hero-title,.next-title,.result-number,.nav-logo,[class*="-title"]{font-weight:400!important;letter-spacing:0}
+.nav-logo{font-family:var(--font-d);color:var(--ink,#16130f)}
+.project-hero-title{letter-spacing:-.01em}
+.image-placeholder,.project-shot,.result-card,.combo-desktop,.combo-phone{background:#fbf9f5}
+.result-card,.project-shot{box-shadow:0 8px 24px rgba(22,19,15,.05)}
+.next-project:hover{background:rgba(31,75,63,.06)!important}
+.nav-back{white-space:nowrap}
+.nav-logo{font-size:1.05rem;letter-spacing:.01em!important}
+.project-num-badge,.meta-label,.content-label,.project-tag-badge{font-family:var(--font-m)}
+a{color:#1f4b3f}a:hover{color:#2f6d5b}
+</style>
+</head>
+<body>
+<div class="nebula n1"></div>
+<div class="nebula n2"></div>
+<canvas id="starfield"></canvas>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Heloise Demétrio</a>
+  <div style="display:flex;align-items:center;gap:24px">
+    <a href="../index.html#projetos" class="nav-back">← <span data-pt="Todos os projetos" data-en="All projects">Todos os projetos</span></a>
+    <div class="lang-toggle">
+      <button id="btn-pt" class="active" onclick="setLang('pt')">PT</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<section class="project-hero">
+  <div class="project-hero-top">
+    <span class="project-num-badge">04 / 06</span>
+    <span class="project-tag-badge" data-pt="UX · Mobile App · Edtech" data-en="UX · Mobile App · Edtech">UX · Mobile App · Edtech</span>
+  </div>
+  <h1 class="project-hero-title" data-pt="Sistema LMS de Educação" data-en="Education LMS System">Sistema LMS de Educação</h1>
+  <div class="project-hero-meta">
+    <div class="meta-item"><p class="meta-label" data-pt="Empresa" data-en="Company">Empresa</p><p class="meta-value">Franq</p></div>
+    <div class="meta-item"><p class="meta-label" data-pt="Ano" data-en="Year">Ano</p><p class="meta-value">2023</p></div>
+    <div class="meta-item"><p class="meta-label" data-pt="Área" data-en="Area">Área</p><p class="meta-value" data-pt="UX · Produto Mobile" data-en="UX · Mobile Product">UX · Produto Mobile</p></div>
+    <div class="meta-item"><p class="meta-label" data-pt="Papel" data-en="Role">Papel</p><p class="meta-value">UX Designer</p></div>
+  </div>
+</section>
+
+<div class="project-content">
+
+  <div class="content-block reveal">
+    <p class="content-label" data-pt="Contexto" data-en="Context">Contexto</p>
+    <p class="content-text" data-pt="A Franq Educação é a plataforma de capacitação dos Personal Bankers, criada para centralizar conteúdos, aulas, workshops, fóruns de negócios e materiais de apoio. O projeto contemplou o design das experiências web e mobile, estruturando trilhas de aprendizagem por temas, conteúdos interativos e atividades de avaliação com feedback detalhado. O desafio foi transformar a capacitação em uma experiência mais acessível, organizada e engajante, concentrando toda a jornada de aprendizagem em uma única plataforma e reduzindo a dependência de ferramentas externas." data-en="Franq Educação is the training platform for Personal Bankers, created to centralize content, classes, workshops, business forums and support materials. The project covered the design of both web and mobile experiences, structuring learning tracks by topic, interactive content and assessment activities with detailed feedback. The challenge was turning training into a more accessible, organized and engaging experience, concentrating the whole learning journey in a single platform and reducing reliance on external tools.">A Franq Educação é a plataforma de capacitação dos Personal Bankers, criada para centralizar conteúdos, aulas, workshops, fóruns de negócios e materiais de apoio. O projeto contemplou o design das experiências web e mobile, estruturando trilhas de aprendizagem por temas, conteúdos interativos e atividades de avaliação com feedback detalhado. O desafio foi transformar a capacitação em uma experiência mais acessível, organizada e engajante, concentrando toda a jornada de aprendizagem em uma única plataforma e reduzindo a dependência de ferramentas externas.</p>
+  </div>
+
+  <div class="combo-stage reveal" style="transition-delay:0.1s">
+    <div class="combo-desktop">
+      <div class="combo-chrome"><span class="cdot cr"></span><span class="cdot cy"></span><span class="cdot cg"></span><span class="curl">app.franq.com.br/conteudos</span></div>
+      <img src="../assets/franq-educacao/lms-desktop.png" alt="Conteúdos Franq — web">
+    </div>
+    <div class="combo-phone"><div class="combo-notch"></div><img src="../assets/franq-educacao/lms-mobile.png" alt="Conteúdos Franq — app"></div>
+  </div>
+  <p class="shot-caption combo-cap" data-pt="Conteúdos Franq — mesma arquitetura de informação na web e no app" data-en="Franq Contents — same information architecture on web and app">Conteúdos Franq — mesma arquitetura de informação na web e no app</p>
+
+  <div class="content-block reveal">
+    <p class="content-label" data-pt="O desafio" data-en="The challenge">O desafio</p>
+    <p class="content-text" data-pt="A capacitação dos Personal Bankers envolvia diferentes formatos e momentos da jornada de aprendizagem. O desafio era criar uma experiência centralizada, capaz de organizar conteúdos, cursos, atividades e eventos em uma única plataforma, tornando o aprendizado mais acessível e reduzindo a dependência de ferramentas externas." data-en="Training for Personal Bankers involved different formats and moments in the learning journey. The challenge was to create a centralized experience able to organize content, courses, activities and events in a single platform, making learning more accessible and reducing reliance on external tools.">A capacitação dos Personal Bankers envolvia diferentes formatos e momentos da jornada de aprendizagem. O desafio era criar uma experiência centralizada, capaz de organizar conteúdos, cursos, atividades e eventos em uma única plataforma, tornando o aprendizado mais acessível e reduzindo a dependência de ferramentas externas.</p>
+    <p class="content-text" data-pt="O desafio era conectar diferentes momentos da jornada:" data-en="The challenge was connecting different moments of the journey:">O desafio era conectar diferentes momentos da jornada:</p>
+    <div class="flow-chain"><div class="flow-step">Entrar na plataforma</div><div class="flow-arrow">→</div><div class="flow-step">Descobrir conteúdos</div><div class="flow-arrow">→</div><div class="flow-step">Realizar um curso</div><div class="flow-arrow">→</div><div class="flow-step">Consumir as aulas</div><div class="flow-arrow">→</div><div class="flow-step">Realizar atividades</div><div class="flow-arrow">→</div><div class="flow-step">Receber feedback</div><div class="flow-arrow">→</div><div class="flow-step">Participar de eventos</div><div class="flow-arrow">→</div><div class="flow-step">Continuar aprendendo</div></div>
+  </div>
+
+  <div class="content-block reveal">
+    <p class="content-label" data-pt="Entendendo a experiência" data-en="Understanding the experience">Entendendo a experiência</p>
+    <p class="content-text" data-pt="Antes de começar a desenhar as interfaces, trabalhei na definição da arquitetura da experiência e dos principais pontos de contato entre o usuário e a plataforma. O objetivo era garantir que cursos, atividades e eventos não funcionassem como produtos isolados, mas como partes de uma mesma jornada de aprendizagem." data-en="Before designing the interfaces, I worked on defining the experience architecture and the main touchpoints between the user and the platform. The goal was to make sure courses, activities and events did not work as isolated products, but as parts of the same learning journey.">Antes de começar a desenhar as interfaces, trabalhei na definição da arquitetura da experiência e dos principais pontos de contato entre o usuário e a plataforma. O objetivo era garantir que cursos, atividades e eventos não funcionassem como produtos isolados, mas como partes de uma mesma jornada de aprendizagem.</p>
+    <div class="area-grid">
+      <div class="area-card"><h4 data-pt="Cursos e aprendizagem" data-en="Courses and learning">Cursos e aprendizagem</h4><p data-pt="Uma área para que o Personal Banker pudesse acessar conteúdos organizados em trilhas e acompanhar sua evolução." data-en="An area where the Personal Banker could access content organized in tracks and follow their progress.">Uma área para que o Personal Banker pudesse acessar conteúdos organizados em trilhas e acompanhar sua evolução.</p></div>
+      <div class="area-card"><h4 data-pt="Atividades" data-en="Activities">Atividades</h4><p data-pt="Um espaço integrado aos cursos para testar conhecimentos e receber feedback sobre as respostas." data-en="A space integrated into the courses to test knowledge and receive feedback on the answers.">Um espaço integrado aos cursos para testar conhecimentos e receber feedback sobre as respostas.</p></div>
+      <div class="area-card"><h4 data-pt="Eventos" data-en="Events">Eventos</h4><p data-pt="Uma área para descobrir, acompanhar e participar de workshops e outros eventos de capacitação." data-en="An area to discover, follow and take part in workshops and other training events.">Uma área para descobrir, acompanhar e participar de workshops e outros eventos de capacitação.</p></div>
+      <div class="area-card"><h4 data-pt="Touchpoints" data-en="Touchpoints">Touchpoints</h4><p data-pt="Os diferentes pontos de contato que conectavam essas experiências dentro da jornada do usuário." data-en="The different touchpoints connecting these experiences within the user journey.">Os diferentes pontos de contato que conectavam essas experiências dentro da jornada do usuário.</p></div>
+    </div>
+  </div>
+
+  <div class="combo-stage combo-left reveal" style="transition-delay:0.1s">
+    <div class="combo-desktop">
+      <div class="combo-chrome"><span class="cdot cr"></span><span class="cdot cy"></span><span class="cdot cg"></span><span class="curl">app.franq.com.br/conteudos/franq-educacao</span></div>
+      <img src="../assets/franq-educacao/edu-desktop.png" alt="Franq Educação — web">
+    </div>
+    <div class="combo-phone"><div class="combo-notch"></div><img src="../assets/franq-educacao/edu-mobile.png" alt="Franq Educação — app"></div>
+  </div>
+  <p class="shot-caption combo-cap combo-cap-left" data-pt="Franq Educação — trilhas de aprendizagem na web e no app" data-en="Franq Educação — learning tracks on web and app">Franq Educação — trilhas de aprendizagem na web e no app</p>
+  <div class="content-block reveal">
+    <p class="content-label" data-pt="Arquitetura da experiência" data-en="Experience architecture">Arquitetura da experiência</p>
+    <p class="content-text" data-pt="A arquitetura foi estruturada para facilitar a descoberta de conteúdos e criar uma navegação clara entre os diferentes formatos de aprendizagem." data-en="The architecture was structured to make content discovery easier and to create clear navigation between the different learning formats.">A arquitetura foi estruturada para facilitar a descoberta de conteúdos e criar uma navegação clara entre os diferentes formatos de aprendizagem.</p>
+    <div class="arch-tree">FRANQ EDUCAÇÃO
+│
+├── Início
+│
+├── Cursos
+│   ├── Trilhas de aprendizagem
+│   ├── Aulas
+│   ├── Progresso
+│   └── Atividades
+│
+└── Eventos
+    ├── Próximos eventos
+    ├── Detalhes
+    ├── Inscrição
+    └── Participação via Zoom</div>
+  </div>
+
+  <div class="content-block reveal">
+    <p class="content-label" data-pt="A experiência de cursos" data-en="The course experience">A experiência de cursos</p>
+    <p class="content-text" data-pt="A área de cursos foi estruturada para ajudar o usuário a encontrar conteúdos relevantes e acompanhar sua jornada de aprendizagem." data-en="The courses area was structured to help the user find relevant content and follow their learning journey.">A área de cursos foi estruturada para ajudar o usuário a encontrar conteúdos relevantes e acompanhar sua jornada de aprendizagem.</p>
+    <p class="content-text" data-pt="A organização dos conteúdos buscou tornar a jornada mais clara, permitindo que o usuário entendesse rapidamente onde estava e quais eram os próximos passos." data-en="Organizing the content aimed to make the journey clearer, letting the user quickly understand where they were and what the next steps were.">A organização dos conteúdos buscou tornar a jornada mais clara, permitindo que o usuário entendesse rapidamente onde estava e quais eram os próximos passos.</p>
+  </div>
+
+  <div class="combo-stage reveal" style="transition-delay:0.1s">
+    <div class="combo-desktop">
+      <div class="combo-chrome"><span class="cdot cr"></span><span class="cdot cy"></span><span class="cdot cg"></span><span class="curl">app.franq.com.br/conteudos/franq-educacao/jornada-personal-banker</span></div>
+      <img src="../assets/franq-educacao/curso-desktop.png" alt="Curso em andamento — web">
+    </div>
+    <div class="combo-phone"><div class="combo-notch"></div><img src="../assets/franq-educacao/curso-mobile.png" alt="Aula em bottom sheet — app"></div>
+  </div>
+  <p class="shot-caption combo-cap combo-cap-left" data-pt="Curso em andamento — trilha com progresso e aulas na web, aula aberta em bottom sheet no app" data-en="Course in progress — track with progress and lessons on web, lesson opened in a bottom sheet on the app">Curso em andamento — trilha com progresso e aulas na web, aula aberta em bottom sheet no app</p>
+  <div class="content-block reveal">
+    <p class="content-label" data-pt="Atividades e feedback" data-en="Activities and feedback">Atividades e feedback</p>
+    <p class="content-text" data-pt="Assistir ao conteúdo era apenas uma parte da experiência. Também era necessário criar uma forma de avaliar o aprendizado e oferecer feedback ao usuário." data-en="Watching the content was only part of the experience. It was also necessary to create a way to assess learning and give feedback to the user.">Assistir ao conteúdo era apenas uma parte da experiência. Também era necessário criar uma forma de avaliar o aprendizado e oferecer feedback ao usuário.</p>
+    <div class="flow-chain"><div class="flow-step">Curso</div><div class="flow-arrow">→</div><div class="flow-step">Aula</div><div class="flow-arrow">→</div><div class="flow-step">Atividade</div><div class="flow-arrow">→</div><div class="flow-step">Resposta</div><div class="flow-arrow">→</div><div class="flow-step">Feedback</div><div class="flow-arrow">→</div><div class="flow-step">Resultado</div><div class="flow-arrow">→</div><div class="flow-step">Continuidade da jornada</div></div>
+    <p class="content-text" style="margin-top:28px" data-pt="Para as atividades, desenhei uma experiência de múltipla escolha com feedback por questão. A intenção não era apenas informar se o usuário acertou ou errou, mas utilizar o feedback como parte do próprio processo de aprendizagem." data-en="For the activities, I designed a multiple-choice experience with per-question feedback. The intent was not only to tell the user whether they were right or wrong, but to use feedback as part of the learning process itself.">Para as atividades, desenhei uma experiência de múltipla escolha com feedback por questão. A intenção não era apenas informar se o usuário acertou ou errou, mas utilizar o feedback como parte do próprio processo de aprendizagem.</p>
+  </div>
+
+  <div class="combo-stage reveal" style="transition-delay:0.1s">
+    <div class="combo-desktop">
+      <div class="combo-chrome"><span class="cdot cr"></span><span class="cdot cy"></span><span class="cdot cg"></span><span class="curl">app.franq.com.br/conteudos/franq-educacao/atividade</span></div>
+      <img src="../assets/franq-educacao/atividade-desktop.png" alt="Atividade concluída com feedback — web">
+    </div>
+    <div class="combo-phone"><div class="combo-notch"></div><img src="../assets/franq-educacao/atividade-mobile.png" alt="Feedback da atividade — app"></div>
+  </div>
+  <p class="shot-caption combo-cap combo-cap-left" data-pt="Feedback da atividade — pontuação, correção por questão e explicação da resposta, na web e no app" data-en="Activity feedback — score, per-question correction and answer explanation, on web and app">Feedback da atividade — pontuação, correção por questão e explicação da resposta, na web e no app</p>
+  <div class="content-block reveal">
+    <p class="content-label" data-pt="Eventos e experiências ao vivo" data-en="Events and live experiences">Eventos e experiências ao vivo</p>
+    <p class="content-text" data-pt="Além dos cursos, a Franq Educação também precisava concentrar workshops e eventos ao vivo. Para isso, foi criada uma área dedicada à descoberta e participação em eventos, integrada ao Zoom." data-en="Beyond courses, Franq Educação also needed to bring together workshops and live events. For that, a dedicated area for discovering and joining events was created, integrated with Zoom.">Além dos cursos, a Franq Educação também precisava concentrar workshops e eventos ao vivo. Para isso, foi criada uma área dedicada à descoberta e participação em eventos, integrada ao Zoom.</p>
+    <div class="flow-chain"><div class="flow-step">Descobrir evento</div><div class="flow-arrow">→</div><div class="flow-step">Visualizar detalhes</div><div class="flow-arrow">→</div><div class="flow-step">Inscrever-se</div><div class="flow-arrow">→</div><div class="flow-step">Receber confirmação</div><div class="flow-arrow">→</div><div class="flow-step">Participar do evento</div><div class="flow-arrow">→</div><div class="flow-step">Acessar pelo Zoom</div></div>
+    <p class="content-text" style="margin-top:28px" data-pt="O desafio não era apenas integrar tecnicamente uma ferramenta externa, mas garantir que a experiência continuasse coerente para o usuário. A jornada foi desenhada para que a descoberta, inscrição e participação no evento acontecessem de forma integrada à plataforma." data-en="The challenge was not only integrating an external tool technically, but keeping the experience coherent for the user. The journey was designed so that discovery, registration and attendance happened in an integrated way within the platform.">O desafio não era apenas integrar tecnicamente uma ferramenta externa, mas garantir que a experiência continuasse coerente para o usuário. A jornada foi desenhada para que a descoberta, inscrição e participação no evento acontecessem de forma integrada à plataforma.</p>
+  </div>
+
+  <div class="combo-stage reveal" style="transition-delay:0.1s">
+    <div class="combo-desktop">
+      <div class="combo-chrome"><span class="cdot cr"></span><span class="cdot cy"></span><span class="cdot cg"></span><span class="curl">app.franq.com.br/agenda-de-eventos/workshop</span></div>
+      <img src="../assets/franq-educacao/evento-web-chat.png" alt="Workshop ao vivo com participantes e chat — web">
+    </div>
+    <div class="combo-phone"><div class="combo-notch"></div><img src="../assets/franq-educacao/evento-app-speaker.png" alt="Workshop ao vivo em foco no palestrante — app"></div>
+  </div>
+  <p class="shot-caption combo-cap combo-cap-left" data-pt="Workshop ao vivo — lista de participantes e chat na web, foco no palestrante no app" data-en="Live workshop — participant list and chat on web, speaker focus on the app">Workshop ao vivo — lista de participantes e chat na web, foco no palestrante no app</p>
+  <div class="combo-stage reveal" style="transition-delay:0.1s">
+    <div class="combo-desktop">
+      <div class="combo-chrome"><span class="cdot cr"></span><span class="cdot cy"></span><span class="cdot cg"></span><span class="curl">app.franq.com.br/agenda-de-eventos/workshop</span></div>
+      <img src="../assets/franq-educacao/evento-web-full.png" alt="Workshop ao vivo em tela cheia — web">
+    </div>
+    <div class="combo-phone"><div class="combo-notch"></div><img src="../assets/franq-educacao/evento-app-grade.png" alt="Workshop ao vivo em visão de grade — app"></div>
+  </div>
+  <p class="shot-caption combo-cap combo-cap-left" data-pt="Painel recolhido — o vídeo ocupa toda a área e a visão em grade mostra todos os participantes" data-en="Panel collapsed — video fills the whole area and grid view shows every participant">Painel recolhido — o vídeo ocupa toda a área e a visão em grade mostra todos os participantes</p>
+  <div class="content-block reveal">
+    <p class="content-label" data-pt="Os touchpoints da jornada" data-en="Journey touchpoints">Os touchpoints da jornada</p>
+    <p class="content-text" data-pt="Como parte do processo, também foram mapeados os principais touchpoints da jornada para entender como diferentes experiências, dentro e fora da plataforma, se conectavam. Isso foi especialmente importante na experiência de eventos, que envolvia a transição entre a Franq Educação e o Zoom." data-en="As part of the process, the main journey touchpoints were mapped to understand how different experiences, inside and outside the platform, connected. This was especially important in the events experience, which involved the transition between Franq Educação and Zoom.">Como parte do processo, também foram mapeados os principais touchpoints da jornada para entender como diferentes experiências, dentro e fora da plataforma, se conectavam. Isso foi especialmente importante na experiência de eventos, que envolvia a transição entre a Franq Educação e o Zoom.</p>
+    <table class="tp-table">
+      <thead><tr><th data-pt="Momento" data-en="Moment">Momento</th><th data-pt="Touchpoint" data-en="Touchpoint">Touchpoint</th><th data-pt="Objetivo" data-en="Goal">Objetivo</th></tr></thead>
+      <tbody>
+        <tr><td data-pt="Descoberta" data-en="Discovery">Descoberta</td><td>Franq Educação</td><td data-pt="Encontrar conteúdos e eventos" data-en="Find content and events">Encontrar conteúdos e eventos</td></tr>
+        <tr><td data-pt="Aprendizagem" data-en="Learning">Aprendizagem</td><td data-pt="Curso / Aula" data-en="Course / Lesson">Curso / Aula</td><td data-pt="Consumir o conteúdo" data-en="Consume the content">Consumir o conteúdo</td></tr>
+        <tr><td data-pt="Avaliação" data-en="Assessment">Avaliação</td><td data-pt="Atividade" data-en="Activity">Atividade</td><td data-pt="Testar conhecimentos" data-en="Test knowledge">Testar conhecimentos</td></tr>
+        <tr><td>Feedback</td><td data-pt="Resultado" data-en="Result">Resultado</td><td data-pt="Entender o desempenho" data-en="Understand performance">Entender o desempenho</td></tr>
+        <tr><td data-pt="Descoberta de eventos" data-en="Event discovery">Descoberta de eventos</td><td data-pt="Área de eventos" data-en="Events area">Área de eventos</td><td data-pt="Encontrar eventos relevantes" data-en="Find relevant events">Encontrar eventos relevantes</td></tr>
+        <tr><td data-pt="Participação" data-en="Attendance">Participação</td><td>Zoom</td><td data-pt="Participar do evento ao vivo" data-en="Join the live event">Participar do evento ao vivo</td></tr>
+        <tr><td data-pt="Continuidade" data-en="Continuity">Continuidade</td><td data-pt="Plataforma" data-en="Platform">Plataforma</td><td data-pt="Seguir a jornada de aprendizagem" data-en="Continue the learning journey">Seguir a jornada de aprendizagem</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="content-block reveal">
+    <p class="content-label" data-pt="Design e consistência" data-en="Design and consistency">Design e consistência</p>
+    <p class="content-text" data-pt="As interfaces foram desenvolvidas para manter consistência entre as experiências web e mobile. Para isso, foram definidos padrões de navegação, componentes e comportamentos reutilizáveis, garantindo que diferentes áreas da plataforma funcionassem como parte do mesmo produto." data-en="The interfaces were built to keep consistency between the web and mobile experiences. Navigation patterns, components and reusable behaviors were defined so that different areas of the platform worked as part of the same product.">As interfaces foram desenvolvidas para manter consistência entre as experiências web e mobile. Para isso, foram definidos padrões de navegação, componentes e comportamentos reutilizáveis, garantindo que diferentes áreas da plataforma funcionassem como parte do mesmo produto.</p>
+  </div>
+
+    <div class="content-block reveal">
+    <p class="content-label" data-pt="Web e mobile" data-en="Web and mobile">Web e mobile</p>
+    <p class="content-text" data-pt="O projeto foi desenvolvido considerando diferentes contextos de uso. A experiência web permitia uma visão mais ampla dos conteúdos e da jornada, enquanto o mobile precisava preservar as principais funcionalidades em uma interface adaptada para interações mais rápidas e contextos de uso diferentes." data-en="The project was developed considering different usage contexts. The web experience allowed a broader view of content and journey, while mobile had to preserve the main features in an interface adapted for faster interactions and different contexts.">O projeto foi desenvolvido considerando diferentes contextos de uso. A experiência web permitia uma visão mais ampla dos conteúdos e da jornada, enquanto o mobile precisava preservar as principais funcionalidades em uma interface adaptada para interações mais rápidas e contextos de uso diferentes.</p>
+  </div>
+
+    <div class="content-block reveal">
+    <p class="content-label" data-pt="Resultado" data-en="Result">Resultado</p>
+    <p class="content-text" data-pt="O resultado foi uma experiência centralizada de aprendizagem, reunindo diferentes formatos de capacitação dentro do ecossistema da Franq. A plataforma passou a conectar conteúdos, avaliações e eventos em uma jornada única, reduzindo a necessidade de navegar entre diferentes ferramentas para realizar atividades de capacitação." data-en="The result was a centralized learning experience, bringing different training formats together inside the Franq ecosystem. The platform now connects content, assessments and events in a single journey, reducing the need to move between different tools to complete training activities.">O resultado foi uma experiência centralizada de aprendizagem, reunindo diferentes formatos de capacitação dentro do ecossistema da Franq. A plataforma passou a conectar conteúdos, avaliações e eventos em uma jornada única, reduzindo a necessidade de navegar entre diferentes ferramentas para realizar atividades de capacitação.</p>
+  </div>
+
+  <div class="content-block reveal" style="margin-bottom:0">
+    <p class="content-label" data-pt="Ferramentas & Skills" data-en="Tools & Skills">Ferramentas & Skills</p>
+    <div class="tags-row">
+      <span class="proj-tag" data-pt="Mobile App" data-en="Mobile App">Mobile App</span><span class="proj-tag">UX Research</span><span class="proj-tag" data-pt="Fluxo de inscrição" data-en="Registration flow">Fluxo de inscrição</span><span class="proj-tag" data-pt="Design System" data-en="Design System">Design System</span><span class="proj-tag" data-pt="Modo claro/escuro" data-en="Light/dark mode">Modo claro/escuro</span>
+    </div>
+  </div>
+
+</div>
+
+<a href="natural-extremo.html" class="next-project">
+  <div>
+    <p class="next-label" data-pt="Próximo projeto" data-en="Next project">Próximo projeto</p>
+    <p class="next-title" data-pt="Natural Extremo" data-en="Natural Extremo">Natural Extremo</p>
+  </div>
+  <span class="next-arrow">→</span>
+</a>
+
+<footer>
+  <p class="footer-copy">© 2026 Heloise Demétrio Prudencio</p>
+  <p class="footer-copy">Florianópolis · SC · BR</p>
+</footer>
+
+<script>
+function setLang(lang){
+  document.documentElement.dataset.lang=lang;
+  localStorage.setItem('hd-lang',lang);
+  document.getElementById('btn-pt').classList.toggle('active',lang==='pt');
+  document.getElementById('btn-en').classList.toggle('active',lang==='en');
+  document.querySelectorAll('[data-pt]').forEach(el=>{el.textContent=el.dataset[lang]||el.dataset.pt;});
+}
+window.setLang=setLang;
+const savedLang=localStorage.getItem('hd-lang')||'pt';
+setLang(savedLang);
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+(function(){
+  const canvas=document.getElementById('starfield');
+  const ctx=canvas.getContext('2d');
+  let W,H,stars=[];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+  function build(){stars=Array.from({length:180},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+0.2,speed:Math.random()*0.1+0.02,tw:Math.random()*Math.PI*2,tws:Math.random()*0.012+0.004,amber:Math.random()<0.1}));}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    stars.forEach(s=>{
+      s.tw+=s.tws; const a=0.3+Math.sin(s.tw)*0.5;
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=s.amber?'rgba(31,75,63,'+a+')':'rgba(237,232,223,'+a+')';ctx.fill();
+      s.y+=s.speed; if(s.y>H){s.y=0;s.x=Math.random()*W;}
+    });
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',()=>{resize();build();});
+  resize();build();requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Idealização Completa de Marketplace — Heloise Demétrio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:#f4f1ea; --bg2:#eae5da; --amber:#1f4b3f; --amber-lt:#2f6d5b;
+      --amber-dim:rgba(31,75,63,0.12); --text:#16130f; --muted:#8a7f70;
+      --border:rgba(31,75,63,0.22);
+      --font-d:'Instrument Serif',serif; --font-b:'Manrope',sans-serif; --font-m:'IBM Plex Mono',monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-b); overflow-x: hidden; }
+
+    #starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .nebula { position: fixed; pointer-events: none; border-radius: 50%; filter: blur(120px); z-index: 0; opacity: 0.14; }
+    .n1 { width:600px;height:600px;background:radial-gradient(circle,#1f4b3f 0%,transparent 70%);top:-200px;right:-200px; }
+    .n2 { width:400px;height:400px;background:radial-gradient(circle,#c9c0b0 0%,transparent 70%);bottom:20%;left:-100px; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 56px;
+      background: rgba(244,241,234,0.93);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family:var(--font-d); font-size:1.1rem; font-weight:700; color:var(--amber); letter-spacing:0.12em; text-decoration:none; }
+    .nav-logo span { color:var(--text); opacity:0.5; }
+    .nav-back {
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--font-m); font-size: 0.7rem; letter-spacing: 0.15em;
+      color: var(--muted); text-decoration: none; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--amber); }
+
+    .lang-toggle { display:flex; background:rgba(31,75,63,0.1); border:1px solid var(--border); border-radius:4px; overflow:hidden; }
+    .lang-toggle button { background:none; border:none; cursor:pointer; font-family:var(--font-m); font-size:0.65rem; letter-spacing:0.12em; padding:5px 10px; color:var(--text); opacity:0.5; transition:all 0.2s; }
+    .lang-toggle button.active { background:var(--amber); color:#f4f1ea; opacity:1; font-weight:700; }
+
+    /* HERO */
+    .project-hero {
+      min-height: 65vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 120px 80px 72px;
+      position: relative; z-index: 1;
+      border-bottom: 1px solid var(--border);
+    }
+    .project-hero-top {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 24px;
+    }
+    .project-num-badge {
+      font-family: var(--font-m); font-size: 0.68rem; letter-spacing: 0.25em;
+      color: var(--amber); border: 1px solid var(--border);
+      padding: 6px 14px; border-radius: 2px;
+    }
+    .project-tag-badge {
+      font-family: var(--font-m); font-size: 0.65rem; letter-spacing: 0.2em;
+      color: var(--muted); text-transform: uppercase;
+    }
+    .project-hero-title {
+      font-family: var(--font-d);
+      font-size: clamp(2.4rem, 6vw, 5.5rem);
+      font-weight: 900; line-height: 1.05;
+      letter-spacing: 0.03em;
+      max-width: 900px;
+      animation: fadeUp 0.9s 0.2s both;
+    }
+    .project-hero-meta {
+      margin-top: 36px;
+      display: flex; gap: 48px; flex-wrap: wrap;
+    }
+    .meta-item { }
+    .meta-label { font-family:var(--font-m); font-size:0.6rem; letter-spacing:0.25em; color:var(--amber); text-transform:uppercase; margin-bottom:6px; }
+    .meta-value { font-size:0.95rem; color:var(--text); }
+
+    /* CONTENT */
+    .project-content { max-width: 900px; margin: 0 auto; padding: 80px 40px; position: relative; z-index: 1; }
+
+    .content-block { margin-bottom: 72px; }
+    .content-label {
+      font-family: var(--font-m); font-size: 0.65rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--amber); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .content-label::after { content:''; flex:1; height:1px; background:var(--border); }
+    .content-text { font-size: 1.05rem; line-height: 1.8; color: var(--text); font-weight: 300; }
+    .content-text + .content-text { margin-top: 16px; }
+
+    /* IMAGE GRID */
+    .image-grid { display: grid; gap: 16px; margin-bottom: 72px; }
+    .image-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+    .image-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .image-placeholder {
+      aspect-ratio: 16/9;
+      background: var(--bg2);
+      border: 1px dashed var(--border);
+      border-radius: 4px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 12px; color: var(--muted);
+    }
+    .image-placeholder-icon { font-size: 2rem; color: var(--border); }
+    .image-placeholder-label { font-family: var(--font-m); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; }
+    .image-full { aspect-ratio: 16/9; }
+
+    /* RESULTS */
+    .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .result-card {
+      background: rgba(22,19,15,0.028); border: 1px solid var(--border);
+      border-radius: 4px; padding: 28px 24px; text-align: center;
+    }
+    .result-number { font-family:var(--font-d); font-size:2.5rem; font-weight:700; color:var(--amber); }
+    .result-label { font-family:var(--font-m); font-size:0.65rem; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase; margin-top:8px; }
+
+    /* NEXT PROJECT */
+    .next-project {
+      position: relative; z-index: 1;
+      padding: 72px 80px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      text-decoration: none; color: inherit;
+      transition: background 0.3s;
+    }
+    .next-project:hover { background: var(--amber-dim); }
+    .next-label { font-family:var(--font-m); font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+    .next-title { font-family:var(--font-d); font-size:2rem; font-weight:700; color:var(--text); }
+    .next-arrow { font-size:3rem; color:var(--amber); }
+
+    footer { position:relative;z-index:1; padding:28px 56px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+    .footer-copy { font-family:var(--font-m); font-size:0.62rem; letter-spacing:0.15em; color:var(--muted); }
+    .footer-sig { font-family:var(--font-d); font-size:0.75rem; color:var(--amber); opacity:0.6; }
+
+    .reveal { opacity:0; transform:translateY(32px); transition:opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
+
+    @media(max-width:768px){
+      nav { padding:16px 24px; }
+      .project-hero { padding:100px 24px 48px; }
+      .project-content { padding:48px 24px; }
+      .results-grid { grid-template-columns:1fr; }
+      .image-grid.cols-2,.image-grid.cols-3 { grid-template-columns:1fr; }
+      .next-project { padding:48px 24px; flex-direction:column; gap:20px; align-items:flex-start; }
+      footer { padding:20px 24px; flex-direction:column; gap:8px; text-align:center; }
+    }
+  </style>
+
+<style id="v2-theme">
+:root{--bg:#f4f1ea;--bg2:#eae5da;--amber:#1f4b3f;--amber-lt:#2f6d5b;--amber-dim:rgba(31,75,63,.07);--text:#16130f;--muted:#8a7f70;--border:rgba(22,19,15,.14);--font-d:'Instrument Serif',serif;--font-b:'Manrope',sans-serif;--font-m:'IBM Plex Mono',monospace}
+#starfield,.nebula{display:none!important}
+body{background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+nav{background:rgba(244,241,234,.93)!important;backdrop-filter:blur(10px)}
+h1,h2,h3,h4,.project-hero-title,.next-title,.result-number,.nav-logo,[class*="-title"]{font-weight:400!important;letter-spacing:0}
+.nav-logo{font-family:var(--font-d);color:var(--ink,#16130f)}
+.project-hero-title{letter-spacing:-.01em}
+.image-placeholder,.project-shot,.result-card,.combo-desktop,.combo-phone{background:#fbf9f5}
+.result-card,.project-shot{box-shadow:0 8px 24px rgba(22,19,15,.05)}
+.next-project:hover{background:rgba(31,75,63,.06)!important}
+.nav-back{white-space:nowrap}
+.nav-logo{font-size:1.05rem;letter-spacing:.01em!important}
+.project-num-badge,.meta-label,.content-label,.project-tag-badge{font-family:var(--font-m)}
+a{color:#1f4b3f}a:hover{color:#2f6d5b}
+</style>
+</head>
+<body>
+<div class="nebula n1"></div>
+<div class="nebula n2"></div>
+<canvas id="starfield"></canvas>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Heloise Demétrio</a>
+  <div style="display:flex;align-items:center;gap:24px">
+    <a href="../index.html#projetos" class="nav-back">← <span data-pt="Todos os projetos" data-en="All projects">Todos os projetos</span></a>
+    <div class="lang-toggle">
+      <button id="btn-pt" class="active" onclick="setLang('pt')">PT</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<section class="project-hero">
+  <div class="project-hero-top">
+    <span class="project-num-badge">06 / 06</span>
+    <span class="project-tag-badge" data-pt="UX · UI · Marketplace" data-en="UX · UI · Marketplace">UX · UI · Marketplace</span>
+  </div>
+  <h1 class="project-hero-title" data-pt="Idealização Completa de Marketplace" data-en="Complete Marketplace Conception">Idealização Completa de Marketplace</h1>
+  <div class="project-hero-meta">
+    <div class="meta-item">
+      <p class="meta-label" data-pt="Empresa" data-en="Company">Empresa</p>
+      <p class="meta-value">IslandHub</p>
+    </div>
+    <div class="meta-item">
+      <p class="meta-label" data-pt="Ano" data-en="Year">Ano</p>
+      <p class="meta-value">2023</p>
+    </div>
+    <div class="meta-item">
+      <p class="meta-label" data-pt="Área" data-en="Area">Área</p>
+      <p class="meta-value" data-pt="UX · UI · Marketplace" data-en="UX · UI · Marketplace">UX · UI · Marketplace</p>
+    </div>
+    <div class="meta-item">
+      <p class="meta-label" data-pt="Papel" data-en="Role">Papel</p>
+      <p class="meta-value">UX/UI Designer</p>
+    </div>
+  </div>
+</section>
+
+<div class="project-content">
+  <div class="content-block" style="margin-bottom:0">
+    <div style="border:1px solid var(--border);border-radius:4px;background:#fbf9f5;padding:96px 48px;text-align:center;display:grid;gap:18px;justify-items:center">
+      <p style="font-family:var(--font-m);font-size:0.66rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--amber)" data-pt="Em breve" data-en="Coming soon">Em breve</p>
+      <h2 style="font-family:var(--font-d);font-weight:400;font-size:clamp(1.9rem,4vw,2.9rem);line-height:1.15;max-width:22ch" data-pt="Estudo de caso em produção" data-en="Case study in production">Estudo de caso em produção</h2>
+      <p style="font-size:1.02rem;font-weight:300;color:var(--muted);max-width:48ch;line-height:1.7;text-wrap:pretty" data-pt="Estou organizando o processo, as telas e os resultados deste projeto para publicar aqui. Se quiser ver antes, me manda uma mensagem." data-en="I'm organizing the process, screens and outcomes of this project to publish here. If you'd like to see it sooner, send me a message.">Estou organizando o processo, as telas e os resultados deste projeto para publicar aqui. Se quiser ver antes, me manda uma mensagem.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:14px">
+        <a href="../contato.html" style="display:inline-flex;align-items:center;padding:12px 22px;border:1px solid var(--amber);background:var(--amber);color:#f4f1ea;border-radius:2px;font-family:var(--font-m);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none" data-pt="Falar comigo" data-en="Get in touch">Falar comigo</a>
+        <a href="../index.html#projetos" style="display:inline-flex;align-items:center;padding:12px 22px;border:1px solid var(--border);color:var(--text);border-radius:2px;font-family:var(--font-m);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none" data-pt="Ver outros projetos" data-en="See other projects">Ver outros projetos</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a href="ficha-pj.html" class="next-project">
+  <div>
+    <p class="next-label" data-pt="Próximo projeto" data-en="Next project">Próximo projeto</p>
+    <p class="next-title" data-pt="Ficha PJ" data-en="PJ Profile">Ficha PJ</p>
+  </div>
+  <span class="next-arrow">→</span>
+</a>
+
+<footer>
+  <p class="footer-copy">© 2026 Heloise Demétrio Prudencio</p>
+  <p class="footer-copy">Florianópolis · SC · BR</p>
+</footer>
+
+<script>
+function setLang(lang){
+  document.documentElement.dataset.lang=lang;
+  localStorage.setItem('hd-lang',lang);
+  document.getElementById('btn-pt').classList.toggle('active',lang==='pt');
+  document.getElementById('btn-en').classList.toggle('active',lang==='en');
+  document.querySelectorAll('[data-pt]').forEach(el=>{el.textContent=el.dataset[lang]||el.dataset.pt;});
+}
+window.setLang=setLang;
+const savedLang=localStorage.getItem('hd-lang')||'pt';
+setLang(savedLang);
+
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+(function(){
+  const canvas=document.getElementById('starfield');
+  const ctx=canvas.getContext('2d');
+  let W,H,stars=[];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+  function build(){stars=Array.from({length:180},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+0.2,speed:Math.random()*0.1+0.02,tw:Math.random()*Math.PI*2,tws:Math.random()*0.012+0.004,amber:Math.random()<0.1}));}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    stars.forEach(s=>{
+      s.tw+=s.tws; const a=0.3+Math.sin(s.tw)*0.5;
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=s.amber?'rgba(31,75,63,'+a+')':'rgba(237,232,223,'+a+')';ctx.fill();
+      s.y+=s.speed; if(s.y>H){s.y=0;s.x=Math.random()*W;}
+    });
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',()=>{resize();build();});
+  resize();build();requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

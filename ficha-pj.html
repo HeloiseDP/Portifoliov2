@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uma Nova Experiência para a Ficha do cliente PJ — Heloise Demétrio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:#f4f1ea; --bg2:#eae5da; --amber:#1f4b3f; --amber-lt:#2f6d5b;
+      --amber-dim:rgba(31,75,63,0.12); --text:#16130f; --muted:#8a7f70;
+      --border:rgba(31,75,63,0.22);
+      --font-d:'Instrument Serif',serif; --font-b:'Manrope',sans-serif; --font-m:'IBM Plex Mono',monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-b); overflow-x: hidden; }
+    #starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .nebula { position: fixed; pointer-events: none; border-radius: 50%; filter: blur(120px); z-index: 0; opacity: 0.14; }
+    .n1 { width:600px;height:600px;background:radial-gradient(circle,#1f4b3f 0%,transparent 70%);top:-200px;right:-200px; }
+    .n2 { width:400px;height:400px;background:radial-gradient(circle,#c9c0b0 0%,transparent 70%);bottom:20%;left:-100px; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 56px; background: rgba(244,241,234,0.93); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family:var(--font-d); font-size:1.1rem; font-weight:700; color:var(--amber); letter-spacing:0.12em; text-decoration:none; }
+    .nav-logo span { color:var(--text); opacity:0.5; }
+    .nav-back { display: flex; align-items: center; gap: 8px; font-family: var(--font-m); font-size: 0.7rem; letter-spacing: 0.15em; color: var(--muted); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+    .nav-back:hover { color: var(--amber); }
+    .lang-toggle { display:flex; background:rgba(31,75,63,0.1); border:1px solid var(--border); border-radius:4px; overflow:hidden; }
+    .lang-toggle button { background:none; border:none; cursor:pointer; font-family:var(--font-m); font-size:0.65rem; letter-spacing:0.12em; padding:5px 10px; color:var(--text); opacity:0.5; transition:all 0.2s; }
+    .lang-toggle button.active { background:var(--amber); color:#f4f1ea; opacity:1; font-weight:700; }
+    .project-hero { min-height: 65vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 120px 80px 72px; position: relative; z-index: 1; border-bottom: 1px solid var(--border); }
+    .project-hero-top { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .project-num-badge { font-family: var(--font-m); font-size: 0.68rem; letter-spacing: 0.25em; color: var(--amber); border: 1px solid var(--border); padding: 6px 14px; border-radius: 2px; }
+    .project-tag-badge { font-family: var(--font-m); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; }
+    .project-hero-title { font-family: var(--font-d); font-size: clamp(2.4rem, 6vw, 5.5rem); font-weight: 900; line-height: 1.05; letter-spacing: 0.03em; max-width: 900px; animation: fadeUp 0.9s 0.2s both; }
+    .project-hero-subtitle { font-family: var(--font-b); font-size: 1.1rem; color: var(--muted); max-width: 640px; margin-top: 18px; line-height: 1.5; }
+    .project-hero-meta { margin-top: 36px; display: flex; gap: 48px; flex-wrap: wrap; }
+    .meta-label { font-family:var(--font-m); font-size:0.6rem; letter-spacing:0.25em; color:var(--amber); text-transform:uppercase; margin-bottom:6px; }
+    .meta-value { font-size:0.95rem; color:var(--text); }
+    .project-content { max-width: 900px; margin: 0 auto; padding: 80px 40px; position: relative; z-index: 1; }
+    .content-block { margin-bottom: 72px; }
+    .content-label { font-family: var(--font-m); font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--amber); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+    .content-label::after { content:''; flex:1; height:1px; background:var(--border); }
+    .content-text { font-size: 1.05rem; line-height: 1.8; color: var(--text); font-weight: 300; }
+    .content-text + .content-text { margin-top: 16px; }
+    .image-grid { display: grid; gap: 16px; margin-bottom: 72px; }
+    .image-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+    .project-shot { border: 1px solid var(--border); border-radius: 4px; overflow: hidden; background: var(--bg2); }
+    .project-shot img { width: 100%; display: block; }
+    .shot-caption { font-family: var(--font-m); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--muted); padding: 10px 14px; text-transform: uppercase; }
+    .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .result-card { background: rgba(22,19,15,0.028); border: 1px solid var(--border); border-radius: 4px; padding: 28px 24px; text-align: center; }
+    .result-number { font-family:var(--font-d); font-size:2.2rem; font-weight:700; color:var(--amber); }
+    .result-label { font-family:var(--font-m); font-size:0.65rem; letter-spacing:0.1em; color:var(--muted); text-transform:uppercase; margin-top:8px; line-height:1.5; }
+    .tags-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .proj-tag { font-family: var(--font-m); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); border: 1px solid var(--border); background: var(--amber-dim); padding: 6px 12px; border-radius: 2px; }
+    .next-project { position: relative; z-index: 1; padding: 72px 80px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: inherit; transition: background 0.3s; }
+    .next-project:hover { background: var(--amber-dim); }
+    .next-label { font-family:var(--font-m); font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+    .next-title { font-family:var(--font-d); font-size:2rem; font-weight:700; color:var(--text); }
+    .next-arrow { font-size:3rem; color:var(--amber); }
+    footer { position:relative;z-index:1; padding:28px 56px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+    .footer-copy { font-family:var(--font-m); font-size:0.62rem; letter-spacing:0.15em; color:var(--muted); }
+    .footer-sig { font-family:var(--font-d); font-size:0.75rem; color:var(--amber); opacity:0.6; }
+    .compare-block { margin-bottom: 72px; }
+    .compare-frame { position: relative; width: 100%; aspect-ratio: 16/10; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; background: var(--bg2); cursor: ew-resize; user-select: none; box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(31,75,63,0.06); }
+    .compare-img { position: absolute; inset: 0; }
+    .compare-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+    .compare-before { clip-path: inset(0 50% 0 0); transition: clip-path 0.05s linear; }
+    .compare-handle { position: absolute; top: 0; bottom: 0; left: 50%; width: 3px; background: var(--amber); box-shadow: 0 0 12px var(--amber), 0 0 30px rgba(31,75,63,0.5); transform: translateX(-50%); pointer-events: none; }
+    .compare-handle-grip { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 40px; height: 40px; border-radius: 50%; background: var(--amber); color: #f4f1ea; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 700; box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
+    .compare-tag { position: absolute; top: 16px; font-family: var(--font-m); font-size: 0.65rem; letter-spacing: 0.2em; padding: 6px 14px; border-radius: 2px; text-transform: uppercase; background: rgba(244,241,234,0.75); border: 1px solid var(--border); color: var(--text); pointer-events: none; backdrop-filter: blur(4px); }
+    .compare-tag-before { left: 16px; }
+    .compare-tag-after { right: 16px; color: var(--amber); border-color: var(--amber); }
+    .compare-hint { text-align: center; margin-top: 16px; font-family: var(--font-m); font-size: 0.68rem; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; }
+    .browser-mock { position: relative; padding: 40px 20px 0; margin-bottom: 24px; }
+    .ghost-panel { position: absolute; left: 50%; border-radius: 10px; background: linear-gradient(180deg, rgba(31,75,63,0.06), rgba(12,12,30,0.6)); border: 1px solid var(--border); }
+    .ghost-2 { top: 0; width: 70%; height: 60px; transform: translateX(-50%); }
+    .ghost-1 { top: 18px; width: 84%; height: 60px; transform: translateX(-50%); }
+    .browser-window { position: relative; z-index: 2; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px var(--amber-dim); background: var(--bg2); }
+    .browser-chrome { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: #14141f; border-bottom: 1px solid var(--border); }
+    .chrome-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .chrome-red { background: #ff5f57; } .chrome-yellow { background: #febc2e; } .chrome-green { background: #28c840; }
+    .chrome-url { margin-left: 12px; font-family: var(--font-m); font-size: 0.7rem; color: var(--muted); background: rgba(22,19,15,0.035); padding: 4px 12px; border-radius: 4px; flex: 1; }
+    .browser-stage { position: relative; }
+    .browser-stage img { width: 100%; display: block; }
+    .doc-hotspot { position: absolute; display: none; border: none; background: transparent; cursor: pointer; padding: 0; }
+    .doc-hotspot.active { display: block; }
+    .doc-hotspot-ring { position: absolute; inset: -6px; border: 2px solid var(--amber); border-radius: 6px; box-shadow: 0 0 0 4px rgba(31,75,63,0.15); animation: hotspotPulse 1.8s ease-in-out infinite; }
+    @keyframes hotspotPulse { 0%,100%{ opacity:0.55; transform:scale(1); } 50%{ opacity:1; transform:scale(1.04); } }
+    .doc-scrim { position: absolute; inset: 0; background: rgba(10,10,20,0.45); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; z-index: 5; }
+    .doc-scrim.show { opacity: 1; pointer-events: auto; }
+    .doc-modal { position: absolute; top: 0; right: 0; bottom: 0; width: 46%; background: #fff; color: #1a1a24; box-shadow: -20px 0 50px rgba(0,0,0,0.35); transform: translateX(100%); transition: transform 0.4s cubic-bezier(.32,.72,0,1); z-index: 6; display: flex; flex-direction: column; font-family: 'DM Sans', sans-serif; }
+    .doc-modal.open { transform: translateX(0); }
+    .doc-modal-header { display: flex; align-items: center; justify-content: space-between; padding: 3% 6%; border-bottom: 1px solid #eee; }
+    .doc-modal-header h3 { font-size: clamp(0.85rem,1.6vw,1.3rem); font-weight: 700; }
+    .doc-modal-close { background: none; border: none; font-size: 1rem; color: #888; cursor: pointer; }
+    .doc-modal-body { padding: 3% 6%; overflow-y: auto; flex: 1; }
+    .doc-field { margin-bottom: 5%; }
+    .doc-field label { display: block; font-size: clamp(0.55rem,1vw,0.8rem); font-weight: 600; margin-bottom: 2%; color: #1a1a24; }
+    .doc-select { display: flex; align-items: center; justify-content: space-between; border: 1px solid #d8d8e0; border-radius: 6px; padding: 3% 4%; font-size: clamp(0.5rem,0.95vw,0.78rem); color: #9a9aa8; }
+    .doc-dropzone { position: relative; border: 2px dashed #c7c7f5; border-radius: 8px; background: #fafaff; min-height: 90px; display: flex; align-items: center; justify-content: center; padding: 4%; text-align: center; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
+    .doc-dropzone:hover { background: #f2f2ff; border-color: #6366f1; }
+    .doc-dropzone-idle, .doc-dropzone-uploading, .doc-dropzone-success { display: none; flex-direction: column; align-items: center; gap: 6px; width: 100%; }
+    .doc-dropzone-idle.show, .doc-dropzone-uploading.show, .doc-dropzone-success.show { display: flex; }
+    .doc-upload-icon { display: inline-flex; width: clamp(20px,2.6vw,32px); height: clamp(20px,2.6vw,32px); color: #6366f1; }
+    .doc-upload-icon svg { width: 100%; height: 100%; }
+    .doc-upload-icon svg path { stroke: #6366f1; }
+    .doc-dropzone p { font-size: clamp(0.55rem,1vw,0.82rem); color: #444; }
+    .doc-dropzone-sub { font-size: clamp(0.45rem,0.8vw,0.68rem); color: #999; }
+    .doc-file-icon { font-size: clamp(1rem,2vw,1.5rem); }
+    .doc-file-name { font-size: clamp(0.55rem,1vw,0.8rem); color: #333; font-weight: 600; }
+    .doc-progress-track { width: 80%; height: 6px; border-radius: 4px; background: #e8e8f5; overflow: hidden; }
+    .doc-progress-fill { width: 0%; height: 100%; background: #6366f1; border-radius: 4px; transition: width 0.1s linear; }
+    .doc-progress-pct { font-size: clamp(0.45rem,0.8vw,0.65rem); color: #6366f1; font-weight: 700; }
+    .doc-success-check { width: clamp(28px,4vw,42px); height: clamp(28px,4vw,42px); border-radius: 50%; background: #22c55e; color: #fff; display: flex; align-items: center; justify-content: center; font-size: clamp(0.9rem,1.8vw,1.3rem); animation: successPop 0.4s cubic-bezier(.34,1.56,.64,1); }
+    @keyframes successPop { from{ transform:scale(0); } to{ transform:scale(1); } }
+    .doc-textarea { border: 1px solid #d8d8e0; border-radius: 6px; padding: 3% 4%; font-size: clamp(0.5rem,0.95vw,0.78rem); color: #b5b5c0; min-height: 50px; }
+    .doc-modal-footer { display: flex; justify-content: flex-end; gap: 10px; padding: 3% 6%; border-top: 1px solid #eee; }
+    .doc-btn { font-family: 'DM Sans', sans-serif; font-size: clamp(0.5rem,1vw,0.8rem); font-weight: 600; padding: 2.5% 5%; border-radius: 6px; cursor: pointer; border: 1px solid transparent; display: flex; align-items: center; gap: 6px; }
+    .doc-btn-ghost { background: #fff; border-color: #d8d8e0; color: #333; }
+    .doc-btn-primary { background: #6366f1; color: #fff; transition: background 0.2s, transform 0.15s; }
+    .doc-btn-primary:hover { background: #4f52d6; }
+    .doc-btn-primary.pulse { animation: btnPulse 0.6s ease; }
+    @keyframes btnPulse { 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.05); } }
+    .doc-btn-icon { font-size: 0.9em; display: inline-flex; width: 1em; height: 1em; }
+    .doc-btn-icon svg { width: 100%; height: 100%; }
+    @media(max-width:768px){ .doc-modal{ width:78%; } }
+    .tab-pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 72px; }
+    .tab-pill { font-family: var(--font-m); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: rgba(22,19,15,0.028); border: 1px solid var(--border); padding: 8px 16px; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
+    .tab-pill:hover { color: var(--text); border-color: var(--amber); }
+    .tab-pill.active { color: #f4f1ea; background: var(--amber); border-color: var(--amber); font-weight: 700; }
+    .reveal { opacity:0; transform:translateY(32px); transition:opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
+    @media(max-width:768px){
+      nav { padding:16px 24px; }
+      .project-hero { padding:100px 24px 48px; }
+      .project-content { padding:48px 24px; }
+      .results-grid { grid-template-columns:1fr; }
+      .image-grid.cols-2 { grid-template-columns:1fr; }
+      .next-project { padding:48px 24px; flex-direction:column; gap:20px; align-items:flex-start; }
+      footer { padding:20px 24px; flex-direction:column; gap:8px; text-align:center; }
+      .chrome-url { font-size:0.6rem; }
+    }
+  </style>
+
+<style id="v2-theme">
+:root{--bg:#f4f1ea;--bg2:#eae5da;--amber:#1f4b3f;--amber-lt:#2f6d5b;--amber-dim:rgba(31,75,63,.07);--text:#16130f;--muted:#8a7f70;--border:rgba(22,19,15,.14);--font-d:'Instrument Serif',serif;--font-b:'Manrope',sans-serif;--font-m:'IBM Plex Mono',monospace}
+#starfield,.nebula{display:none!important}
+body{background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+nav{background:rgba(244,241,234,.93)!important;backdrop-filter:blur(10px)}
+h1,h2,h3,h4,.project-hero-title,.next-title,.result-number,.nav-logo,[class*="-title"]{font-weight:400!important;letter-spacing:0}
+.nav-logo{font-family:var(--font-d);color:var(--ink,#16130f)}
+.project-hero-title{letter-spacing:-.01em}
+.image-placeholder,.project-shot,.result-card,.combo-desktop,.combo-phone{background:#fbf9f5}
+.result-card,.project-shot{box-shadow:0 8px 24px rgba(22,19,15,.05)}
+.next-project:hover{background:rgba(31,75,63,.06)!important}
+.nav-back{white-space:nowrap}
+.nav-logo{font-size:1.05rem;letter-spacing:.01em!important}
+.project-num-badge,.meta-label,.content-label,.project-tag-badge{font-family:var(--font-m)}
+a{color:#1f4b3f}a:hover{color:#2f6d5b}
+</style>
+</head>
+<body>
+<div class="nebula n1"></div>
+<div class="nebula n2"></div>
+<canvas id="starfield"></canvas>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Heloise Demétrio</a>
+  <div style="display:flex;align-items:center;gap:24px">
+    <a href="../index.html#projetos" class="nav-back">← <span data-pt="Todos os projetos" data-en="All projects">Todos os projetos</span></a>
+    <div class="lang-toggle">
+      <button id="btn-pt" class="active" onclick="setLang('pt')">PT</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<section class="project-hero">
+  <div class="project-hero-top">
+    <span class="project-num-badge">01 / 06</span>
+    <span class="project-tag-badge" data-pt="UX · UI · Fintech" data-en="UX · UI · Fintech">UX · UI · Fintech</span>
+  </div>
+  <h1 class="project-hero-title" data-pt="Uma Nova Experiência para a Ficha do cliente PJ" data-en="Uma Nova Experiência para a Ficha do cliente PJ">Uma Nova Experiência para a Ficha do cliente PJ</h1>
+  <p class="project-hero-subtitle" data-pt="Reestruturação da visualização de dados do cliente para tornar a análise mais orientada à venda." data-en="Reestruturação da visualização de dados do cliente para tornar a análise mais orientada à venda.">Reestruturação da visualização de dados do cliente para tornar a análise mais orientada à venda.</p>
+  <div class="project-hero-meta">
+    <div class="meta-item"><p class="meta-label" data-pt="Empresa" data-en="Company">Empresa</p><p class="meta-value">Franq</p></div>
+    <div class="meta-item"><p class="meta-label" data-pt="Ano" data-en="Year">Ano</p><p class="meta-value">2024</p></div>
+    <div class="meta-item"><p class="meta-label" data-pt="Área" data-en="Area">Área</p><p class="meta-value" data-pt="UX · UI · Produto Web" data-en="UX · UI · Web Product">UX · UI · Produto Web</p></div>
+    <div class="meta-item"><p class="meta-label" data-pt="Papel" data-en="Role">Papel</p><p class="meta-value">UX Designer</p></div>
+  </div>
+</section>
+
+<div class="project-content">
+
+  <div class="content-block reveal">
+    <p class="content-label" data-pt="Contexto" data-en="Context">Contexto</p>
+    <p class="content-text" data-pt="A Ficha do Cliente PJ é onde o Personal Banker acompanha score, documentos e produtos elegíveis de cada empresa. A versão antiga concentrava tudo em três colunas fixas: diagnóstico, lista de documentos e ofertas, sem nenhuma organização por contexto de uso. Isso obrigava o PB a rolar a página inteira para achar uma informação específica, e não deixava claro o que era prioridade em cada momento da relação com o cliente." data-en="The PJ Client Profile is where the Personal Banker tracks score, documents and eligible products for each company. The old version crammed everything into three fixed columns: diagnosis, document list and offers, with no organization by context of use. This forced the PB to scroll the entire page to find a specific piece of information, and never made clear what was the priority at each stage of the client relationship.">A Ficha do Cliente PJ é onde o Personal Banker acompanha score, documentos e produtos elegíveis de cada empresa. A versão antiga concentrava tudo em três colunas fixas: diagnóstico, lista de documentos e ofertas, sem nenhuma organização por contexto de uso. Isso obrigava o PB a rolar a página inteira para achar uma informação específica, e não deixava claro o que era prioridade em cada momento da relação com o cliente.</p>
+  </div>
+
+  <div class="compare-block reveal" style="transition-delay:0.1s">
+    <div class="compare-frame" id="compare-frame">
+      <div class="compare-img compare-after"><img src="../assets/ficha-pj/nova-01-visao360.jpg" alt="Depois — Visão 360"></div>
+      <div class="compare-img compare-before" id="compare-before"><img src="../assets/ficha-pj/antiga.jpg" alt="Antes — Ficha do cliente"></div>
+      <div class="compare-handle" id="compare-handle"><span class="compare-handle-grip">↔</span></div>
+      <span class="compare-tag compare-tag-before" data-pt="ANTES" data-en="BEFORE">ANTES</span>
+      <span class="compare-tag compare-tag-after" data-pt="DEPOIS" data-en="AFTER">DEPOIS</span>
+    </div>
+    <p class="compare-hint" data-pt="Arraste ou passe o mouse para comparar" data-en="Drag or hover to compare">Arraste ou passe o mouse para comparar</p>
+  </div>
+
+  <div class="content-block reveal">
+    <p class="content-label" data-pt="Processo" data-en="Process">Processo</p>
+    <p class="content-text" data-pt="Para entender como a ficha era utilizada no dia a dia, realizei um levantamento com os PBs e CSs das tarefas executadas com maior frequência. A partir desses insights, identifiquei a necessidade de reorganizar a experiência e propus uma estrutura baseada em cinco abas: Visão 360, reunindo as principais informações do cliente em um resumo executivo; Produtos, concentrando o catálogo de ofertas; Operações, exibindo o pipeline de propostas em andamento; Defesa de Crédito, destinada ao preenchimento das justificativas; e Documentos, funcionando como um repositório centralizado de arquivos." data-en="To understand how the profile was used day to day, I conducted a survey with PBs and CSs on their most frequently performed tasks. Based on these insights, I identified the need to reorganize the experience and proposed a structure based on five tabs: Overview 360, bringing together the client's key information in an executive summary; Products, concentrating the offer catalog; Operations, displaying the ongoing proposal pipeline; Credit Defense, dedicated to filling out justifications; and Documents, functioning as a centralized file repository.">Para entender como a ficha era utilizada no dia a dia, realizei um levantamento com os PBs e CSs das tarefas executadas com maior frequência. A partir desses insights, identifiquei a necessidade de reorganizar a experiência e propus uma estrutura baseada em cinco abas: Visão 360, reunindo as principais informações do cliente em um resumo executivo; Produtos, concentrando o catálogo de ofertas; Operações, exibindo o pipeline de propostas em andamento; Defesa de Crédito, destinada ao preenchimento das justificativas; e Documentos, funcionando como um repositório centralizado de arquivos.</p>
+    <p class="content-text" data-pt="Além da reorganização da informação, prototipei todos os estados da interface, vazio, pendência e sucesso, garantindo consistência em diferentes cenários de uso. Também redesenhei os fluxos de envio e visualização de documentos utilizando modais, permitindo que o PB anexasse e consultasse arquivos sem precisar sair da ficha, preservando o contexto da navegação e reduzindo interrupções na tarefa." data-en="Beyond reorganizing the information, I prototyped every interface state, empty, pending and success, ensuring consistency across different usage scenarios. I also redesigned the document upload and viewing flows using modals, allowing the PB to attach and consult files without leaving the profile, preserving navigation context and reducing task interruptions.">Além da reorganização da informação, prototipei todos os estados da interface, vazio, pendência e sucesso, garantindo consistência em diferentes cenários de uso. Também redesenhei os fluxos de envio e visualização de documentos utilizando modais, permitindo que o PB anexasse e consultasse arquivos sem precisar sair da ficha, preservando o contexto da navegação e reduzindo interrupções na tarefa.</p>
+  </div>
+
+  <div class="content-block reveal">
+    <p class="content-label" data-pt="Solução" data-en="Solution">Solução</p>
+    <p class="content-text" data-pt="A nova ficha passou a ser estruturada em cinco abas, cada uma respondendo a uma necessidade específica do PB: 'Como está este cliente hoje?', 'O que posso oferecer?', 'O que já está em andamento?', 'Como aumentar as chances de aprovação?' e 'Quais documentos já foram enviados?'." data-en="The new profile came to be structured into five tabs, each answering a specific need of the PB: 'How is this client doing today?', 'What can I offer?', 'What's already in progress?', 'How do I increase approval chances?' and 'Which documents have already been sent?'.">A nova ficha passou a ser estruturada em cinco abas, cada uma respondendo a uma necessidade específica do PB: "Como está este cliente hoje?", "O que posso oferecer?", "O que já está em andamento?", "Como aumentar as chances de aprovação?" e "Quais documentos já foram enviados?".</p>
+    <p class="content-text" data-pt="Na Visão 360, informações críticas como score, pendências e estrutura societária receberam maior destaque, permitindo uma avaliação rápida da situação do cliente. Já os novos fluxos de upload e visualização de documentos simplificaram significativamente o processo de anexar e consultar arquivos, tornando a experiência mais ágil, intuitiva e eficiente." data-en="In the 360 Overview, critical information such as score, pending items and ownership structure gained greater prominence, allowing for a quick assessment of the client's situation. The new document upload and viewing flows significantly simplified the process of attaching and consulting files, making the experience more agile, intuitive and efficient.">Na Visão 360, informações críticas como score, pendências e estrutura societária receberam maior destaque, permitindo uma avaliação rápida da situação do cliente. Já os novos fluxos de upload e visualização de documentos simplificaram significativamente o processo de anexar e consultar arquivos, tornando a experiência mais ágil, intuitiva e eficiente.</p>
+  </div>
+
+  <div class="tab-pills" id="tab-pills">
+    <button class="tab-pill active" data-tab="0" data-pt="Visão 360" data-en="Overview 360">Visão 360</button>
+    <button class="tab-pill" data-tab="1" data-pt="Produtos" data-en="Products">Produtos</button>
+    <button class="tab-pill" data-tab="2" data-pt="Operações" data-en="Operations">Operações</button>
+    <button class="tab-pill" data-tab="3" data-pt="Defesa de Crédito" data-en="Credit Defense">Defesa de Crédito</button>
+    <button class="tab-pill" data-tab="4" data-pt="Documentos" data-en="Documents">Documentos</button>
+  </div>
+
+  <div class="browser-mock reveal" style="transition-delay:0.1s">
+    <div class="ghost-panel ghost-2"></div>
+    <div class="ghost-panel ghost-1"></div>
+    <div class="browser-window" id="browser-window">
+      <div class="browser-chrome">
+        <span class="chrome-dot chrome-red"></span><span class="chrome-dot chrome-yellow"></span><span class="chrome-dot chrome-green"></span>
+        <span class="chrome-url" id="tab-url">app.franq.com.br/ficha-pj/visao-360</span>
+      </div>
+      <div class="browser-stage">
+        <img id="tab-img" src="../assets/ficha-pj/nova-01-visao360.jpg" alt="Visão 360">
+        <button class="doc-hotspot" id="doc-hotspot" title="Enviar Documento" style="left:83.5%;top:20.5%;width:13%;height:3.6%"><span class="doc-hotspot-ring"></span></button>
+
+        <div class="doc-scrim" id="doc-scrim"></div>
+        <div class="doc-modal" id="doc-modal">
+          <div class="doc-modal-header">
+            <h3 data-pt="Enviar Documento" data-en="Send Document">Enviar Documento</h3>
+            <button class="doc-modal-close" id="doc-modal-close">✕</button>
+          </div>
+          <div class="doc-modal-body" id="doc-modal-body">
+            <div class="doc-field">
+              <label data-pt="Tipo de documento" data-en="Document type">Tipo de documento</label>
+              <div class="doc-select"><span data-pt="Selecione o tipo de documento" data-en="Select the document type">Selecione o tipo de documento</span><span>⌄</span></div>
+            </div>
+            <div class="doc-field">
+              <label data-pt="Categoria" data-en="Category">Categoria</label>
+              <div class="doc-select"><span data-pt="Selecione a categoria" data-en="Select the category">Selecione a categoria</span><span>⌄</span></div>
+            </div>
+            <div class="doc-field">
+              <label data-pt="Arquivo" data-en="File">Arquivo</label>
+              <div class="doc-dropzone" id="doc-dropzone">
+                <div class="doc-dropzone-idle" id="doc-dropzone-idle">
+                  <span class="doc-upload-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3V15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17 8L12 3L7 8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+                  <p data-pt="Arraste o arquivo aqui ou clique para selecionar" data-en="Drag the file here or click to select">Arraste o arquivo aqui ou clique para selecionar</p>
+                  <span class="doc-dropzone-sub" data-pt="PDF, JPG, PNG — Máximo 10MB" data-en="PDF, JPG, PNG — Max 10MB">PDF, JPG, PNG — Máximo 10MB</span>
+                </div>
+                <div class="doc-dropzone-uploading" id="doc-dropzone-uploading">
+                  <span class="doc-file-icon">📄</span>
+                  <p class="doc-file-name">contrato_social_2024.pdf</p>
+                  <div class="doc-progress-track"><div class="doc-progress-fill" id="doc-progress-fill"></div></div>
+                  <span class="doc-progress-pct" id="doc-progress-pct">0%</span>
+                </div>
+                <div class="doc-dropzone-success" id="doc-dropzone-success">
+                  <span class="doc-success-check">✓</span>
+                  <p data-pt="Documento enviado com sucesso!" data-en="Document sent successfully!">Documento enviado com sucesso!</p>
+                  <span class="doc-dropzone-sub">contrato_social_2024.pdf · 2.1 MB</span>
+                </div>
+              </div>
+            </div>
+            <div class="doc-field">
+              <label data-pt="Observação (opcional)" data-en="Note (optional)">Observação (opcional)</label>
+              <div class="doc-textarea" data-pt="Ex: Balanço referente ao exercício 2023" data-en="E.g.: Balance sheet for fiscal year 2023">Ex: Balanço referente ao exercício 2023</div>
+            </div>
+          </div>
+          <div class="doc-modal-footer">
+            <button class="doc-btn doc-btn-ghost" id="doc-cancel-btn" data-pt="Cancelar" data-en="Cancel">Cancelar</button>
+            <button class="doc-btn doc-btn-primary" id="doc-send-btn"><span class="doc-btn-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17 8L12 3L7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><span data-pt="Enviar Documento" data-en="Send Document">Enviar Documento</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="shot-caption" id="tab-caption" style="text-align:center;margin-bottom:72px" data-pt="Visão 360 — score, pendências e estrutura societária em um único painel" data-en="360 Overview — score, pending items and ownership structure in a single panel">Visão 360 — score, pendências e estrutura societária em um único painel</p>
+
+  <div class="image-grid cols-2 reveal" style="transition-delay:0.1s">
+    <figure class="project-shot">
+      <img src="../assets/ficha-pj/nova-06-operacoes.jpg" alt="Modal de envio de documento">
+      <figcaption class="shot-caption" data-pt="Modal — envio de documento sem sair da ficha" data-en="Modal — document upload without leaving the profile">Modal — envio de documento sem sair da ficha</figcaption>
+    </figure>
+    <figure class="project-shot">
+      <img src="../assets/ficha-pj/nova-07-produtos.jpg" alt="Modal de visualização de documento">
+      <figcaption class="shot-caption" data-pt="Modal — visualização e download do documento enviado" data-en="Modal — viewing and downloading the submitted document">Modal — visualização e download do documento enviado</figcaption>
+    </figure>
+  </div>
+
+  <div class="content-block reveal">
+    <p class="content-label" data-pt="Resultados" data-en="Results">Resultados</p>
+    <p class="content-text" data-pt="A reestruturação por abas trouxe clareza imediata sobre onde encontrar cada tipo de informação, reduzindo o tempo que o PB gasta procurando dados espalhados e tornando a ficha um verdadeiro painel de gestão do relacionamento com o cliente PJ." data-en="The tab restructuring brought immediate clarity on where to find each type of information, reducing the time PBs spend searching for scattered data and turning the profile into a true relationship-management panel for PJ clients.">A reestruturação por abas trouxe clareza imediata sobre onde encontrar cada tipo de informação, reduzindo o tempo que o PB gasta procurando dados espalhados e tornando a ficha um verdadeiro painel de gestão do relacionamento com o cliente PJ.</p>
+    <div class="results-grid" style="margin-top:24px">
+      <div class="result-card"><div class="result-number">5</div><div class="result-label" data-pt="Abas de contexto dedicado" data-en="Dedicated context tabs">Abas de contexto dedicado</div></div>
+      <div class="result-card"><div class="result-number">-40%</div><div class="result-label" data-pt="Rolagem para encontrar informação" data-en="Scrolling to find information">Rolagem para encontrar informação</div></div>
+      <div class="result-card"><div class="result-number">2</div><div class="result-label" data-pt="Modais para upload e visualização" data-en="Modals for upload and viewing">Modais para upload e visualização</div></div>
+    </div>
+  </div>
+
+  <div class="content-block reveal" style="margin-bottom:0">
+    <p class="content-label" data-pt="Ferramentas & Skills" data-en="Tools & Skills">Ferramentas & Skills</p>
+    <div class="tags-row">
+      <span class="proj-tag" data-pt="Redesign" data-en="Redesign">Redesign</span><span class="proj-tag" data-pt="Arquitetura de informação" data-en="Information architecture">Arquitetura de informação</span><span class="proj-tag" data-pt="Navegação por abas" data-en="Tab navigation">Navegação por abas</span><span class="proj-tag">Design System</span><span class="proj-tag" data-pt="Fluxos modais" data-en="Modal flows">Fluxos modais</span><span class="proj-tag">B2B SaaS</span>
+    </div>
+  </div>
+
+</div>
+
+<a href="kanban-ganhos.html" class="next-project">
+  <div>
+    <p class="next-label" data-pt="Próximo projeto" data-en="Next project">Próximo projeto</p>
+    <p class="next-title" data-pt="Nova Experiência para Gestão de Comissões" data-en="Nova Experiência para Gestão de Comissões">Nova Experiência para Gestão de Comissões</p>
+  </div>
+  <span class="next-arrow">→</span>
+</a>
+
+<footer>
+  <p class="footer-copy">© 2026 Heloise Demétrio Prudencio</p>
+  <p class="footer-copy">Florianópolis · SC · BR</p>
+</footer>
+
+<script>
+function setLang(lang){
+  document.documentElement.dataset.lang=lang;
+  localStorage.setItem('hd-lang',lang);
+  document.getElementById('btn-pt').classList.toggle('active',lang==='pt');
+  document.getElementById('btn-en').classList.toggle('active',lang==='en');
+  document.querySelectorAll('[data-pt]').forEach(el=>{el.textContent=el.dataset[lang]||el.dataset.pt;});
+  const tabs=[
+    {url:'app.franq.com.br/ficha-pj/visao-360', pt:'Visão 360 — score, pendências e estrutura societária em um único painel', en:'360 Overview — score, pending items and ownership structure in a single panel'},
+    {url:'app.franq.com.br/ficha-pj/produtos', pt:'Produtos — catálogo de ofertas elegíveis, a consultar e solicitadas', en:'Products — catalog of eligible, consultable and requested offers'},
+    {url:'app.franq.com.br/ficha-pj/operacoes', pt:'Operações — pipeline de propostas e linha do tempo de atividades', en:'Operations — proposal pipeline and activity timeline'},
+    {url:'app.franq.com.br/ficha-pj/defesa-credito', pt:'Defesa de Crédito — formulário guiado para justificar a proposta', en:'Credit Defense — guided form to justify the proposal'},
+    {url:'app.franq.com.br/ficha-pj/documentos', pt:'Documentos — repositório com status de validade de cada arquivo', en:'Documents — repository with validity status for each file'}
+  ];
+  const active=document.querySelector('.tab-pill.active');
+  const idx=active?parseInt(active.dataset.tab):0;
+  document.getElementById('tab-caption').textContent = lang==='pt'?tabs[idx].pt:tabs[idx].en;
+}
+window.setLang=setLang;
+const savedLang=localStorage.getItem('hd-lang')||'pt';
+
+const tabImages=[
+  'assets/ficha-pj/nova-01-visao360.jpg',
+  'assets/ficha-pj/nova-02-doc-viewer.jpg',
+  'assets/ficha-pj/nova-03-enviar-doc.jpg',
+  'assets/ficha-pj/nova-04-documentos.jpg',
+  'assets/ficha-pj/nova-05-defesa-credito.jpg'
+];
+const tabCache=tabImages.map(src=>{const i=new Image();i.src=src;return i;});
+document.querySelectorAll('.tab-pill').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-pill').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const idx=parseInt(btn.dataset.tab);
+    document.getElementById('tab-img').src=tabImages[idx];
+    document.getElementById('doc-hotspot').classList.toggle('active', idx===4);
+    closeDocModal(true);
+    setLang(document.documentElement.dataset.lang||'pt');
+  });
+});
+
+setLang(savedLang);
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+(function(){
+  const hotspot=document.getElementById('doc-hotspot');
+  const scrim=document.getElementById('doc-scrim');
+  const modal=document.getElementById('doc-modal');
+  const closeBtn=document.getElementById('doc-modal-close');
+  const cancelBtn=document.getElementById('doc-cancel-btn');
+  const sendBtn=document.getElementById('doc-send-btn');
+  const dropzone=document.getElementById('doc-dropzone');
+  const idle=document.getElementById('doc-dropzone-idle');
+  const uploading=document.getElementById('doc-dropzone-uploading');
+  const success=document.getElementById('doc-dropzone-success');
+  const fill=document.getElementById('doc-progress-fill');
+  const pct=document.getElementById('doc-progress-pct');
+  let uploadTimer=null;
+
+  function resetDoc(){
+    idle.classList.add('show'); uploading.classList.remove('show'); success.classList.remove('show');
+    fill.style.width='0%'; pct.textContent='0%';
+    sendBtn.classList.remove('pulse');
+    clearTimeout(uploadTimer);
+  }
+  window.openDocModal=function(){
+    resetDoc();
+    scrim.classList.add('show');
+    modal.classList.add('open');
+  };
+  window.closeDocModal=function(silent){
+    scrim.classList.remove('show');
+    modal.classList.remove('open');
+    if(!silent) setTimeout(resetDoc, 400);
+  };
+  if(hotspot) hotspot.addEventListener('click', ()=>openDocModal());
+  if(scrim) scrim.addEventListener('click', ()=>closeDocModal());
+  if(closeBtn) closeBtn.addEventListener('click', ()=>closeDocModal());
+  if(cancelBtn) cancelBtn.addEventListener('click', ()=>closeDocModal());
+
+  function startUpload(){
+    if(uploading.classList.contains('show')||success.classList.contains('show')) return;
+    idle.classList.remove('show');
+    uploading.classList.add('show');
+    let p=0;
+    uploadTimer=setInterval(()=>{
+      p+=Math.random()*18+8;
+      if(p>=100){
+        p=100;
+        clearInterval(uploadTimer);
+        fill.style.width='100%'; pct.textContent='100%';
+        sendBtn.classList.add('pulse');
+        setTimeout(()=>{
+          uploading.classList.remove('show');
+          success.classList.add('show');
+          setTimeout(()=>closeDocModal(), 1600);
+        }, 350);
+        return;
+      }
+      fill.style.width=p+'%'; pct.textContent=Math.floor(p)+'%';
+    }, 220);
+  }
+  if(dropzone) dropzone.addEventListener('click', startUpload);
+  if(sendBtn) sendBtn.addEventListener('click', ()=>{ if(!uploading.classList.contains('show') && !success.classList.contains('show')) startUpload(); });
+})();
+
+(function(){
+  const frame=document.getElementById('compare-frame');
+  const before=document.getElementById('compare-before');
+  const handle=document.getElementById('compare-handle');
+  if(!frame) return;
+  let dragging=false;
+  function setPos(clientX){
+    const rect=frame.getBoundingClientRect();
+    let pct=((clientX-rect.left)/rect.width)*100;
+    pct=Math.max(0,Math.min(100,pct));
+    before.style.clipPath='inset(0 '+(100-pct)+'% 0 0)';
+    handle.style.left=pct+'%';
+  }
+  frame.addEventListener('mousemove',e=>{ if(!dragging) setPos(e.clientX); });
+  frame.addEventListener('mouseleave',()=>{ if(!dragging){ before.style.clipPath='inset(0 50% 0 0)'; handle.style.left='50%'; } });
+  frame.addEventListener('mousedown',e=>{ dragging=true; setPos(e.clientX); });
+  window.addEventListener('mouseup',()=>{ dragging=false; });
+  window.addEventListener('mousemove',e=>{ if(dragging) setPos(e.clientX); });
+  frame.addEventListener('touchstart',e=>{ dragging=true; setPos(e.touches[0].clientX); },{passive:true});
+  frame.addEventListener('touchmove',e=>{ setPos(e.touches[0].clientX); },{passive:true});
+  frame.addEventListener('touchend',()=>{ dragging=false; });
+})();
+(function(){
+  const canvas=document.getElementById('starfield');
+  const ctx=canvas.getContext('2d');
+  let W,H,stars=[];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+  function build(){stars=Array.from({length:180},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+0.2,speed:Math.random()*0.1+0.02,tw:Math.random()*Math.PI*2,tws:Math.random()*0.012+0.004,amber:Math.random()<0.1}));}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    stars.forEach(s=>{
+      s.tw+=s.tws; const a=0.3+Math.sin(s.tw)*0.5;
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=s.amber?'rgba(31,75,63,'+a+')':'rgba(237,232,223,'+a+')';ctx.fill();
+      s.y+=s.speed; if(s.y>H){s.y=0;s.x=Math.random()*W;}
+    });
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',()=>{resize();build();});
+  resize();build();requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

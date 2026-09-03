@@ -1,0 +1,131 @@
+/* ============================================
+   FRANQ — Header
+   ============================================ */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-header);
+  padding: var(--sp-md) var(--sp-xl);
+  transition: background 0.4s var(--ease-default),
+              backdrop-filter 0.4s var(--ease-default);
+}
+
+/* Scrolled state: slight dark glass */
+.header.is-scrolled {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* ---- Logo ---- */
+.header__logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: var(--sp-sm);
+}
+
+.header__logo-wordmark {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  color: var(--color-text-white);
+  line-height: 1;
+}
+
+.header__logo-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-blue-accent);
+  flex-shrink: 0;
+}
+
+.header__logo-img {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
+/* ---- Nav ---- */
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2xl);
+}
+
+.header__nav a {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+
+.header__nav a:hover {
+  color: var(--color-text-white);
+}
+
+.header__nav a.is-active {
+  color: var(--color-text-white);
+}
+
+/* ---- CTA button ---- */
+.header__cta {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-white) !important;
+  border: 1px solid var(--color-border-subtle);
+  padding: 10px 20px;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s !important;
+}
+
+.header__cta:hover {
+  background: rgba(255,255,255,0.08) !important;
+  border-color: var(--color-border-white) !important;
+}
+
+/* ---- Hamburger (mobile) ---- */
+.header__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+
+.header__hamburger span {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--color-text-white);
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+@media (max-width: 768px) {
+  .header__nav {
+    display: none;
+  }
+  .header__hamburger {
+    display: flex;
+  }
+}

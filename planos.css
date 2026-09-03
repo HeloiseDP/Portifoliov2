@@ -1,0 +1,661 @@
+/* ============================================
+   FRANQ — Seções de Planos
+   ============================================ */
+
+/* ── Shared ── */
+.planos-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 9999px;
+}
+
+/* ══════════════════════════════════════════
+   SEÇÃO 1 — PLANO START
+   Fundo preto, destaque total
+══════════════════════════════════════════ */
+
+.section-start {
+  background: #000;
+  color: #fff;
+  scroll-margin-top: 80px;
+}
+
+.start__inner {
+  max-width: 1344px;
+  margin: 0 auto;
+  padding: 100px 48px;
+}
+
+/* ── Corpo: left column + card ── */
+.start__body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+}
+
+.start__left {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+/* ── Header do Plano Start (dentro do left) ── */
+.start__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.start__eyebrow {
+  background: transparent;
+  border: 1px solid rgba(104, 123, 234, 0.4);
+  color: #687bea;
+  margin-bottom: 20px;
+  align-self: flex-start;
+}
+
+.start__plan-name {
+  font-family: var(--font-heading);
+  font-size: clamp(52px, 5.5vw, 80px);
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0 0 20px;
+}
+
+.start__tagline {
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.55);
+  max-width: 480px;
+  margin: 0;
+}
+
+/* Features list */
+.start__features-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin: 0 0 16px;
+}
+
+.start__features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.start__feature-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 16px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.4;
+}
+
+.start__feature-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(104, 123, 234, 0.15);
+  border: 1px solid rgba(104, 123, 234, 0.4);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.start__feature-check svg {
+  width: 10px;
+  height: 10px;
+  stroke: #687bea;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Price card */
+.start__card {
+  background: #0d1117;
+  border: 1px solid rgba(104, 123, 234, 0.2);
+  border-radius: 24px;
+  padding: 36px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow: hidden;
+}
+
+/* Glow sutil no topo */
+.start__card::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: -60px;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(104, 123, 234, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.start__card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.start__card-icon {
+  width: 44px;
+  height: 44px;
+  background: rgba(104, 123, 234, 0.12);
+  border: 1px solid rgba(104, 123, 234, 0.25);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #687bea;
+}
+
+.start__card-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.start__card-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.start__card-badge {
+  background: rgba(104, 123, 234, 0.12);
+  color: #687bea;
+  border: 1px solid rgba(104, 123, 234, 0.25);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 5px 12px;
+  border-radius: 9999px;
+}
+
+.start__card-badge--lime {
+  background: rgba(104, 123, 234, 0.12);
+  color: #687bea;
+  border: 1px solid rgba(104, 123, 234, 0.25);
+}
+
+.start__card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.start__card-name {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 400;
+  color: #fff;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.start__card-subtitle {
+  font-size: 14px;
+  color: rgba(255,255,255,0.35);
+}
+
+.start__card-pricing {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.start__price-from {
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+  text-decoration: line-through;
+  text-decoration-color: rgba(255,255,255,0.2);
+}
+
+.start__price-note {
+  display: block;
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 6px;
+}
+
+.start__price-savings {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: #687bea;
+  margin-top: 4px;
+}
+
+.start__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.start__price-currency {
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+}
+
+.start__price-amount {
+  font-family: var(--font-heading);
+  font-size: 72px;
+  font-weight: 400;
+  line-height: 1;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.start__price-period {
+  font-size: 16px;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 4px;
+}
+
+.start__card-divider {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  margin: 0;
+}
+
+.start__card-cta {
+  display: block;
+  width: 100%;
+  padding: 17px;
+  background: #687bea;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.start__card-cta:hover {
+  background: #5567d6;
+  transform: translateY(-1px);
+}
+
+.start__card-note {
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ══════════════════════════════════════════
+   SEÇÃO 2 — OUTROS PLANOS
+   Fundo #0d1117, dois cards lado a lado
+══════════════════════════════════════════ */
+
+.section-outros {
+  background: #0d1117;
+  color: #fff;
+  scroll-margin-top: 80px;
+}
+
+.outros__inner {
+  max-width: 1344px;
+  margin: 0 auto;
+  padding: 100px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+  align-items: center;
+}
+
+/* ── Header ── */
+.outros__header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  max-width: 700px;
+}
+
+.outros__eyebrow {
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.6);
+  border: 1px solid rgba(255,255,255,0.1);
+  align-self: flex-start;
+  margin-bottom: 20px;
+}
+
+.outros__title {
+  font-family: var(--font-heading);
+  font-size: clamp(48px, 5vw, 72px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0;
+}
+
+.outros__subtitle {
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.45);
+  margin: 0;
+}
+
+/* ── Cards grid ── */
+.outros__cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  width: 100%;
+}
+
+/* ── Card base ── */
+.plano-card {
+  background: #0d1117;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+
+.plano-card:hover {
+  border-color: rgba(255,255,255,0.15);
+}
+
+/* Anual: destacado */
+.plano-card--featured {
+  border-color: rgba(200, 242, 61, 0.2);
+}
+
+.plano-card--featured:hover {
+  border-color: rgba(200, 242, 61, 0.4);
+}
+
+/* Glow para featured */
+.plano-card--featured::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: -60px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(200, 242, 61, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Glow para mensal */
+.plano-card:not(.plano-card--featured)::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Top row: ícone + badge ── */
+.plano-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.plano-card__icon {
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.5);
+}
+
+.plano-card__icon--lime {
+  background: rgba(200, 242, 61, 0.1);
+  border-color: rgba(200, 242, 61, 0.2);
+  color: #c8f23d;
+}
+
+.plano-card__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.plano-card__badge {
+  width: fit-content;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 5px 12px;
+  border-radius: 9999px;
+}
+
+.plano-card__badge--lime {
+  background: rgba(200, 242, 61, 0.12);
+  color: #c8f23d;
+  border: 1px solid rgba(200, 242, 61, 0.25);
+}
+
+.plano-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.plano-card__name {
+  font-family: var(--font-heading);
+  font-size: 34px;
+  font-weight: 400;
+  color: #fff;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.plano-card__subtitle {
+  font-size: 14px;
+  color: rgba(255,255,255,0.35);
+}
+
+.plano-card__pricing {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.plano-card__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.plano-card__currency {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.6);
+}
+
+.plano-card__amount {
+  font-family: var(--font-heading);
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 1;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.plano-card__period {
+  font-size: 15px;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 2px;
+}
+
+.plano-card__price-note {
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+}
+
+.plano-card__price-savings {
+  font-size: 12px;
+  font-weight: 500;
+  color: #c8f23d;
+}
+
+.plano-card__divider {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  margin: 0;
+}
+
+.plano-card__features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.plano-card__feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  color: rgba(255,255,255,0.65);
+}
+
+.plano-card__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.plano-card--featured .plano-card__dot {
+  background: #c8f23d;
+}
+
+.plano-card:not(.plano-card--featured) .plano-card__dot {
+  background: rgba(255,255,255,0.25);
+}
+
+.plano-card__more {
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+  padding-left: 17px;
+}
+
+.plano-card__cta {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: background 0.2s, transform 0.15s, border-color 0.2s;
+}
+
+.plano-card__cta--lime {
+  background: #c8f23d;
+  color: #0a0a0a;
+}
+
+.plano-card__cta--lime:hover {
+  background: #d4f55a;
+  transform: translateY(-1px);
+}
+
+.plano-card__cta--outline {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+.plano-card__cta--outline:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.3);
+  transform: translateY(-1px);
+}
+
+/* ══════════════════════════════════════════
+   MENSAL — overrides de cor (neutro)
+══════════════════════════════════════════ */
+
+.mensal__card {
+  background: #131c25;
+  border-color: rgba(255,255,255,0.1);
+}
+
+.mensal__card-icon {
+  background: rgba(255,255,255,0.06) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: rgba(255,255,255,0.45) !important;
+}
+
+.mensal__card-cta {
+  background: transparent !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,0.2) !important;
+}
+
+.mensal__card-cta:hover {
+  background: rgba(255,255,255,0.06) !important;
+  border-color: rgba(255,255,255,0.35) !important;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .start__inner,
+  .outros__inner {
+    padding: 64px 24px;
+  }
+
+  .start__body {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .outros__cards {
+    grid-template-columns: 1fr;
+  }
+
+  .start__price-amount {
+    font-size: 56px;
+  }
+}
