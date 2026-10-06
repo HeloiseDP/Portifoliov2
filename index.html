@@ -1,871 +1,366 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Encontre o plano ideal para você,Franq Planos" />
-  <title>Planos Franq</title>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="css/variables.css" />
-  <link rel="stylesheet" href="css/header.css" />
-  <link rel="stylesheet" href="css/hero.css" />
-  <link rel="stylesheet" href="css/sobre.css" />
-  <link rel="stylesheet" href="css/planos.css" />
-  <link rel="stylesheet" href="css/personal-banker.css" />
-  <link rel="stylesheet" href="css/contato.css" />
-  <link rel="stylesheet" href="css/footer.css" />
-  <link rel="stylesheet" href="css/register-modal.css" />
-
-  <style>
-    /* ─── Global reset ──────────────────────── */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: #000;
-      color: #fafaff;
-      font-family: var(--font-body);
-      font-size: var(--fs-body);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
-    }
-
-    /* ─── Placeholder: sections after hero ── */
-    .section-placeholder {
-      min-height: 100vh;
-      background: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-body);
-      font-size: var(--fs-secondary);
-      color: rgba(250,250,255,0.3);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heloise Demétrio · Home</title>
+<meta name="description" content="Heloise Demétrio Prudencio — Product Designer em produtos financeiros digitais. Economista pela UFSC, do discovery ao acompanhamento de resultados.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#f4f1ea}
+*{box-sizing:border-box}
+h1,h2,h3,h4,p,ul,ol,dl,dd,dt,figure,blockquote{margin:0;padding:0}
+a{color:#1f4b3f;text-decoration:none}a:hover{color:#2f6d5b}
+.nl:hover{color:#1f4b3f !important}
+.btn{transition:background .2s,color .2s,border-color .2s}
+.btn:hover{background:#16130f !important;color:#f4f1ea !important;border-color:#16130f !important}
+.proj{transition:border-color .22s,transform .22s,box-shadow .22s}
+.proj:hover{border-color:#1f4b3f !important;transform:translateY(-3px);box-shadow:0 12px 30px rgba(22,19,15,.07)}
+.cc{transition:border-color .2s,background .2s}
+.cc:hover{border-color:#1f4b3f !important;background:#ffffff !important}
+@media(max-width:900px){.hide-sm{display:none !important}}
+</style>
 </head>
-
 <body>
-
-  <!-- ══════════════════════════════════════════
-       HEADER
-  ══════════════════════════════════════════ -->
-  <header class="header">
-    <div class="header__inner">
-
-      <!-- Logo -->
-      <a href="/" class="header__logo" aria-label="Franq,Início">
-        <img src="assets/logo-franq.svg" alt="Franq" class="header__logo-img" />
-      </a>
-
-      <!-- Navigation -->
-      <nav class="header__nav" aria-label="Navegação principal">
-        <a href="#planos" class="is-active">Planos</a>
-        <a href="#sobre">Sobre</a>
-        <a href="#contato" class="header__cta">Fale conosco</a>
-      </nav>
-
-      <!-- Hamburger (mobile) -->
-      <button class="header__hamburger" aria-label="Menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-    </div>
-  </header>
-
-
-  <!-- ══════════════════════════════════════════
-       RÉGUA DE SCROLL,fixa, percorre o site todo
-  ══════════════════════════════════════════ -->
-  <div class="hero-ruler" id="site-ruler" aria-hidden="true">
-
-    <!-- Contador: seção atual / total,fica no topo -->
-    <div class="hero-ruler__counter">
-      <span class="hero-ruler__phase-num" id="ruler-phase-num">01</span>
-      <span class="hero-ruler__phase-sep">/</span>
-      <span class="hero-ruler__phase-total">05</span>
-    </div>
-
-    <!-- Trilha vertical -->
-    <div class="hero-ruler__track">
-      <div class="hero-ruler__track-fill" id="ruler-fill"></div>
-
-      <!-- 5 ticks,uma por seção -->
-      <div class="hero-ruler__tick" style="--tick-pos: 0%">
-        <span class="hero-ruler__label">Início</span>
-      </div>
-      <div class="hero-ruler__tick" style="--tick-pos: 25%">
-        <span class="hero-ruler__label">Planos</span>
-      </div>
-      <div class="hero-ruler__tick" style="--tick-pos: 50%">
-        <span class="hero-ruler__label">Personal Banker</span>
-      </div>
-      <div class="hero-ruler__tick" style="--tick-pos: 75%">
-        <span class="hero-ruler__label">Sobre</span>
-      </div>
-      <div class="hero-ruler__tick" style="--tick-pos: 100%">
-        <span class="hero-ruler__label">Contato</span>
-      </div>
-
-      <!-- Dot deslizante -->
-      <div class="hero-ruler__dot" id="ruler-dot"></div>
-    </div>
-
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       HERO SECTION
-       Scroll budget: 300vh
-       Inner sticky panel: 100vh
-  ══════════════════════════════════════════ -->
-  <section id="hero-wrapper" class="hero-wrapper" aria-label="Hero,Planos Franq">
-
-    <div class="hero-sticky">
-
-      <!-- ── Background image ───────────────────
-           transform-origin: bottom right
-           Starts full-screen → shrinks to bottom-right corner
-           SOURCE: replace assets/franq-building.jpg with your hosted image
-           (Figma URL used here, valid for 7 days from last Figma export)
-      ──────────────────────────────────────── -->
-      <div class="hero-image" id="hero-image">
-        <img
-          src="assets/franq-building.png"
-          alt="Prédio Franq"
-          fetchpriority="high"
-          draggable="false"
-        />
-      </div>
-
-
-      <!-- ── Scroll hint (desaparece ao rolar) ── -->
-      <div class="hero-scroll-hint" id="hero-scroll-hint" aria-hidden="true">
-        <div class="hero-scroll-hint__mouse">
-          <div class="hero-scroll-hint__dot"></div>
-        </div>
-      </div>
-
-      <!-- ── Stage 1: Large title (visible at start) ──
-           "Planos Franq",140px, bottom-left
-      ──────────────────────────────────────── -->
-      <h1 class="hero-title-s1" id="hero-title-s1" aria-label="Planos Franq">
-        Planos Franq
-      </h1>
-
-      <!-- ── Stage 2: Medium title (over image, bottom-right) ──
-           "Planos Franq",70px
-      ──────────────────────────────────────── -->
-      <p class="hero-title-s2" id="hero-title-s2" aria-hidden="true">
-        Planos Franq
-      </p>
-
-      <!-- ── Intro body text (bottom-left, black area) ── -->
-      <p class="hero-intro" id="hero-intro">
-        Oferecemos diferentes opções para atender às suas necessidades.
-      </p>
-
-      <!-- ── Final heading (top-left, Phase 3) ── -->
-      <h2 class="hero-heading-final" id="hero-heading-final">
-        Encontre o plano<br />ideal para você
-      </h2>
-
-    </div><!-- /.hero-sticky -->
-
-  </section><!-- /#hero-wrapper -->
-
-
-  <!-- ══════════════════════════════════════════
-       MAIN CONTENT
-  ══════════════════════════════════════════ -->
-  <main>
-
-    <!-- ══════════════════════════════════════════
-         SEÇÃO PLANO START
-    ══════════════════════════════════════════ -->
-    <section id="planos" class="section-start" aria-label="Plano Start">
-      <div class="start__inner">
-
-        <!-- Header -->
-        <!-- Body: features + card -->
-        <div class="start__body">
-
-          <!-- Left: header + features -->
-          <div class="start__left">
-            <div class="start__header">
-              <span class="planos-badge start__eyebrow">Para quem já decidiu crescer</span>
-              <h2 class="start__plan-name">Plano Anual</h2>
-              <p class="start__tagline">
-                Para o bancário autônomo que já sabe onde quer chegar. Mesmo acesso completo à plataforma,
-                com o menor custo mensal, porque quem está comprometido com o crescimento
-                não precisa pagar por flexibilidade que não vai usar.
-              </p>
-            </div>
-            <div class="start__features-block">
-            <p class="start__features-label">O que está incluído</p>
-            <ul class="start__features">
-              <li class="start__feature-item">
-                <span class="start__feature-check">
-                  <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
-                </span>
-                Acesso à plataforma completa Franq
-              </li>
-              <li class="start__feature-item">
-                <span class="start__feature-check">
-                  <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
-                </span>
-                Suporte dedicado via chat, ligação e e-mail
-              </li>
-              <li class="start__feature-item">
-                <span class="start__feature-check">
-                  <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
-                </span>
-                Relatórios mensais de performance
-              </li>
-              <li class="start__feature-item">
-                <span class="start__feature-check">
-                  <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
-                </span>
-                Onboarding guiado com especialista
-              </li>
-              <li class="start__feature-item">
-                <span class="start__feature-check">
-                  <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
-                </span>
-                Integrações com as principais ferramentas
-              </li>
-              <li class="start__feature-item">
-                <span class="start__feature-check">
-                  <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
-                </span>
-                Atualizações automáticas incluídas
-              </li>
-            </ul>
-            </div><!-- end start__features-block -->
-          </div><!-- end start__left -->
-
-          <!-- Price card -->
-          <div class="start__card">
-            <div class="start__card-top">
-              <div class="start__card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
-                </svg>
-              </div>
-              <div class="start__card-badges">
-                <div class="start__card-badge">50% OFF</div>
-                <div class="start__card-badge start__card-badge--lime">O mais vendido</div>
-              </div>
-            </div>
-            <div class="start__card-header">
-              <h3 class="start__card-name">Plano Anual</h3>
-              <span class="start__card-subtitle">Para quem vai ficar</span>
-            </div>
-            <div class="start__card-pricing">
-              <div class="start__price-row">
-                <span class="start__price-currency">R$</span>
-                <span class="start__price-amount">1.200</span>
-                <span class="start__price-period">/ano</span>
-              </div>
-              <span class="start__price-note">Equivale a R$ 100/mês</span>
-              <span class="start__price-savings">Economize R$ 1.200 com o plano anual</span>
-            </div>
-            <hr class="start__card-divider" />
-            <a href="planos/anual.html" class="start__card-cta">Saiba mais</a>
-          </div>
-
-        </div><!-- /.start__body -->
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         SEÇÃO OUTROS PLANOS
-    ══════════════════════════════════════════ -->
-    <section class="section-outros" aria-label="Plano Mensal">
-      <div class="start__inner">
-        <div class="start__body">
-
-          <!-- Left: header + features -->
-          <div class="start__left">
-            <div class="start__header">
-              <span class="planos-badge outros__eyebrow">Para quem está chegando</span>
-              <h2 class="start__plan-name">Plano Mensal</h2>
-              <p class="start__tagline">
-                Para o bancário autônomo que quer explorar a plataforma antes de se comprometer.
-                Acesso completo à Franq, sem fidelidade. O passo certo para quem está
-                nos primeiros meses de operação ou ainda quer conhecer antes de decidir.
-              </p>
-            </div>
-            <div class="start__features-block">
-              <p class="start__features-label">O que está incluído</p>
-              <ul class="start__features">
-                <li class="start__feature-item">
-                  <span class="start__feature-check">
-                    <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
-                  </span>
-                  Acesso à plataforma completa Franq
-                </li>
-                <li class="start__feature-item">
-                  <span class="start__feature-check">
-                    <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
-                  </span>
-                  Suporte dedicado via chat, ligação e e-mail
-                </li>
-                <li class="start__feature-item">
-                  <span class="start__feature-check">
-                    <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
-                  </span>
-                  Relatórios mensais de performance
-                </li>
-                <li class="start__feature-item">
-                  <span class="start__feature-check">
-                    <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
-                  </span>
-                  Onboarding guiado com especialista
-                </li>
-                <li class="start__feature-item">
-                  <span class="start__feature-check">
-                    <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
-                  </span>
-                  Integrações com as principais ferramentas
-                </li>
-                <li class="start__feature-item">
-                  <span class="start__feature-check">
-                    <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
-                  </span>
-                  Atualizações automáticas incluídas
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Price card -->
-          <div class="start__card mensal__card">
-            <div class="start__card-top">
-              <div class="start__card-icon mensal__card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
-                </svg>
-              </div>
-            </div>
-            <div class="start__card-header">
-              <h3 class="start__card-name">Plano Mensal</h3>
-              <span class="start__card-subtitle">Sem compromisso de prazo</span>
-            </div>
-            <div class="start__card-pricing">
-              <div class="start__price-row">
-                <span class="start__price-currency">R$</span>
-                <span class="start__price-amount">200</span>
-                <span class="start__price-period">/mês</span>
-              </div>
-              <span class="start__price-note">Equivale a R$ 2.400/ano</span>
-              <span class="start__price-note">Cancele quando quiser</span>
-            </div>
-            <hr class="start__card-divider" />
-            <a href="planos/mensal.html" class="start__card-cta mensal__card-cta">Saiba mais</a>
-          </div>
-
-        </div><!-- /.start__body -->
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         SEÇÃO PERSONAL BANKER
-    ══════════════════════════════════════════ -->
-    <section id="personal-banker" class="section-pb" aria-label="Personal Banker">
-      <div class="pb__inner">
-
-        <!-- Header -->
-        <div class="pb__header">
-          <div>
-            <span class="pb__eyebrow">Personal Banker</span>
-            <h2 class="pb__title">Uma nova forma de atuar no <em>mercado financeiro.</em></h2>
-          </div>
-          <p class="pb__intro">O Personal Banker é o profissional independente que conecta pessoas a soluções financeiras sob medida. Com a Franq, você tem a estrutura de uma grande instituição, com a liberdade de quem tem o próprio negócio.</p>
-        </div>
-
-        <!-- Cards -->
-        <div class="pb__cards">
-
-          <!-- 1. O que é um Personal Banker → user -->
-          <div class="pb__card">
-            <div class="pb__card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="7" r="4"/>
-                <path d="M4 21v-1a8 8 0 0 1 16 0v1"/>
-              </svg>
-            </div>
-            <div class="pb__card-content">
-              <h3>O que é um Personal Banker?</h3>
-              <p>É o profissional autônomo que atua como um consultor financeiro independente, ajudando clientes a escolher os melhores produtos e soluções, com total autonomia para construir sua própria carteira.</p>
-            </div>
-          </div>
-
-          <!-- 2. Tecnologia e estrutura → laptop/plataforma -->
-          <div class="pb__card">
-            <div class="pb__card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="3" width="20" height="13" rx="2"/>
-                <polyline points="8,21 12,17 16,21"/>
-                <line x1="7" y1="21" x2="17" y2="21"/>
-              </svg>
-            </div>
-            <div class="pb__card-content">
-              <h3>Tecnologia e estrutura da Franq</h3>
-              <p>Acesso a uma plataforma completa com CRM, gestão de clientes, propostas automatizadas e relatórios de performance. Tudo que você precisa para profissionalizar sua atuação e escalar resultados.</p>
-            </div>
-          </div>
-
-          <!-- 3. Portfólio de produtos → briefcase/carteira -->
-          <div class="pb__card">
-            <div class="pb__card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="7" width="20" height="14" rx="2"/>
-                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
-                <line x1="2" y1="12" x2="22" y2="12"/>
-                <path d="M12 12v2"/>
-              </svg>
-            </div>
-            <div class="pb__card-content">
-              <h3>Portfólio de produtos robusto</h3>
-              <p>Ofereça para seus clientes um amplo portfólio das maiores instituições do país: crédito, investimentos, seguros e muito mais. Mais produtos, mais oportunidades, mais comissões.</p>
-            </div>
-          </div>
-
-          <!-- 4. Suporte e comunidade → headset -->
-          <div class="pb__card">
-            <div class="pb__card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
-                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/>
-                <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
-              </svg>
-            </div>
-            <div class="pb__card-content">
-              <h3>Suporte e comunidade ativa</h3>
-              <p>Você não está sozinho. Conte com treinamentos, suporte dedicado e uma comunidade de Personal Bankers para trocar experiências e crescer junto com quem já está no mercado.</p>
-            </div>
-          </div>
-
-          <!-- 5. Renda recorrente → gráfico de crescimento -->
-          <div class="pb__card">
-            <div class="pb__card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-                <polyline points="17 6 23 6 23 12"/>
-              </svg>
-            </div>
-            <div class="pb__card-content">
-              <h3>Renda recorrente e escalável</h3>
-              <p>Construa uma carteira de clientes fidelizados e gere renda recorrente todos os meses. Quanto mais você cresce, mais sua receita cresce, sem teto de ganhos.</p>
-            </div>
-          </div>
-
-          <!-- 6. Seu negócio → building/independência -->
-          <div class="pb__card">
-            <div class="pb__card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                <polyline points="9,22 9,12 15,12 15,22"/>
-              </svg>
-            </div>
-            <div class="pb__card-content">
-              <h3>Seu negócio, do seu jeito</h3>
-              <p>Trabalhe de onde quiser, no horário que preferir. A Franq oferece a infraestrutura para você construir um negócio rentável com total independência e flexibilidade.</p>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- CTA Banner -->
-        <div class="pb__cta-banner">
-          <div class="pb__cta-text">
-            <h3>Pronto para começar sua jornada como Personal Banker?</h3>
-            <p>Junte-se a milhares de profissionais que já escolheram a Franq para construir uma carreira sólida e rentável no mercado financeiro.</p>
-          </div>
-          <div class="pb__cta-actions">
-            <a href="#" class="pb__cta-btn pb__cta-btn--primary" data-rm-trigger>Quero ser Personal Banker</a>
-            <a href="#planos" class="pb__cta-btn pb__cta-btn--ghost">Ver planos</a>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         SEÇÃO SOBRE A FRANQ
-    ══════════════════════════════════════════ -->
-    <section id="sobre" class="section-sobre" aria-label="Sobre a Franq">
-      <div class="sobre__inner">
-
-        <!-- Cabeçalho -->
-        <div class="sobre__header">
-          <h2 class="sobre__title">Sobre a Franq</h2>
-          <p class="sobre__description">
-            Somos a fintech que potencializa a atuação do bancário autônomo, conectando profissionais
-            independentes a um amplo ecossistema de produtos e serviços financeiros das principais
-            instituições do mercado. Nosso propósito é oferecer tecnologia, estrutura e acesso para
-            que você amplie sua capacidade de atender clientes, gere mais oportunidades de negócios
-            e construa uma atuação verdadeiramente independente.
-          </p>
-        </div>
-
-        <!-- Corpo: imagem + features -->
-        <div class="sobre__body">
-
-          <!-- Imagem do prédio Franq -->
-          <div class="sobre__image-wrap">
-            <img
-              src="assets/franq-building.png"
-              alt="Prédio Franq"
-              loading="lazy"
-            />
-          </div>
-
-          <!-- Features -->
-          <div class="sobre__features">
-
-            <div class="sobre__feature">
-              <div class="sobre__feature-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
-                  <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/>
-                  <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
-                </svg>
-              </div>
-              <div class="sobre__feature-text">
-                <h3 class="sobre__feature-title">Sua assessoria, do seu jeito</h3>
-                <p class="sobre__feature-desc">
-                  Na Franq, você mantém o protagonismo do relacionamento com seus clientes.
-                  Nossa plataforma foi desenvolvida para apoiar sua atuação consultiva, oferecendo
-                  ferramentas, suporte especializado e acesso simplificado a soluções financeiras
-                  alinhadas às necessidades de cada perfil.
-                </p>
-              </div>
-            </div>
-
-            <div class="sobre__feature">
-              <div class="sobre__feature-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="7" width="20" height="14" rx="2"/>
-                  <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
-                  <line x1="2" y1="13" x2="22" y2="13"/>
-                </svg>
-              </div>
-              <div class="sobre__feature-text">
-                <h3 class="sobre__feature-title">Um portfólio completo em uma única plataforma</h3>
-                <p class="sobre__feature-desc">
-                  Tenha acesso a mais de 150 produtos e serviços financeiros de diferentes
-                  instituições, sem a necessidade de múltiplos credenciamentos. Mais opções para
-                  estruturar estratégias personalizadas e ampliar suas oportunidades de receita.
-                </p>
-              </div>
-            </div>
-
-            <div class="sobre__feature">
-              <div class="sobre__feature-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="3" width="20" height="13" rx="2"/>
-                  <polyline points="8,21 12,17 16,21"/>
-                  <line x1="7" y1="21" x2="17" y2="21"/>
-                </svg>
-              </div>
-              <div class="sobre__feature-text">
-                <h3 class="sobre__feature-title">Tecnologia que simplifica sua operação</h3>
-                <p class="sobre__feature-desc">
-                  Centralize sua rotina comercial em uma plataforma intuitiva e eficiente.
-                  Da prospecção à contratação, a Franq oferece recursos que reduzem a burocracia
-                  e permitem que você dedique mais tempo ao relacionamento e à geração de negócios.
-                </p>
-              </div>
-            </div>
-
-          </div><!-- /.sobre__features -->
-        </div><!-- /.sobre__body -->
-
-        <!-- Divisor -->
-        <hr class="sobre__divider" />
-
-        <!-- Estatísticas -->
-        <div class="sobre__stats">
-          <div class="sobre__stat">
-            <span class="sobre__stat-number">+200k</span>
-            <p class="sobre__stat-label">Clientes atendidos na plataforma</p>
-          </div>
-          <div class="sobre__stat">
-            <span class="sobre__stat-number">+8.000</span>
-            <p class="sobre__stat-label">Personal Bankers em todo o Brasil</p>
-          </div>
-          <div class="sobre__stat">
-            <span class="sobre__stat-number">+150</span>
-            <p class="sobre__stat-label">Produtos e serviços financeiros</p>
-          </div>
-          <div class="sobre__stat">
-            <span class="sobre__stat-number">+60 Bi</span>
-            <p class="sobre__stat-label">Em volume transacionado</p>
-          </div>
-        </div><!-- /.sobre__stats -->
-
-        <!-- Divisor final -->
-        <hr class="sobre__divider" />
-
-      </div><!-- /.sobre__inner -->
-    </section>
-
-  </main>
-
-  <!-- ══════════════════════════════════════════
-       SEÇÃO FALE CONOSCO
-  ══════════════════════════════════════════ -->
-  <section id="contato" class="section-contato" aria-label="Fale Conosco">
-    <div class="contato__inner">
-
-      <!-- Esquerda: título + canais -->
-      <div class="contato__left">
-        <div>
-          <span class="contato__eyebrow">Fale Conosco</span>
-          <h2 class="contato__title">Estamos aqui para te ajudar.</h2>
-          <p class="contato__desc" style="margin-top:16px">Escolha o canal mais conveniente para você ou nos envie uma mensagem diretamente.</p>
-        </div>
-
-        <div class="contato__channels">
-          <a href="https://wa.me/554832053801?text=Ol%C3%A1,%20quero%20saber%20mais%20sobre%20a%20Franq" class="contato__channel" target="_blank" rel="noopener">
-            <div class="contato__channel-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-              </svg>
-            </div>
-            <div class="contato__channel-info">
-              <span class="contato__channel-label">WhatsApp</span>
-              <span class="contato__channel-value">Atendimento via chat</span>
-            </div>
-            <svg class="contato__channel-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-
-          <a href="mailto:contato@franq.com.br" class="contato__channel">
-            <div class="contato__channel-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
-              </svg>
-            </div>
-            <div class="contato__channel-info">
-              <span class="contato__channel-label">E-mail</span>
-              <span class="contato__channel-value">contato@franq.com.br</span>
-            </div>
-            <svg class="contato__channel-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-
-          <a href="tel:+554832053801" class="contato__channel">
-            <div class="contato__channel-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.06 6.06l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 16.92z"/>
-              </svg>
-            </div>
-            <div class="contato__channel-info">
-              <span class="contato__channel-label">Telefone</span>
-              <span class="contato__channel-value">(48) 3205-3801</span>
-            </div>
-            <svg class="contato__channel-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-        </div>
-      </div>
-
-      <!-- Direita: formulário -->
-      <div class="contato__form-wrap">
-        <h3 class="contato__form-title">Envie uma mensagem</h3>
-        <p class="contato__form-sub">Responderemos em até 1 dia útil.</p>
-
-        <div class="contato__field--row">
-          <div class="contato__field">
-            <label for="c-nome">Nome</label>
-            <input type="text" id="c-nome" placeholder="Seu nome" autocomplete="name" />
-          </div>
-          <div class="contato__field">
-            <label for="c-telefone">Telefone</label>
-            <input type="tel" id="c-telefone" placeholder="(11) 99999-9999" autocomplete="tel" />
-          </div>
-        </div>
-
-        <div class="contato__field">
-          <label for="c-email">E-mail</label>
-          <input type="email" id="c-email" placeholder="seu@email.com" autocomplete="email" />
-        </div>
-
-        <div class="contato__field">
-          <label for="c-assunto">Assunto</label>
-          <select id="c-assunto">
-            <option value="" disabled selected>Selecione um assunto</option>
-            <option>Dúvidas sobre planos</option>
-            <option>Quero ser um Personal Banker</option>
-            <option>Suporte técnico</option>
-            <option>Parceria comercial</option>
-            <option>Outro</option>
-          </select>
-        </div>
-
-        <div class="contato__field">
-          <label for="c-mensagem">Mensagem</label>
-          <textarea id="c-mensagem" placeholder="Como podemos ajudar?"></textarea>
-        </div>
-
-        <button class="contato__submit" type="button" id="contato-submit">Enviar mensagem</button>
-
-        <script>
-          document.getElementById('contato-submit').addEventListener('click', function () {
-            var nome     = document.getElementById('c-nome').value.trim();
-            var telefone = document.getElementById('c-telefone').value.trim();
-            var email    = document.getElementById('c-email').value.trim();
-            var assunto  = document.getElementById('c-assunto').value;
-            var mensagem = document.getElementById('c-mensagem').value.trim();
-
-            if (!nome || !email || !mensagem) {
-              alert('Por favor, preencha pelo menos seu nome, e-mail e mensagem.');
-              return;
-            }
-
-            var subject = encodeURIComponent(assunto || 'Contato pelo site');
-            var body = encodeURIComponent(
-              'Nome: ' + nome + '\n' +
-              'Telefone: ' + (telefone || 'não informado') + '\n' +
-              'E-mail: ' + email + '\n' +
-              'Assunto: ' + (assunto || 'não informado') + '\n\n' +
-              'Mensagem:\n' + mensagem
-            );
-
-            window.location.href = 'mailto:contato@franq.com.br?subject=' + subject + '&body=' + body;
-          });
-        </script>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════════
-       FOOTER
-  ══════════════════════════════════════════ -->
-  <footer class="site-footer" aria-label="Rodapé">
-
-    <!-- Main: brand + nav -->
-    <div class="footer__main">
-
-      <!-- Brand -->
-      <div class="footer__brand">
-        <a href="/" class="footer__logo" aria-label="Franq">
-          <img src="assets/logo-franq.svg" alt="Franq" />
-        </a>
-        <p class="footer__tagline">Tecnologia para o bancário autônomo evoluir com estrutura e independência.</p>
-        <div class="footer__social">
-          <!-- Instagram -->
-          <a href="https://www.instagram.com/franq.oficial/" target="_blank" rel="noopener" class="footer__social-link" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
-            </svg>
-          </a>
-          <!-- LinkedIn -->
-          <a href="https://www.linkedin.com/company/franq-oficial/posts/?feedView=all" target="_blank" rel="noopener" class="footer__social-link" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
-            </svg>
-          </a>
-          <!-- YouTube -->
-          <a href="https://www.youtube.com/channel/UC285p64ZYunFkClFjVEYJ0A" target="_blank" rel="noopener" class="footer__social-link" aria-label="YouTube">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-
-      <!-- Nav links -->
-      <nav class="footer__nav" aria-label="Links do rodapé">
-        <div class="footer__nav-group">
-          <h4>Plataforma</h4>
-          <ul>
-            <li><a href="#planos">Planos</a></li>
-            <li><a href="#sobre">Sobre a Franq</a></li>
-            <li><a href="#personal-banker">Personal Banker</a></li>
-
-          </ul>
-        </div>
-        <div class="footer__nav-group">
-          <h4>Suporte</h4>
-          <ul>
-            <li><a href="#contato">Fale Conosco</a></li>
-            <li><a href="mailto:sac@franq.com.br">sac@franq.com.br</a></li>
-            <li><a href="https://franq.com.br/blog" target="_blank" rel="noopener">Blog</a></li>
-          </ul>
-        </div>
-        <div class="footer__nav-group">
-          <h4>Legal</h4>
-          <ul>
-            <li><a href="#">Termos de Uso</a></li>
-            <li><a href="#">Política de Privacidade</a></li>
-            <li><a href="#">Compliance</a></li>
-          </ul>
-        </div>
-      </nav>
-
-    </div>
-
-    <hr class="footer__divider" />
-
-    <!-- Legal disclaimer -->
-    <div class="footer__legal">
-      <p class="footer__legal-text">
-        A Franq Tecnologia S.A. (CNPJ 32.709.829/0001-54) é uma plataforma de tecnologia que integra instituições financeira a bancários autônomos, e realiza a divulgação de produtos por meio de seus correspondentes bancários WIN CORRESPONDENTE BANCÁRIO LTDA, CNPJ 40.673.528/0001-46 e K.ZA CORRESPONDENTE BANCÁRIO LTDA, CNPJ 42.637.945/0001-69, nos termos da Resolução CMN nº 4.935/21, operando com indicação de clientes e apoio administrativo para instituições financeiras "PARCEIRAS". As informações contidas nesta página foram redigidas pelo nosso time de curadoria e representam uma descrição da Franq sobre o produto e seu parceiro, construída a partir de dados públicos do parceiro (websites, redes sociais, materiais de vendas, etc.). A Franq não se responsabiliza por eventuais alterações nas características ou features dos produtos, assim como taxas, critérios de renda ou processos de contratação. É fundamental que você verifique todos estes pontos quando direcionado ao site do parceiro antes de efetuar sua compra. Em caso de dúvidas sempre consulte o seu Personal Banker.
-      </p>
-    </div>
-
-    <hr class="footer__divider" />
-
-    <!-- Bottom bar -->
-    <div class="footer__bottom">
-      <span class="footer__copyright">© 2025 Franq Tecnologia S.A. Todos os direitos reservados.</span>
-      <div class="footer__bottom-links">
-        <a href="#">Termos de Uso</a>
-        <a href="#">Privacidade</a>
-        <a href="#">Cookies</a>
-      </div>
-    </div>
-
-  </footer>
-
-  <!-- ══════════════════════════════════════════
-       SCRIPTS
-  ══════════════════════════════════════════ -->
-  <script src="js/hero.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/register-modal.js"></script>
-  <script>
-    // Preview-only: block interactions so visitors can scroll but not click through the flow.
-    ['click','mousedown','pointerdown','submit','keydown'].forEach(function(type){
-      document.addEventListener(type, function(e){
-        if(type==='keydown' && !['Tab'].includes(e.key)) return;
-        e.preventDefault();
-        e.stopPropagation();
-      }, true);
-    });
-  </script>
-
+<div style="font-family: 'Manrope', sans-serif; color: #16130f; background: #f4f1ea; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased">
+
+<header style="position: sticky; top: 0; z-index: 50; background: rgba(244,241,234,.92); border-bottom: 1px solid rgba(22,19,15,.07)">
+<nav style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 62px; flex-wrap: wrap">
+<a href="index.html" style="display: flex; align-items: baseline; gap: 10px; color: #16130f">
+<span style="font-family: 'Instrument Serif', serif; font-size: 18px">Heloise Demétrio</span>
+<span class="hide-sm" style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #8a7f70">Product Designer</span>
+</a>
+<div style="display: flex; align-items: center; gap: 8px 26px; flex-wrap: wrap">
+<a class="nl hide-sm" href="#processo" style="color: #443c31; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase">Processo</a>
+<a class="nl hide-sm" href="#experiencia" style="color: #443c31; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase">Experiência</a>
+<a class="nl" href="#projetos" style="color: #443c31; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase">Projetos</a>
+<a class="nl hide-sm" href="#skills" style="color: #443c31; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase">Skills</a>
+<a class="nl hide-sm" href="sobre.html" style="color: #443c31; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase">Sobre</a>
+<a class="nl" href="contato.html" style="color: #443c31; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase">Contato</a>
+<div style="display: flex; border: 1px solid rgba(22,19,15,.14); border-radius: 2px; overflow: hidden; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em">
+<span aria-current="true" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; background: #16130f; color: #f4f1ea">PT</span>
+<a href="index-en.html" lang="en" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; color: #443c31">EN</a>
+</div>
+</div>
+</nav>
+</header>
+
+<section id="hero" style="padding: 104px 0 88px; border-bottom: 1px solid rgba(22,19,15,.07)">
+<div style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); display: flex; flex-wrap: wrap; gap: 72px; align-items: flex-start">
+<div style="flex: 3 1 480px; min-width: 0">
+<p style="display: flex; align-items: center; gap: 10px; margin-bottom: 22px; color: #1f4b3f; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase"><span style="width: 26px; height: 1px; background: #1f4b3f; display: inline-block"></span>Product Designer · perfil generalista · ponta a ponta</p>
+<h1 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(46px, 6.2vw, 74px); line-height: 1.02; letter-spacing: -.01em">Heloise Demétrio,<br><i style="color: #1f4b3f">Product Designer</i></h1>
+<p style="margin-top: 26px; max-width: 44ch; font-size: 18px; font-weight: 300; color: #443c31; text-wrap: pretty">Economista pela UFSC, seis anos desenhando produtos financeiros digitais. Meu trabalho começa antes da tela: descoberta, definição estratégica, construção, disponibilização com o time e acompanhamento dos resultados.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px">
+<a class="btn" href="#projetos" style="display: inline-flex; align-items: center; min-height: 44px; padding: 12px 22px; border: 1px solid #1f4b3f; border-radius: 2px; background: #1f4b3f; color: #f4f1ea; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase">Ver projetos</a>
+<a class="btn" href="#carta" style="display: inline-flex; align-items: center; min-height: 44px; padding: 12px 22px; border: 1px solid #16130f; border-radius: 2px; color: #16130f; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase">Por que design</a>
+<a class="btn" href="cv.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 12px 22px; border: 1px solid #16130f; border-radius: 2px; color: #16130f; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase">Baixar CV</a>
+</div>
+</div>
+<dl style="flex: 2 1 300px; min-width: 0; border-top: 1px solid rgba(22,19,15,.14)">
+<div style="display: grid; grid-template-columns: 110px 1fr; gap: 14px; padding: 13px 0; border-bottom: 1px solid rgba(22,19,15,.07); align-items: baseline"><dt style="color: #8a7f70; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase">Local</dt><dd style="font-size: 14.5px">Florianópolis, SC · Brasil</dd></div>
+<div style="display: grid; grid-template-columns: 110px 1fr; gap: 14px; padding: 13px 0; border-bottom: 1px solid rgba(22,19,15,.07); align-items: baseline"><dt style="color: #8a7f70; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase">Disponibilidade</dt><dd style="font-size: 14.5px">Aberta a novas oportunidades</dd></div>
+<div style="display: grid; grid-template-columns: 110px 1fr; gap: 14px; padding: 13px 0; border-bottom: 1px solid rgba(22,19,15,.07); align-items: baseline"><dt style="color: #8a7f70; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase">Experiência</dt><dd style="font-size: 14.5px">3+ anos em design · 6 anos em produto</dd></div>
+<div style="display: grid; grid-template-columns: 110px 1fr; gap: 14px; padding: 13px 0; border-bottom: 1px solid rgba(22,19,15,.07); align-items: baseline"><dt style="color: #8a7f70; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase">Setor</dt><dd style="font-size: 14.5px">Fintech · produtos financeiros regulados</dd></div>
+<div style="display: grid; grid-template-columns: 110px 1fr; gap: 14px; padding: 13px 0; border-bottom: 1px solid rgba(22,19,15,.07); align-items: baseline"><dt style="color: #8a7f70; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase">Formação</dt><dd style="font-size: 14.5px">Economia · UFSC</dd></div>
+<div style="display: grid; grid-template-columns: 110px 1fr; gap: 14px; padding: 13px 0; border-bottom: 1px solid rgba(22,19,15,.07); align-items: baseline"><dt style="color: #8a7f70; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase">Idiomas</dt><dd style="font-size: 14.5px">Português · Inglês</dd></div>
+</dl>
+</div>
+</section>
+
+<section id="carta" style="padding: 88px 0; border-bottom: 1px solid rgba(22,19,15,.07)">
+<div style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px)">
+<div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 12px"><span style="color: #1f4b3f; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .18em">01</span><h2 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(30px, 3.4vw, 43px); line-height: 1.1">Por que design</h2></div>
+<div style="display: flex; flex-wrap: wrap; gap: 64px; align-items: flex-start; margin-top: 14px">
+<div style="flex: 3 1 460px; min-width: 0; max-width: 64ch; display: flex; flex-direction: column; gap: 22px; font-size: 16.5px; font-weight: 300; color: #443c31">
+<p style="text-wrap: pretty">Passei seis anos dentro de produto financeiro antes de me chamar designer. Comecei como analista de produto, olhando métricas e comportamento de usuários, e essa origem mudou a forma como desenho: para mim, uma decisão de interface só está pronta quando dá para explicar o efeito dela no negócio.</p>
+<p style="text-wrap: pretty">Na Franq, trabalhei com dinheiro dos outros: contratação de planos, comissões, análise de clientes PJ, dados cadastrais. São fluxos onde um erro de copy ou uma hierarquia mal resolvida custa confiança, e às vezes custa conformidade. Aprendi a desenhar com regra, com time jurídico por perto e com desenvolvedor do lado.</p>
+<p style="text-wrap: pretty">É esse tipo de problema que quero continuar resolvendo, em escala maior: produto financeiro complexo, muita gente envolvida, decisão que precisa ser defendida com dado e com pesquisa. Perfil generalista, do discovery ao pós-entrega.</p>
+</div>
+<aside style="flex: 2 1 280px; min-width: 0; border-top: 1px solid rgba(22,19,15,.14); padding-top: 18px">
+<p style="color: #1f4b3f; margin-bottom: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase">Onde eu encaixo</p>
+<ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 14.5px; color: #443c31; font-weight: 300">
+<li style="display: flex; gap: 11px; align-items: baseline"><span style="flex: none; width: 9px; height: 1px; background: #1f4b3f; transform: translateY(-4px)"></span><span>Concepção de produto de ponta a ponta, em um segmento de negócio ou canal</span></li>
+<li style="display: flex; gap: 11px; align-items: baseline"><span style="flex: none; width: 9px; height: 1px; background: #1f4b3f; transform: translateY(-4px)"></span><span>Descoberta e definição estratégica junto a negócio e produto</span></li>
+<li style="display: flex; gap: 11px; align-items: baseline"><span style="flex: none; width: 9px; height: 1px; background: #1f4b3f; transform: translateY(-4px)"></span><span>Construção, prototipação e disponibilização com engenharia</span></li>
+<li style="display: flex; gap: 11px; align-items: baseline"><span style="flex: none; width: 9px; height: 1px; background: #1f4b3f; transform: translateY(-4px)"></span><span>Acompanhamento de resultado depois do go-live</span></li>
+<li style="display: flex; gap: 11px; align-items: baseline"><span style="flex: none; width: 9px; height: 1px; background: #1f4b3f; transform: translateY(-4px)"></span><span>Leitura de dados e métricas sem depender de tradutor</span></li>
+</ul>
+</aside>
+</div>
+</div>
+</section>
+
+<section id="processo" style="padding: 88px 0; border-bottom: 1px solid rgba(22,19,15,.07)">
+<div style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px)">
+<div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 12px"><span style="color: #1f4b3f; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .18em">02</span><h2 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(30px, 3.4vw, 43px); line-height: 1.1">Como eu trabalho</h2></div>
+<p style="color: #8a7f70; font-size: 15px; max-width: 62ch; margin-bottom: 52px; font-weight: 300">Cinco etapas. Nenhuma delas é minha sozinha, e é por isso que funciona.</p>
+<ol style="list-style: none; border-top: 1px solid rgba(22,19,15,.14)">
+<li style="display: flex; flex-wrap: wrap; gap: 18px 32px; padding: 26px 0; border-bottom: 1px solid rgba(22,19,15,.07); align-items: flex-start"><span style="flex: 0 0 64px; font-family: 'Instrument Serif', serif; font-size: 32px; line-height: 1; color: #1f4b3f; opacity: .65">01</span><div style="flex: 1 1 400px; min-width: 0"><h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 21.5px; line-height: 1.2">Descoberta</h3><p style="margin-top: 8px; font-size: 15px; font-weight: 300; color: #443c31; max-width: 62ch; text-wrap: pretty">Entendo o problema antes de aceitar o pedido. Desk research, dados de uso, conversa com quem atende o cliente e entrevistas quando a dúvida é de comportamento.</p><p style="margin-top: 12px; color: #8a7f70; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase">Com negócio, dados e atendimento</p></div></li>
+<li style="display: flex; flex-wrap: wrap; gap: 18px 32px; padding: 26px 0; border-bottom: 1px solid rgba(22,19,15,.07); align-items: flex-start"><span style="flex: 0 0 64px; font-family: 'Instrument Serif', serif; font-size: 32px; line-height: 1; color: #1f4b3f; opacity: .65">02</span><div style="flex: 1 1 400px; min-width: 0"><h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 21.5px; line-height: 1.2">Definição estratégica</h3><p style="margin-top: 8px; font-size: 15px; font-weight: 300; color: #443c31; max-width: 62ch; text-wrap: pretty">Transformo o achado em recorte: qual usuário, qual momento da jornada, qual métrica move. É aqui que a maior parte do escopo é cortada.</p><p style="margin-top: 12px; color: #8a7f70; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase">Com produto e liderança</p></div></li>
+<li style="display: flex; flex-wrap: wrap; gap: 18px 32px; padding: 26px 0; border-bottom: 1px solid rgba(22,19,15,.07); align-items: flex-start"><span style="flex: 0 0 64px; font-family: 'Instrument Serif', serif; font-size: 32px; line-height: 1; color: #1f4b3f; opacity: .65">03</span><div style="flex: 1 1 400px; min-width: 0"><h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 21.5px; line-height: 1.2">Construção</h3><p style="margin-top: 8px; font-size: 15px; font-weight: 300; color: #443c31; max-width: 62ch; text-wrap: pretty">Arquitetura de informação, fluxos, protótipo de alta fidelidade em cima do design system. Testo com usuário antes de passar para dev.</p><p style="margin-top: 12px; color: #8a7f70; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase">Com design system e pesquisa</p></div></li>
+<li style="display: flex; flex-wrap: wrap; gap: 18px 32px; padding: 26px 0; border-bottom: 1px solid rgba(22,19,15,.07); align-items: flex-start"><span style="flex: 0 0 64px; font-family: 'Instrument Serif', serif; font-size: 32px; line-height: 1; color: #1f4b3f; opacity: .65">04</span><div style="flex: 1 1 400px; min-width: 0"><h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 21.5px; line-height: 1.2">Disponibilização</h3><p style="margin-top: 8px; font-size: 15px; font-weight: 300; color: #443c31; max-width: 62ch; text-wrap: pretty">Acompanho a implementação componente por componente, reviso em ambiente de teste e resolvo os casos de borda que só aparecem no código.</p><p style="margin-top: 12px; color: #8a7f70; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase">Com engenharia e QA</p></div></li>
+<li style="display: flex; flex-wrap: wrap; gap: 18px 32px; padding: 26px 0; border-bottom: 1px solid rgba(22,19,15,.07); align-items: flex-start"><span style="flex: 0 0 64px; font-family: 'Instrument Serif', serif; font-size: 32px; line-height: 1; color: #1f4b3f; opacity: .65">05</span><div style="flex: 1 1 400px; min-width: 0"><h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 21.5px; line-height: 1.2">Resultado</h3><p style="margin-top: 8px; font-size: 15px; font-weight: 300; color: #443c31; max-width: 62ch; text-wrap: pretty">Olho os números depois do go-live e comparo com a hipótese. Se não moveu, volto para a etapa 01 com uma pergunta melhor.</p><p style="margin-top: 12px; color: #8a7f70; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase">Com dados e produto</p></div></li>
+</ol>
+</div>
+</section>
+
+<section id="experiencia" style="padding: 88px 0; border-bottom: 1px solid rgba(22,19,15,.07)">
+<div style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px)">
+<div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 12px"><span style="color: #1f4b3f; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .18em">03</span><h2 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(30px, 3.4vw, 43px); line-height: 1.1">Experiência</h2></div>
+<p style="color: #8a7f70; font-size: 15px; max-width: 62ch; margin-bottom: 52px; font-weight: 300">Cargos em ordem cronológica inversa, com as responsabilidades e as entregas de cada um.</p>
+
+<article style="display: flex; flex-wrap: wrap; gap: 14px 40px; padding: 36px 0; border-top: 1px solid rgba(22,19,15,.14)">
+<p style="flex: 0 0 190px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .06em; color: #8a7f70; line-height: 1.9"><strong style="display: block; color: #1f4b3f; font-weight: 500">jun/2023 — set/2026</strong>3 anos</p>
+<div style="flex: 1 1 480px; min-width: 0">
+<h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 24px; line-height: 1.2">UX Designer <span style="color: #8a7f70">— Franq</span></h3>
+<p style="margin-top: 12px; color: #443c31; font-weight: 300; max-width: 66ch; text-wrap: pretty">Conduzi projetos do discovery à entrega: pesquisa, benchmarking, fluxos e protótipos de alta fidelidade, acompanhando a implementação lado a lado com PMs e desenvolvedores.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .1em; text-transform: uppercase; color: #443c31; border: 1px solid rgba(22,19,15,.14); border-radius: 2px; padding: 4px 9px; background: #eae5da">UX Research</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .1em; text-transform: uppercase; color: #443c31; border: 1px solid rgba(22,19,15,.14); border-radius: 2px; padding: 4px 9px; background: #eae5da">UI Design</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .1em; text-transform: uppercase; color: #443c31; border: 1px solid rgba(22,19,15,.14); border-radius: 2px; padding: 4px 9px; background: #eae5da">Figma</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .1em; text-transform: uppercase; color: #443c31; border: 1px solid rgba(22,19,15,.14); border-radius: 2px; padding: 4px 9px; background: #eae5da">Design System</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .1em; text-transform: uppercase; color: #443c31; border: 1px solid rgba(22,19,15,.14); border-radius: 2px; padding: 4px 9px; background: #eae5da">Produto regulado</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .1em; text-transform: uppercase; color: #443c31; border: 1px solid rgba(22,19,15,.14); border-radius: 2px; padding: 4px 9px; background: #eae5da">IA aplicada</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 14px; margin-top: 24px">
+<div style="border-left: 2px solid #1f4b3f; padding: 2px 0 2px 18px"><h4 style="font-size: 14.7px; font-weight: 600">Design System da Franq</h4><p style="font-size: 14px; color: #443c31; font-weight: 300; margin-top: 3px; max-width: 64ch">Manutenção e evolução dos componentes e tokens, garantindo consistência entre web e mobile e reduzindo retrabalho entre design e desenvolvimento.</p></div>
+<div style="border-left: 2px solid #1f4b3f; padding: 2px 0 2px 18px"><h4 style="font-size: 14.7px; font-weight: 600">Fluxos financeiros com regra e conformidade</h4><p style="font-size: 14px; color: #443c31; font-weight: 300; margin-top: 3px; max-width: 64ch">Contratação de planos, comissionamento e dados cadastrais de PJ: desenhei dentro de restrições regulatórias e de política interna, validando termos, avisos e estados de erro com negócio e jurídico.</p></div>
+<div style="border-left: 2px solid #1f4b3f; padding: 2px 0 2px 18px"><h4 style="font-size: 14.7px; font-weight: 600">Pesquisa e validação com usuários</h4><p style="font-size: 14px; color: #443c31; font-weight: 300; margin-top: 3px; max-width: 64ch">Entrevistas e testes que orientaram decisões de produto em fluxos de contratação, comissões e análise de clientes.</p></div>
+<div style="border-left: 2px solid #1f4b3f; padding: 2px 0 2px 18px"><h4 style="font-size: 14.7px; font-weight: 600">IA no processo de design</h4><p style="font-size: 14px; color: #443c31; font-weight: 300; margin-top: 3px; max-width: 64ch">Uso de IA para acelerar benchmarks, explorar alternativas de fluxo e refinar microcopy antes dos testes com usuários.</p></div>
+</div>
+</div>
+</article>
+
+<article style="display: flex; flex-wrap: wrap; gap: 14px 40px; padding: 36px 0; border-top: 1px solid rgba(22,19,15,.14)">
+<p style="flex: 0 0 190px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .06em; color: #8a7f70; line-height: 1.9"><strong style="display: block; color: #1f4b3f; font-weight: 500">nov/2022 — nov/2023</strong></p>
+<div style="flex: 1 1 480px; min-width: 0">
+<h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 24px; line-height: 1.2">Designer Educacional <span style="color: #8a7f70">— Franq</span></h3>
+<p style="margin-top: 12px; color: #443c31; font-weight: 300; max-width: 66ch; text-wrap: pretty">A ponte entre os números e o design: transformei temas complexos em jornadas de aprendizagem claras, com UX writing cuidadoso. Foi nesse papel que descobri meu interesse genuíno por interface e comportamento do usuário.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .1em; text-transform: uppercase; color: #443c31; border: 1px solid rgba(22,19,15,.14); border-radius: 2px; padding: 4px 9px; background: #eae5da">UX Writing</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .1em; text-transform: uppercase; color: #443c31; border: 1px solid rgba(22,19,15,.14); border-radius: 2px; padding: 4px 9px; background: #eae5da">Design instrucional</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .1em; text-transform: uppercase; color: #443c31; border: 1px solid rgba(22,19,15,.14); border-radius: 2px; padding: 4px 9px; background: #eae5da">Linguagem simples</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .1em; text-transform: uppercase; color: #443c31; border: 1px solid rgba(22,19,15,.14); border-radius: 2px; padding: 4px 9px; background: #eae5da">SendGrid</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 14px; margin-top: 24px">
+<div style="border-left: 2px solid #1f4b3f; padding: 2px 0 2px 18px"><h4 style="font-size: 14.7px; font-weight: 600">Trilhas de aprendizagem</h4><p style="font-size: 14px; color: #443c31; font-weight: 300; margin-top: 3px; max-width: 64ch">Estruturação de conteúdos financeiros densos em módulos progressivos, com linguagem acessível para o Personal Banker.</p></div>
+<div style="border-left: 2px solid #1f4b3f; padding: 2px 0 2px 18px"><h4 style="font-size: 14.7px; font-weight: 600">Comunicação por e-mail</h4><p style="font-size: 14px; color: #443c31; font-weight: 300; margin-top: 3px; max-width: 64ch">Réguas de comunicação e materiais de apoio para sustentar o engajamento nas trilhas.</p></div>
+</div>
+</div>
+</article>
+
+<article style="display: flex; flex-wrap: wrap; gap: 14px 40px; padding: 36px 0; border-top: 1px solid rgba(22,19,15,.14)">
+<p style="flex: 0 0 190px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .06em; color: #8a7f70; line-height: 1.9"><strong style="display: block; color: #1f4b3f; font-weight: 500">set/2020 — nov/2022</strong></p>
+<div style="flex: 1 1 480px; min-width: 0">
+<h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 24px; line-height: 1.2">Analista de Produto <span style="color: #8a7f70">— Franq</span></h3>
+<p style="margin-top: 12px; color: #443c31; font-weight: 300; max-width: 66ch; text-wrap: pretty">Dois anos analisando métricas de produto e comportamento de usuários, gerando insights para roadmap e priorização junto ao time de produto, a visão sistêmica que, mais tarde, me trouxe até o design.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .1em; text-transform: uppercase; color: #443c31; border: 1px solid rgba(22,19,15,.14); border-radius: 2px; padding: 4px 9px; background: #eae5da">Análise de dados</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .1em; text-transform: uppercase; color: #443c31; border: 1px solid rgba(22,19,15,.14); border-radius: 2px; padding: 4px 9px; background: #eae5da">Métricas de produto</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .1em; text-transform: uppercase; color: #443c31; border: 1px solid rgba(22,19,15,.14); border-radius: 2px; padding: 4px 9px; background: #eae5da">Priorização</span>
+</div>
+</div>
+</article>
+
+<article style="display: flex; flex-wrap: wrap; gap: 14px 40px; padding: 36px 0; border-top: 1px solid rgba(22,19,15,.14)">
+<p style="flex: 0 0 190px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .06em; color: #8a7f70; line-height: 1.9"><strong style="display: block; color: #1f4b3f; font-weight: 500">Freelance</strong></p>
+<div style="flex: 1 1 480px; min-width: 0">
+<h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 24px; line-height: 1.2">Natural Extremo <span style="color: #8a7f70">· IslandHub</span></h3>
+<p style="margin-top: 12px; color: #443c31; font-weight: 300; max-width: 66ch; text-wrap: pretty">Projetos de redesign e idealização de produtos digitais para e-commerce e marketplace, aplicando o mesmo processo de descoberta, prototipação e entrega.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .1em; text-transform: uppercase; color: #443c31; border: 1px solid rgba(22,19,15,.14); border-radius: 2px; padding: 4px 9px; background: #eae5da">E-commerce</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .1em; text-transform: uppercase; color: #443c31; border: 1px solid rgba(22,19,15,.14); border-radius: 2px; padding: 4px 9px; background: #eae5da">Marketplace</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .1em; text-transform: uppercase; color: #443c31; border: 1px solid rgba(22,19,15,.14); border-radius: 2px; padding: 4px 9px; background: #eae5da">Zero a um</span>
+</div>
+</div>
+</article>
+
+<div style="margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(22,19,15,.14)">
+<p style="color: #1f4b3f; margin-bottom: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase">Como eu trabalho em time</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 26px 48px">
+<div><h4 style="font-size: 15px; font-weight: 600">Com engenharia</h4><p style="margin-top: 6px; font-size: 14px; font-weight: 300; color: #443c31; text-wrap: pretty">Entrego em componentes do design system, não em telas soltas. Especifico estados, erros e limites de dado, e reviso a implementação antes do release.</p></div>
+<div><h4 style="font-size: 15px; font-weight: 600">Com produto</h4><p style="margin-top: 6px; font-size: 14px; font-weight: 300; color: #443c31; text-wrap: pretty">Participo da priorização com evidência: o que a pesquisa disse, o que o dado mostra, o que dá para cortar sem perder o valor.</p></div>
+<div><h4 style="font-size: 15px; font-weight: 600">Com negócio e jurídico</h4><p style="margin-top: 6px; font-size: 14px; font-weight: 300; color: #443c31; text-wrap: pretty">Levo o fluxo para validação cedo. Termos, avisos obrigatórios e regras de elegibilidade entram no desenho, não depois dele.</p></div>
+<div><h4 style="font-size: 15px; font-weight: 600">Com atendimento</h4><p style="margin-top: 6px; font-size: 14px; font-weight: 300; color: #443c31; text-wrap: pretty">Uso os tickets como fonte de pesquisa contínua: é onde o atrito aparece primeiro e mais barato.</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="projetos" style="padding: 88px 0; border-bottom: 1px solid rgba(22,19,15,.07)">
+<div style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px)">
+<div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 12px"><span style="color: #1f4b3f; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .18em">04</span><h2 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(30px, 3.4vw, 43px); line-height: 1.1">Projetos</h2></div>
+<p style="color: #8a7f70; font-size: 15px; max-width: 62ch; margin-bottom: 52px; font-weight: 300">Casos de fintech, edtech, e-commerce e marketplace. Cada projeto abre em um estudo de caso com contexto, processo e resultado.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 18px">
+
+<a class="proj" href="ficha-pj.html" style="color: #16130f; display: flex; flex-direction: column; gap: 12px; padding: 26px; background: #fbf9f5; border: 1px solid rgba(22,19,15,.14); border-radius: 3px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .14em; text-transform: uppercase; color: #1f4b3f">UX · UI · Fintech</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; color: #8a7f70">01</span></div>
+<h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 21px; line-height: 1.18">Uma Nova Experiência para a Ficha do cliente PJ</h3>
+<p style="font-size: 14px; color: #443c31; font-weight: 300; flex: 1; text-wrap: pretty">Reestruturação da visualização de dados do cliente para tornar a análise mais orientada à venda.</p>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 12px; border-top: 1px solid rgba(22,19,15,.07)"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; color: #8a7f70">Franq</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; color: #1f4b3f">Ver caso →</span></div>
+</a>
+
+<a class="proj" href="comissoes.html" style="color: #16130f; display: flex; flex-direction: column; gap: 12px; padding: 26px; background: #fbf9f5; border: 1px solid rgba(22,19,15,.14); border-radius: 3px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .14em; text-transform: uppercase; color: #1f4b3f">UX · UI · B2B SaaS</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; color: #8a7f70">02</span></div>
+<h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 21px; line-height: 1.18">Nova Experiência para Gestão de Comissões</h3>
+<p style="font-size: 14px; color: #443c31; font-weight: 300; flex: 1; text-wrap: pretty">Redesign da visualização de ganhos, melhorando leitura, organização e entendimento dos pagamentos.</p>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 12px; border-top: 1px solid rgba(22,19,15,.07)"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; color: #8a7f70">Franq</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; color: #1f4b3f">Ver caso →</span></div>
+</a>
+
+<a class="proj" href="planos.html" style="color: #16130f; display: flex; flex-direction: column; gap: 12px; padding: 26px; background: #fbf9f5; border: 1px solid rgba(22,19,15,.14); border-radius: 3px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .14em; text-transform: uppercase; color: #1f4b3f">UX Research · Service Design</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; color: #8a7f70">03</span></div>
+<h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 21px; line-height: 1.18">Experiência de Contratação de Planos</h3>
+<p style="font-size: 14px; color: #443c31; font-weight: 300; flex: 1; text-wrap: pretty">Pesquisa com usuários e concepção de uma nova página de planos para simplificar a escolha e apoiar a decisão de contratação.</p>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 12px; border-top: 1px solid rgba(22,19,15,.07)"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; color: #8a7f70">Franq</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; color: #1f4b3f">Ver caso →</span></div>
+</a>
+
+<a class="proj" href="lms-educacao.html" style="color: #16130f; display: flex; flex-direction: column; gap: 12px; padding: 26px; background: #fbf9f5; border: 1px solid rgba(22,19,15,.14); border-radius: 3px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .14em; text-transform: uppercase; color: #1f4b3f">UX · Mobile App · Edtech</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; color: #8a7f70">04</span></div>
+<h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 21px; line-height: 1.18">Sistema LMS de Educação</h3>
+<p style="font-size: 14px; color: #443c31; font-weight: 300; flex: 1; text-wrap: pretty">Design de ponta a ponta da agenda de eventos e trilhas de aprendizagem no app do Personal Banker.</p>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 12px; border-top: 1px solid rgba(22,19,15,.07)"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; color: #8a7f70">Franq</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; color: #1f4b3f">Ver caso →</span></div>
+</a>
+
+<a class="proj" href="natural-extremo.html" style="color: #16130f; display: flex; flex-direction: column; gap: 12px; padding: 26px; background: #fbf9f5; border: 1px solid rgba(22,19,15,.14); border-radius: 3px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .14em; text-transform: uppercase; color: #1f4b3f">UX · UI · E-commerce</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; color: #8a7f70">05</span></div>
+<h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 21px; line-height: 1.18">Renovação do Fluxo de Compra</h3>
+<p style="font-size: 14px; color: #443c31; font-weight: 300; flex: 1; text-wrap: pretty">Redesign completo do funil de compras, melhorando conversão e experiência de checkout.</p>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 12px; border-top: 1px solid rgba(22,19,15,.07)"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; color: #8a7f70">Natural Extremo</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; color: #1f4b3f">Ver caso →</span></div>
+</a>
+
+<a class="proj" href="islandhub.html" style="color: #16130f; display: flex; flex-direction: column; gap: 12px; padding: 26px; background: #fbf9f5; border: 1px solid rgba(22,19,15,.14); border-radius: 3px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .14em; text-transform: uppercase; color: #1f4b3f">UX · UI · Marketplace</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; color: #8a7f70">06</span></div>
+<h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 21px; line-height: 1.18">Idealização Completa de Marketplace</h3>
+<p style="font-size: 14px; color: #443c31; font-weight: 300; flex: 1; text-wrap: pretty">Concepção do zero de um marketplace: pesquisa, arquitetura de informação, protótipos.</p>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 12px; border-top: 1px solid rgba(22,19,15,.07)"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; color: #8a7f70">IslandHub</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; color: #1f4b3f">Ver caso →</span></div>
+</a>
+
+</div>
+</div>
+</section>
+
+<section id="skills" style="padding: 88px 0; border-bottom: 1px solid rgba(22,19,15,.07)">
+<div style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px)">
+<div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 12px"><span style="color: #1f4b3f; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .18em">05</span><h2 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(30px, 3.4vw, 43px); line-height: 1.1">Habilidades</h2></div>
+<p style="color: #8a7f70; font-size: 15px; max-width: 62ch; margin-bottom: 52px; font-weight: 300">Proficiência autoavaliada de 0 a 100, com os anos de experiência profissional em cada ferramenta ou prática.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 44px 64px">
+
+<div>
+<p style="font-family: 'IBM Plex Mono', monospace; font-size: 10.2px; letter-spacing: .18em; text-transform: uppercase; color: #1f4b3f; padding-bottom: 10px; border-bottom: 1px solid rgba(22,19,15,.14); margin-bottom: 18px">Design &amp; Pesquisa</p>
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 7px"><div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 14.7px; font-weight: 500">Figma</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .08em; color: #8a7f70">95 · 3 anos</span></div><div style="height: 3px; background: #eae5da; border-radius: 2px"><div style="width: 95%; height: 3px; background: #1f4b3f; border-radius: 2px"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 7px"><div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 14.7px; font-weight: 500">UX Research</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .08em; color: #8a7f70">85 · 3 anos</span></div><div style="height: 3px; background: #eae5da; border-radius: 2px"><div style="width: 85%; height: 3px; background: #1f4b3f; border-radius: 2px"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 7px"><div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 14.7px; font-weight: 500">Design System</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .08em; color: #8a7f70">90 · 3 anos</span></div><div style="height: 3px; background: #eae5da; border-radius: 2px"><div style="width: 90%; height: 3px; background: #1f4b3f; border-radius: 2px"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 7px"><div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 14.7px; font-weight: 500">Prototipação</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .08em; color: #8a7f70">90 · 3 anos</span></div><div style="height: 3px; background: #eae5da; border-radius: 2px"><div style="width: 90%; height: 3px; background: #1f4b3f; border-radius: 2px"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 7px"><div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 14.7px; font-weight: 500">Acessibilidade (WCAG)</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .08em; color: #8a7f70">75 · 3 anos</span></div><div style="height: 3px; background: #eae5da; border-radius: 2px"><div style="width: 75%; height: 3px; background: #1f4b3f; border-radius: 2px"></div></div></div>
+</div>
+</div>
+
+<div>
+<p style="font-family: 'IBM Plex Mono', monospace; font-size: 10.2px; letter-spacing: .18em; text-transform: uppercase; color: #1f4b3f; padding-bottom: 10px; border-bottom: 1px solid rgba(22,19,15,.14); margin-bottom: 18px">Produto &amp; Estratégia</p>
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 7px"><div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 14.7px; font-weight: 500">Análise de dados</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .08em; color: #8a7f70">70 · 6 anos</span></div><div style="height: 3px; background: #eae5da; border-radius: 2px"><div style="width: 70%; height: 3px; background: #1f4b3f; border-radius: 2px"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 7px"><div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 14.7px; font-weight: 500">CX Design</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .08em; color: #8a7f70">80 · 3 anos</span></div><div style="height: 3px; background: #eae5da; border-radius: 2px"><div style="width: 80%; height: 3px; background: #1f4b3f; border-radius: 2px"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 7px"><div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 14.7px; font-weight: 500">Gestão de projetos</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .08em; color: #8a7f70">80 · 4 anos</span></div><div style="height: 3px; background: #eae5da; border-radius: 2px"><div style="width: 80%; height: 3px; background: #1f4b3f; border-radius: 2px"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 7px"><div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 14.7px; font-weight: 500">Produto financeiro regulado</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .08em; color: #8a7f70">85 · 6 anos</span></div><div style="height: 3px; background: #eae5da; border-radius: 2px"><div style="width: 85%; height: 3px; background: #1f4b3f; border-radius: 2px"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 7px"><div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 14.7px; font-weight: 500">Miro</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .08em; color: #8a7f70">85 · 3 anos</span></div><div style="height: 3px; background: #eae5da; border-radius: 2px"><div style="width: 85%; height: 3px; background: #1f4b3f; border-radius: 2px"></div></div></div>
+</div>
+</div>
+
+<div>
+<p style="font-family: 'IBM Plex Mono', monospace; font-size: 10.2px; letter-spacing: .18em; text-transform: uppercase; color: #1f4b3f; padding-bottom: 10px; border-bottom: 1px solid rgba(22,19,15,.14); margin-bottom: 18px">Conteúdo &amp; Comunicação</p>
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 7px"><div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 14.7px; font-weight: 500">UX Writing</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .08em; color: #8a7f70">90 · 4 anos</span></div><div style="height: 3px; background: #eae5da; border-radius: 2px"><div style="width: 90%; height: 3px; background: #1f4b3f; border-radius: 2px"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 7px"><div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 14.7px; font-weight: 500">Design educacional</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .08em; color: #8a7f70">90 · 2 anos</span></div><div style="height: 3px; background: #eae5da; border-radius: 2px"><div style="width: 90%; height: 3px; background: #1f4b3f; border-radius: 2px"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 7px"><div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 14.7px; font-weight: 500">Facilitação de workshop</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .08em; color: #8a7f70">75 · 3 anos</span></div><div style="height: 3px; background: #eae5da; border-radius: 2px"><div style="width: 75%; height: 3px; background: #1f4b3f; border-radius: 2px"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 7px"><div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 14.7px; font-weight: 500">SendGrid</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .08em; color: #8a7f70">75 · 2 anos</span></div><div style="height: 3px; background: #eae5da; border-radius: 2px"><div style="width: 75%; height: 3px; background: #1f4b3f; border-radius: 2px"></div></div></div>
+</div>
+</div>
+
+<div>
+<p style="font-family: 'IBM Plex Mono', monospace; font-size: 10.2px; letter-spacing: .18em; text-transform: uppercase; color: #1f4b3f; padding-bottom: 10px; border-bottom: 1px solid rgba(22,19,15,.14); margin-bottom: 18px">IA aplicada ao design</p>
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 7px"><div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 14.7px; font-weight: 500">IA para benchmarks</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .08em; color: #8a7f70">85 · 2 anos</span></div><div style="height: 3px; background: #eae5da; border-radius: 2px"><div style="width: 85%; height: 3px; background: #1f4b3f; border-radius: 2px"></div></div></div>
+<div style="display: flex; flex-direction: column; gap: 7px"><div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px"><span style="font-size: 14.7px; font-weight: 500">IA para microcopy</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .08em; color: #8a7f70">85 · 2 anos</span></div><div style="height: 3px; background: #eae5da; border-radius: 2px"><div style="width: 85%; height: 3px; background: #1f4b3f; border-radius: 2px"></div></div></div>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="acessibilidade" style="padding: 88px 0; border-bottom: 1px solid rgba(22,19,15,.07)">
+<div style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px)">
+<div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 12px"><span style="color: #1f4b3f; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .18em">06</span><h2 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(30px, 3.4vw, 43px); line-height: 1.1">Acessibilidade e inclusão</h2></div>
+<p style="color: #8a7f70; font-size: 15px; max-width: 62ch; margin-bottom: 52px; font-weight: 300">Produto financeiro é serviço essencial: se alguém não consegue usar, o problema é do design. O que eu checo em toda entrega.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); border-top: 1px solid rgba(22,19,15,.14)">
+<div style="padding: 22px 26px 24px; border-bottom: 1px solid rgba(22,19,15,.07); border-right: 1px solid rgba(22,19,15,.07)"><h4 style="font-size: 15px; font-weight: 600">Contraste e legibilidade</h4><p style="margin-top: 7px; font-size: 14px; font-weight: 300; color: #443c31; text-wrap: pretty">Texto sempre acima de 4.5:1, corpo mínimo de 16px, nunca cor como único portador de informação.</p></div>
+<div style="padding: 22px 26px 24px; border-bottom: 1px solid rgba(22,19,15,.07); border-right: 1px solid rgba(22,19,15,.07)"><h4 style="font-size: 15px; font-weight: 600">Teclado e leitor de tela</h4><p style="margin-top: 7px; font-size: 14px; font-weight: 300; color: #443c31; text-wrap: pretty">Ordem de foco, rótulos e mensagens de erro descritas. Fluxo financeiro precisa ser concluível sem mouse.</p></div>
+<div style="padding: 22px 26px 24px; border-bottom: 1px solid rgba(22,19,15,.07); border-right: 1px solid rgba(22,19,15,.07)"><h4 style="font-size: 15px; font-weight: 600">Linguagem simples</h4><p style="margin-top: 7px; font-size: 14px; font-weight: 300; color: #443c31; text-wrap: pretty">Herança dos anos em design educacional: reescrevo jargão financeiro até caber na leitura de quem nunca investiu.</p></div>
+<div style="padding: 22px 26px 24px; border-bottom: 1px solid rgba(22,19,15,.07); border-right: 1px solid rgba(22,19,15,.07)"><h4 style="font-size: 15px; font-weight: 600">Alvos e mobile</h4><p style="margin-top: 7px; font-size: 14px; font-weight: 300; color: #443c31; text-wrap: pretty">Área de toque mínima de 44px e revisão do fluxo em tela pequena, que é onde a maior parte do público está.</p></div>
+<div style="padding: 22px 26px 24px; border-bottom: 1px solid rgba(22,19,15,.07); border-right: 1px solid rgba(22,19,15,.07)"><h4 style="font-size: 15px; font-weight: 600">Diversidade na amostra</h4><p style="margin-top: 7px; font-size: 14px; font-weight: 300; color: #443c31; text-wrap: pretty">Recrutamento de pesquisa variado em idade, renda e familiaridade digital. Usuário avançado sozinho esconde o problema.</p></div>
+</div>
+</div>
+</section>
+
+<section id="depoimentos" style="padding: 88px 0; border-bottom: 1px solid rgba(22,19,15,.07)">
+<div style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px)">
+<div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 12px"><span style="color: #1f4b3f; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .18em">07</span><h2 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(30px, 3.4vw, 43px); line-height: 1.1">Recomendações</h2></div>
+<p style="color: #8a7f70; font-size: 15px; max-width: 62ch; margin-bottom: 52px; font-weight: 300">De quem trabalhou comigo no dia a dia, entre produto, engenharia e negócio.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 18px">
+<figure style="display: flex; flex-direction: column; gap: 18px; padding: 28px; border: 1px dashed rgba(22,19,15,.14); border-radius: 3px"><blockquote style="font-family: 'Instrument Serif', serif; font-size: 18.5px; line-height: 1.4; color: #8a7f70; flex: 1">[Depoimento — cole aqui a recomendação recebida]</blockquote><figcaption style="display: flex; flex-direction: column; gap: 3px; padding-top: 14px; border-top: 1px solid rgba(22,19,15,.07)"><span style="font-size: 14px; font-weight: 600">Nome</span><span style="color: #8a7f70; font-family: 'IBM Plex Mono', monospace; font-size: 9.3px; letter-spacing: .16em; text-transform: uppercase">Cargo · Empresa</span></figcaption></figure>
+<figure style="display: flex; flex-direction: column; gap: 18px; padding: 28px; border: 1px dashed rgba(22,19,15,.14); border-radius: 3px"><blockquote style="font-family: 'Instrument Serif', serif; font-size: 18.5px; line-height: 1.4; color: #8a7f70; flex: 1">[Depoimento — cole aqui a recomendação recebida]</blockquote><figcaption style="display: flex; flex-direction: column; gap: 3px; padding-top: 14px; border-top: 1px solid rgba(22,19,15,.07)"><span style="font-size: 14px; font-weight: 600">Nome</span><span style="color: #8a7f70; font-family: 'IBM Plex Mono', monospace; font-size: 9.3px; letter-spacing: .16em; text-transform: uppercase">Cargo · Empresa</span></figcaption></figure>
+<figure style="display: flex; flex-direction: column; gap: 18px; padding: 28px; border: 1px dashed rgba(22,19,15,.14); border-radius: 3px"><blockquote style="font-family: 'Instrument Serif', serif; font-size: 18.5px; line-height: 1.4; color: #8a7f70; flex: 1">[Depoimento — cole aqui a recomendação recebida]</blockquote><figcaption style="display: flex; flex-direction: column; gap: 3px; padding-top: 14px; border-top: 1px solid rgba(22,19,15,.07)"><span style="font-size: 14px; font-weight: 600">Nome</span><span style="color: #8a7f70; font-family: 'IBM Plex Mono', monospace; font-size: 9.3px; letter-spacing: .16em; text-transform: uppercase">Cargo · Empresa</span></figcaption></figure>
+</div>
+</div>
+</section>
+
+<section id="formacao" style="padding: 88px 0; border-bottom: 1px solid rgba(22,19,15,.07)">
+<div style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px)">
+<div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 12px"><span style="color: #1f4b3f; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .18em">08</span><h2 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(30px, 3.4vw, 43px); line-height: 1.1">Formação</h2></div>
+<p style="color: #8a7f70; font-size: 15px; max-width: 62ch; margin-bottom: 52px; font-weight: 300">Base em economia e comportamento, especialização em design de produto.</p>
+<div style="border-top: 1px solid rgba(22,19,15,.14)">
+<div style="display: flex; flex-wrap: wrap; gap: 6px 40px; padding: 22px 0; border-bottom: 1px solid rgba(22,19,15,.07); align-items: baseline"><span style="flex: 0 0 190px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8a7f70; letter-spacing: .06em">Graduação</span><div style="flex: 1 1 400px; min-width: 0"><h4 style="font-size: 16px; font-weight: 600">Ciências Econômicas</h4><p style="font-size: 14px; color: #443c31; font-weight: 300; margin-top: 3px">Universidade Federal de Santa Catarina (UFSC)</p></div></div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px 40px; padding: 22px 0; border-bottom: 1px solid rgba(22,19,15,.07); align-items: baseline"><span style="flex: 0 0 190px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8a7f70; letter-spacing: .06em">Especialização</span><div style="flex: 1 1 400px; min-width: 0"><h4 style="font-size: 16px; font-weight: 600">UX/UI Design</h4><p style="font-size: 14px; color: #443c31; font-weight: 300; margin-top: 3px">Formação em design de interfaces, pesquisa com usuários e prototipação.</p></div></div>
+</div>
+</div>
+</section>
+
+<section id="contato" style="padding: 88px 0">
+<div style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px)">
+<div style="display: flex; align-items: baseline; gap: 18px; margin-bottom: 12px"><span style="color: #1f4b3f; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .18em">09</span><h2 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(30px, 3.4vw, 43px); line-height: 1.1">Contato</h2></div>
+<p style="color: #8a7f70; font-size: 15px; max-width: 62ch; margin-bottom: 52px; font-weight: 300">E-mail é o caminho mais rápido para uma resposta. Também estou no LinkedIn e no WhatsApp.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 14px">
+<button class="cc" type="button" data-copy-email="heloise.prudencio@gmail.com" data-copied-text="E-mail copiado" style="display: flex; flex-direction: column; gap: 6px; padding: 24px; border: 1px solid rgba(22,19,15,.14); border-radius: 3px; background: #fbf9f5; text-align: left; font-family: inherit; cursor: pointer; color: inherit">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .16em; text-transform: uppercase; color: #1f4b3f">E-mail</span>
+<span style="font-size: 14.7px; color: #16130f; word-break: break-word">heloise.prudencio@gmail.com</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.3px; letter-spacing: .1em; text-transform: uppercase; color: #8a7f70" data-hint>Clique para copiar</span>
+</button>
+<a class="cc" href="https://www.linkedin.com/in/heloise-dem%C3%A9trio-prudencio-855693175/" target="_blank" rel="noopener" style="display: flex; flex-direction: column; gap: 6px; padding: 24px; border: 1px solid rgba(22,19,15,.14); border-radius: 3px; background: #fbf9f5; color: inherit">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .16em; text-transform: uppercase; color: #1f4b3f">LinkedIn</span>
+<span style="font-size: 14.7px; color: #16130f; word-break: break-word">heloise-demétrio-prudencio</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.3px; letter-spacing: .1em; text-transform: uppercase; color: #8a7f70">Abrir perfil</span>
+</a>
+<a class="cc" href="https://wa.me/5548999327699" target="_blank" rel="noopener" style="display: flex; flex-direction: column; gap: 6px; padding: 24px; border: 1px solid rgba(22,19,15,.14); border-radius: 3px; background: #fbf9f5; color: inherit">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; letter-spacing: .16em; text-transform: uppercase; color: #1f4b3f">WhatsApp</span>
+<span style="font-size: 14.7px; color: #16130f; word-break: break-word">+55 48 9 9932 7699</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.3px; letter-spacing: .1em; text-transform: uppercase; color: #8a7f70">Enviar mensagem</span>
+</a>
+</div>
+</div>
+</section>
+
+<footer style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px)">
+<div style="padding: 30px 0 40px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; border-top: 1px solid rgba(22,19,15,.07); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; color: #8a7f70">
+<p>© 2026 Heloise Demétrio Prudencio</p>
+<p>Florianópolis · SC · BR</p>
+</div>
+</footer>
+
+</div>
+<script src="assets/site.js"></script>
 </body>
 </html>

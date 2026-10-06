@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Plano Mensal · Protótipo Planos Franq</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/header.css" />
+  <link rel="stylesheet" href="../css/planos.css" />
+  <link rel="stylesheet" href="../css/register-modal.css" />
+  <link rel="stylesheet" href="../css/payment-modal.css" />
+  <link rel="stylesheet" href="../css/demo.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: #000; color: #fafaff; font-family: var(--font-body); font-size: var(--fs-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header__inner">
+      <a href="../index.html" class="header__logo" aria-label="Franq, início do protótipo">
+        <img src="../assets/logo-franq.svg" alt="Franq" class="header__logo-img" />
+      </a>
+      <nav class="header__nav" aria-label="Navegação principal">
+        <a href="../index.html#planos" class="is-active">Planos</a>
+        <a href="../index.html#sobre">Sobre</a>
+        <a href="../index.html#contato" class="header__cta">Fale conosco</a>
+      </nav>
+      <button class="header__hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main class="plan-page">
+    <section class="plan-hero">
+      <a href="../index.html#planos" class="plan-back">← Voltar para planos</a>
+      <div><span class="planos-badge plan-eyebrow">Para quem está chegando</span></div>
+      <h1 class="plan-title">Plano Mensal</h1>
+      <p class="plan-lead">Para o bancário autônomo que quer explorar a plataforma antes de se comprometer. Acesso completo à Franq, sem fidelidade. O passo certo para quem está nos primeiros meses de operação ou ainda quer conhecer antes de decidir.</p>
+      <div class="plan-stats"><div class="plan-stat"><p class="plan-stat__value">R$ 200</p><p class="plan-stat__label">por mês</p></div><div class="plan-stat"><p class="plan-stat__value">Sem fidelidade</p><p class="plan-stat__label">cancele quando quiser</p></div><div class="plan-stat"><p class="plan-stat__value">Acesso completo</p><p class="plan-stat__label">à plataforma Franq</p></div></div>
+    </section>
+
+    <section class="plan-why">
+      <div class="start__inner">
+        <div class="start__body">
+          <div class="start__left">
+            <div class="start__header">
+              <p class="plan-why__eyebrow">Por que começar no mensal?</p>
+              <h2 class="plan-why__title">Conheça primeiro.<br>Decida no seu tempo.</h2>
+              <p class="plan-why__text">Comece com acesso completo à plataforma, sem compromisso de prazo. Quando estiver pronto para crescer, migre para o plano anual e pague metade por mês.</p>
+            </div>
+            <div class="start__features-block">
+              <p class="start__features-label">O que está incluído</p>
+              <ul class="start__features">
+                <li class="start__feature-item">
+                  <span class="start__feature-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>
+                  Acesso à plataforma completa Franq
+                </li>
+                <li class="start__feature-item">
+                  <span class="start__feature-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>
+                  Suporte dedicado via chat, ligação e e-mail
+                </li>
+                <li class="start__feature-item">
+                  <span class="start__feature-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>
+                  Relatórios mensais de performance
+                </li>
+                <li class="start__feature-item">
+                  <span class="start__feature-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>
+                  Onboarding guiado com especialista
+                </li>
+                <li class="start__feature-item">
+                  <span class="start__feature-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>
+                  Integrações com as principais ferramentas
+                </li>
+                <li class="start__feature-item">
+                  <span class="start__feature-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>
+                  Atualizações automáticas incluídas
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="start__card mensal__card">
+            <div class="start__card-top">
+              <div class="start__card-icon mensal__card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></div>
+            </div>
+            <div class="start__card-header"><h3 class="start__card-name">Plano Mensal</h3><span class="start__card-subtitle">Sem compromisso de prazo</span></div>
+            <div class="start__card-pricing">
+              <div class="start__price-row"><span class="start__price-currency">R$</span><span class="start__price-amount">200</span><span class="start__price-period">/mês</span></div>
+              <span class="start__price-note">Equivale a R$ 2.400/ano</span>
+              <span class="start__price-note">Cancele quando quiser</span>
+            </div>
+            <hr class="start__card-divider" />
+            <a href="#" class="start__card-cta mensal__card-cta" data-pm-trigger data-pm-plan="mensal">Contratar plano mensal</a>
+            <a href="anual.html" class="plan-card-alt">Conhecer o plano anual (50% OFF)</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="plan-help">
+      <div>
+        <h2 class="plan-help__title">Ainda está decidindo?</h2>
+        <p class="plan-help__text">Compare com o <a href="anual.html" style="color:#8b9bf2">Plano Anual</a> ou fale com a gente.</p>
+      </div>
+      <a href="../index.html#contato" class="plan-help__btn">Fale conosco</a>
+    </section>
+
+    <footer class="plan-footer">
+      <span>Protótipo de portfólio · Heloise Demétrio</span>
+      <span>Conteúdo e valores fictícios</span>
+    </footer>
+  </main>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/register-modal.js"></script>
+  <script src="../js/payment-modal.js"></script>
+  <script src="../js/demo.js"></script>
+</body>
+</html>

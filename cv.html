@@ -1,150 +1,129 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CV — Heloise Demétrio Prudencio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap">
 <style>
-doc-page:not(:defined){visibility:hidden}
-:root{--ink:#16130f;--ink2:#443c31;--mute:#8a7f70;--accent:#1f4b3f;--line:rgba(22,19,15,.16);--line2:rgba(22,19,15,.08);--fd:'Instrument Serif',serif;--fb:'Manrope',sans-serif;--fm:'IBM Plex Mono',monospace}
-.page{font-family:var(--fb);color:var(--ink);background:#fff;padding:0.62in 0.68in;display:flex;flex-direction:column}
-.cv-top{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding-bottom:14px;border-bottom:2px solid var(--accent)}
-.cv-name{font-family:var(--fd);font-weight:400;font-size:33pt;line-height:1}
-.cv-role{font-family:var(--fm);font-size:7.6pt;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-top:6px}
-.cv-meta{font-family:var(--fm);font-size:7.4pt;line-height:1.85;color:var(--ink2);text-align:right;white-space:nowrap}
-.cv-meta a{color:var(--ink2);text-decoration:none}
-.cv-sum{margin-top:14px;font-size:9.6pt;font-weight:300;line-height:1.5;color:var(--ink2);max-width:6.4in;text-wrap:pretty}
-h2{font-family:var(--fm);font-size:7.6pt;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:17px 0 9px;padding-bottom:5px;border-bottom:1px solid var(--line)}
-.job{display:grid;grid-template-columns:1.28in 1fr;gap:16px;margin-bottom:11px}
-.job-when{font-family:var(--fm);font-size:7.4pt;line-height:1.6;color:var(--mute)}
-.job h3{font-size:10.4pt;font-weight:700;line-height:1.25}
-.job h3 span{font-weight:400;color:var(--mute)}
-.job p{font-size:9pt;font-weight:300;line-height:1.48;color:var(--ink2);margin-top:3px}
-.job ul{margin:6px 0 0 0;padding:0;list-style:none;display:grid;gap:3px}
-.job li{font-size:8.8pt;font-weight:300;line-height:1.45;color:var(--ink2);padding-left:11px;position:relative}
-.job li::before{content:'';position:absolute;left:0;top:.5em;width:4px;height:4px;background:var(--accent);border-radius:50%}
-.cols2{display:grid;grid-template-columns:1fr 1fr;gap:8px 34px}
-.srow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:baseline;padding:3px 0;border-bottom:1px solid var(--line2)}
-.srow b{font-size:8.9pt;font-weight:500}
-.srow i{font-style:normal;font-family:var(--fm);font-size:7.2pt;color:var(--mute);white-space:nowrap}
-.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px 30px}
-.pitem b{display:block;font-size:9.1pt;font-weight:600;line-height:1.25}
-.pitem em{font-style:normal;font-family:var(--fm);font-size:7pt;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);display:block;margin-top:2px}
-.pitem p{font-size:8.5pt;font-weight:300;line-height:1.42;color:var(--ink2);margin-top:3px}
-.edu-l{display:grid;gap:6px}
-.eitem{display:grid;grid-template-columns:1.28in 1fr;gap:16px;align-items:baseline}
-.eitem span{font-family:var(--fm);font-size:7.4pt;color:var(--mute)}
-.eitem b{font-size:9.2pt;font-weight:600}
-.eitem p{font-size:8.6pt;font-weight:300;color:var(--ink2)}
-.cv-foot{margin-top:auto;padding-top:12px;font-family:var(--fm);font-size:6.8pt;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);display:flex;justify-content:space-between;gap:16px}
+
+
+*{box-sizing:border-box}
+h1,h2,h3,h4,p,ul,ol,li{margin:0;padding:0}
+a{color:#443c31;text-decoration:none}a:hover{color:#1f4b3f}
+
+body{margin:0;background:#eae5da;font-family:'Manrope',sans-serif}
+.cv-bar{max-width:794px;margin:0 auto;padding:24px 0 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.cv-bar a,.cv-bar button{display:inline-flex;align-items:center;min-height:44px;padding:10px 18px;border:1px solid #16130f;border-radius:2px;background:transparent;color:#16130f;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;cursor:pointer}
+.cv-bar button{background:#1f4b3f;border-color:#1f4b3f;color:#f4f1ea}
+.cv-page{width:794px;margin:0 auto 24px;box-shadow:0 10px 30px rgba(22,19,15,.12);overflow:hidden}
+@media (max-width:820px){.cv-scroll{overflow-x:auto;padding:0 16px}}
+@page{size:A4;margin:0}
+@media print{body{background:#fff}.cv-bar{display:none}.cv-page{box-shadow:none;margin:0;break-after:page}.cv-page:last-child{break-after:auto}}
 </style>
 </head>
 <body>
-<doc-page>
+<div class="cv-bar"><a href="index.html">← Voltar ao portfólio</a><button type="button" onclick="window.print()">Baixar PDF</button></div>
+<div class="cv-scroll">
+<div class="cv-page"><div style="width: 794px; height: 1123px; overflow: hidden; box-sizing: border-box; padding: 60px 66px 48px; background: #ffffff; color: #16130f; font-family: 'Manrope', sans-serif; display: flex; flex-direction: column">
 
-<section class="page">
-<div class="cv-top">
+<div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding-bottom: 14px; border-bottom: 2px solid #1f4b3f">
 <div>
-<h1 class="cv-name">Heloise Demétrio Prudencio</h1>
-<p class="cv-role">Product Designer · UX · UI · CX</p>
+<h1 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 44px; line-height: 1">Heloise Demétrio Prudencio</h1>
+<p style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: #1f4b3f; margin-top: 8px">Product Designer · UX · UI · CX</p>
 </div>
-<p class="cv-meta">
-heloise.prudencio@gmail.com<br>
-+55 48 9 9932 7699<br>
-linkedin.com/in/heloise-demétrio-prudencio<br>
-Florianópolis · SC · Brasil
-</p>
+<p style="font-family: 'IBM Plex Mono', monospace; font-size: 9.9px; line-height: 1.85; color: #443c31; text-align: right; white-space: nowrap">heloise.prudencio@gmail.com<br>+55 48 9 9932 7699<br>linkedin.com/in/heloise-demétrio-prudencio<br>Florianópolis · SC · Brasil</p>
 </div>
 
-<p class="cv-sum">Economista pela UFSC e Product Designer na Franq, onde atuo do discovery à entrega em produtos financeiros digitais: pesquisa com usuários, arquitetura de informação, fluxos, protótipos de alta fidelidade e design system. Seis anos dentro da mesma fintech vendo o produto por três ângulos — dados, conteúdo e interface.</p>
+<p style="margin-top: 16px; font-size: 12.8px; font-weight: 300; line-height: 1.5; color: #443c31; max-width: 614px; text-wrap: pretty">Economista pela UFSC e Product Designer, com seis anos em produtos financeiros digitais, atuando do discovery à entrega em produtos financeiros digitais: pesquisa com usuários, arquitetura de informação, fluxos, protótipos de alta fidelidade e design system. Seis anos dentro da mesma fintech vendo o produto por três ângulos — dados, conteúdo e interface.</p>
 
-<h2>Experiência</h2>
+<h2 style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: #1f4b3f; margin: 24px 0 12px; padding-bottom: 6px; border-bottom: 1px solid rgba(22,19,15,.16)">Experiência</h2>
 
-<div class="job">
-<p class="job-when">jun/2023 — hoje<br>Florianópolis</p>
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: grid; grid-template-columns: 123px 1fr; gap: 16px">
+<p style="font-family: 'IBM Plex Mono', monospace; font-size: 9.9px; line-height: 1.6; color: #8a7f70">jun/2023 — set/2026<br>Florianópolis</p>
 <div>
-<h3>UX Designer <span>— Franq</span></h3>
-<p>Conduzo projetos do discovery à entrega: pesquisa, benchmarking, fluxos e protótipos de alta fidelidade, acompanhando a implementação lado a lado com PMs e desenvolvedores.</p>
-<ul>
-<li>Manutenção e evolução do Design System da Franq, garantindo consistência entre web e mobile e reduzindo retrabalho entre design e desenvolvimento.</li>
-<li>Uso de IA para acelerar benchmarks, explorar alternativas de fluxo e refinar microcopy antes dos testes com usuários.</li>
-<li>Pesquisa e testes com usuários orientando decisões em fluxos de contratação de planos, gestão de comissões e análise de clientes PJ.</li>
+<h3 style="font-size: 13.9px; font-weight: 700; line-height: 1.25">UX Designer <span style="font-weight: 400; color: #8a7f70">— Franq</span></h3>
+<p style="font-size: 12px; font-weight: 300; line-height: 1.48; color: #443c31; margin-top: 4px">Conduzo projetos do discovery à entrega: pesquisa, benchmarking, fluxos e protótipos de alta fidelidade, acompanhando a implementação lado a lado com PMs e desenvolvedores.</p>
+<ul style="list-style: none; margin-top: 8px; display: flex; flex-direction: column; gap: 4px">
+<li style="display: flex; gap: 9px; font-size: 11.7px; font-weight: 300; line-height: 1.45; color: #443c31"><span style="flex: none; width: 5px; height: 5px; margin-top: 7px; background: #1f4b3f; border-radius: 50%"></span><span>Manutenção e evolução do Design System da Franq, garantindo consistência entre web e mobile e reduzindo retrabalho entre design e desenvolvimento.</span></li>
+<li style="display: flex; gap: 9px; font-size: 11.7px; font-weight: 300; line-height: 1.45; color: #443c31"><span style="flex: none; width: 5px; height: 5px; margin-top: 7px; background: #1f4b3f; border-radius: 50%"></span><span>Uso de IA para acelerar benchmarks, explorar alternativas de fluxo e refinar microcopy antes dos testes com usuários.</span></li>
+<li style="display: flex; gap: 9px; font-size: 11.7px; font-weight: 300; line-height: 1.45; color: #443c31"><span style="flex: none; width: 5px; height: 5px; margin-top: 7px; background: #1f4b3f; border-radius: 50%"></span><span>Pesquisa e testes com usuários orientando decisões em fluxos de contratação de planos, gestão de comissões e análise de clientes PJ.</span></li>
 </ul>
 </div>
 </div>
 
-<div class="job">
-<p class="job-when">nov/2022 — nov/2023<br>Florianópolis</p>
+<div style="display: grid; grid-template-columns: 123px 1fr; gap: 16px">
+<p style="font-family: 'IBM Plex Mono', monospace; font-size: 9.9px; line-height: 1.6; color: #8a7f70">nov/2022 — nov/2023<br>Florianópolis</p>
 <div>
-<h3>Designer Educacional <span>— Franq</span></h3>
-<p>A ponte entre os números e o design: transformei temas complexos em jornadas de aprendizagem claras, com UX writing cuidadoso.</p>
-<ul>
-<li>Estruturação de conteúdos financeiros densos em módulos progressivos, em linguagem acessível para o Personal Banker.</li>
-<li>Réguas de comunicação por e-mail (SendGrid) e materiais de apoio para sustentar o engajamento nas trilhas.</li>
+<h3 style="font-size: 13.9px; font-weight: 700; line-height: 1.25">Designer Educacional <span style="font-weight: 400; color: #8a7f70">— Franq</span></h3>
+<p style="font-size: 12px; font-weight: 300; line-height: 1.48; color: #443c31; margin-top: 4px">A ponte entre os números e o design: transformei temas complexos em jornadas de aprendizagem claras, com UX writing cuidadoso.</p>
+<ul style="list-style: none; margin-top: 8px; display: flex; flex-direction: column; gap: 4px">
+<li style="display: flex; gap: 9px; font-size: 11.7px; font-weight: 300; line-height: 1.45; color: #443c31"><span style="flex: none; width: 5px; height: 5px; margin-top: 7px; background: #1f4b3f; border-radius: 50%"></span><span>Estruturação de conteúdos financeiros densos em módulos progressivos, em linguagem acessível para o Personal Banker.</span></li>
+<li style="display: flex; gap: 9px; font-size: 11.7px; font-weight: 300; line-height: 1.45; color: #443c31"><span style="flex: none; width: 5px; height: 5px; margin-top: 7px; background: #1f4b3f; border-radius: 50%"></span><span>Réguas de comunicação por e-mail (SendGrid) e materiais de apoio para sustentar o engajamento nas trilhas.</span></li>
 </ul>
 </div>
 </div>
 
-<div class="job">
-<p class="job-when">set/2020 — nov/2022<br>Florianópolis</p>
+<div style="display: grid; grid-template-columns: 123px 1fr; gap: 16px">
+<p style="font-family: 'IBM Plex Mono', monospace; font-size: 9.9px; line-height: 1.6; color: #8a7f70">set/2020 — nov/2022<br>Florianópolis</p>
 <div>
-<h3>Analista de Produto <span>— Franq</span></h3>
-<p>Dois anos analisando métricas de produto e comportamento de usuários, gerando insights para roadmap e priorização junto ao time de produto.</p>
+<h3 style="font-size: 13.9px; font-weight: 700; line-height: 1.25">Analista de Produto <span style="font-weight: 400; color: #8a7f70">— Franq</span></h3>
+<p style="font-size: 12px; font-weight: 300; line-height: 1.48; color: #443c31; margin-top: 4px">Dois anos analisando métricas de produto e comportamento de usuários, gerando insights para roadmap e priorização junto ao time de produto.</p>
 </div>
 </div>
 
-<div class="job">
-<p class="job-when">Freelance</p>
+<div style="display: grid; grid-template-columns: 123px 1fr; gap: 16px">
+<p style="font-family: 'IBM Plex Mono', monospace; font-size: 9.9px; line-height: 1.6; color: #8a7f70">Freelance</p>
 <div>
-<h3>Natural Extremo <span>· IslandHub</span></h3>
-<p>Redesign e idealização de produtos digitais para e-commerce e marketplace, aplicando o mesmo processo de descoberta, prototipação e entrega.</p>
+<h3 style="font-size: 13.9px; font-weight: 700; line-height: 1.25">Natural Extremo <span style="font-weight: 400; color: #8a7f70">· IslandHub</span></h3>
+<p style="font-size: 12px; font-weight: 300; line-height: 1.48; color: #443c31; margin-top: 4px">Redesign e idealização de produtos digitais para e-commerce e marketplace, aplicando o mesmo processo de descoberta, prototipação e entrega.</p>
 </div>
 </div>
-
-<p class="cv-foot"><span>Heloise Demétrio Prudencio · CV</span><span>página 1 de 2</span></p>
-</section>
-
-<section class="page">
-<h2 style="margin-top:0">Habilidades</h2>
-<div class="cols2">
-<div class="srow"><b>Figma</b><i>3 anos</i></div>
-<div class="srow"><b>UX Research</b><i>3 anos</i></div>
-<div class="srow"><b>Design System</b><i>3 anos</i></div>
-<div class="srow"><b>Prototipação</b><i>3 anos</i></div>
-<div class="srow"><b>UX Writing</b><i>4 anos</i></div>
-<div class="srow"><b>Análise de dados</b><i>6 anos</i></div>
-<div class="srow"><b>CX Design</b><i>3 anos</i></div>
-<div class="srow"><b>Gestão de projetos</b><i>4 anos</i></div>
-<div class="srow"><b>Miro</b><i>3 anos</i></div>
-<div class="srow"><b>Design educacional</b><i>2 anos</i></div>
-<div class="srow"><b>IA aplicada ao design</b><i>2 anos</i></div>
-<div class="srow"><b>SendGrid</b><i>2 anos</i></div>
 </div>
 
-<h2>Projetos selecionados</h2>
-<div class="pgrid">
-<div class="pitem"><b>Uma Nova Experiência para a Ficha do cliente PJ</b><em>Franq · UX · UI · Fintech</em><p>Reestruturação da visualização de dados do cliente para tornar a análise mais orientada à venda.</p></div>
-<div class="pitem"><b>Nova Experiência para Gestão de Comissões</b><em>Franq · UX · UI · B2B SaaS</em><p>Redesign da visualização de ganhos, melhorando leitura, organização e entendimento dos pagamentos.</p></div>
-<div class="pitem"><b>Experiência de Contratação de Planos</b><em>Franq · UX Research · Service Design</em><p>Pesquisa com usuários e concepção de uma nova página de planos para simplificar a escolha e apoiar a decisão de contratação.</p></div>
-<div class="pitem"><b>Sistema LMS de Educação</b><em>Franq · UX · Mobile App · Edtech</em><p>Design de ponta a ponta da agenda de eventos e trilhas de aprendizagem no app do Personal Banker.</p></div>
-<div class="pitem"><b>Renovação do Fluxo de Compra</b><em>Natural Extremo · UX · UI · E-commerce</em><p>Redesign completo do funil de compras, melhorando conversão e experiência de checkout.</p></div>
-<div class="pitem"><b>Idealização Completa de Marketplace</b><em>IslandHub · UX · UI · Marketplace</em><p>Concepção do zero de um marketplace: pesquisa, arquitetura de informação e protótipos.</p></div>
+<div style="margin-top: auto; padding-top: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: #8a7f70; display: flex; justify-content: space-between; gap: 16px"><span>Heloise Demétrio Prudencio · CV</span><span>página 1 de 2</span></div>
+</div></div>
+<div class="cv-page"><div style="width: 794px; height: 1123px; overflow: hidden; box-sizing: border-box; padding: 60px 66px 48px; background: #ffffff; color: #16130f; font-family: 'Manrope', sans-serif; display: flex; flex-direction: column">
+
+<h2 style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: #1f4b3f; margin: 0 0 12px; padding-bottom: 6px; border-bottom: 1px solid rgba(22,19,15,.16)">Habilidades</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 45px; row-gap: 8px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 4px 0; border-bottom: 1px solid rgba(22,19,15,.08)"><b style="font-size: 11.9px; font-weight: 500">Figma</b><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; color: #8a7f70">3 anos</span></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 4px 0; border-bottom: 1px solid rgba(22,19,15,.08)"><b style="font-size: 11.9px; font-weight: 500">UX Research</b><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; color: #8a7f70">3 anos</span></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 4px 0; border-bottom: 1px solid rgba(22,19,15,.08)"><b style="font-size: 11.9px; font-weight: 500">Design System</b><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; color: #8a7f70">3 anos</span></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 4px 0; border-bottom: 1px solid rgba(22,19,15,.08)"><b style="font-size: 11.9px; font-weight: 500">Prototipação</b><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; color: #8a7f70">3 anos</span></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 4px 0; border-bottom: 1px solid rgba(22,19,15,.08)"><b style="font-size: 11.9px; font-weight: 500">UX Writing</b><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; color: #8a7f70">4 anos</span></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 4px 0; border-bottom: 1px solid rgba(22,19,15,.08)"><b style="font-size: 11.9px; font-weight: 500">Análise de dados</b><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; color: #8a7f70">6 anos</span></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 4px 0; border-bottom: 1px solid rgba(22,19,15,.08)"><b style="font-size: 11.9px; font-weight: 500">CX Design</b><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; color: #8a7f70">3 anos</span></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 4px 0; border-bottom: 1px solid rgba(22,19,15,.08)"><b style="font-size: 11.9px; font-weight: 500">Gestão de projetos</b><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; color: #8a7f70">4 anos</span></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 4px 0; border-bottom: 1px solid rgba(22,19,15,.08)"><b style="font-size: 11.9px; font-weight: 500">Miro</b><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; color: #8a7f70">3 anos</span></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 4px 0; border-bottom: 1px solid rgba(22,19,15,.08)"><b style="font-size: 11.9px; font-weight: 500">Design educacional</b><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; color: #8a7f70">2 anos</span></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 4px 0; border-bottom: 1px solid rgba(22,19,15,.08)"><b style="font-size: 11.9px; font-weight: 500">IA aplicada ao design</b><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; color: #8a7f70">2 anos</span></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 4px 0; border-bottom: 1px solid rgba(22,19,15,.08)"><b style="font-size: 11.9px; font-weight: 500">SendGrid</b><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.6px; color: #8a7f70">2 anos</span></div>
 </div>
 
-<h2>Formação e idiomas</h2>
-<div class="edu-l">
-<div class="eitem"><span>Graduação</span><div><b>Ciências Econômicas</b><p>Universidade Federal de Santa Catarina (UFSC)</p></div></div>
-<div class="eitem"><span>Especialização</span><div><b>UX/UI Design</b><p>Design de interfaces, pesquisa com usuários e prototipação</p></div></div>
-<div class="eitem"><span>Idiomas</span><div><b>Português (nativo) · Inglês (profissional)</b></div></div>
+<h2 style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: #1f4b3f; margin: 26px 0 12px; padding-bottom: 6px; border-bottom: 1px solid rgba(22,19,15,.16)">Projetos selecionados</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 40px; row-gap: 14px">
+<div><b style="display: block; font-size: 12.1px; font-weight: 600; line-height: 1.25">Uma Nova Experiência para a Ficha do cliente PJ</b><span style="display: block; margin-top: 3px; font-family: 'IBM Plex Mono', monospace; font-size: 9.3px; letter-spacing: .1em; text-transform: uppercase; color: #1f4b3f">Franq · UX · UI · Fintech</span><p style="font-size: 11.3px; font-weight: 300; line-height: 1.42; color: #443c31; margin-top: 4px">Reestruturação da visualização de dados do cliente para tornar a análise mais orientada à venda.</p></div>
+<div><b style="display: block; font-size: 12.1px; font-weight: 600; line-height: 1.25">Nova Experiência para Gestão de Comissões</b><span style="display: block; margin-top: 3px; font-family: 'IBM Plex Mono', monospace; font-size: 9.3px; letter-spacing: .1em; text-transform: uppercase; color: #1f4b3f">Franq · UX · UI · B2B SaaS</span><p style="font-size: 11.3px; font-weight: 300; line-height: 1.42; color: #443c31; margin-top: 4px">Redesign da visualização de ganhos, melhorando leitura, organização e entendimento dos pagamentos.</p></div>
+<div><b style="display: block; font-size: 12.1px; font-weight: 600; line-height: 1.25">Experiência de Contratação de Planos</b><span style="display: block; margin-top: 3px; font-family: 'IBM Plex Mono', monospace; font-size: 9.3px; letter-spacing: .1em; text-transform: uppercase; color: #1f4b3f">Franq · UX Research · Service Design</span><p style="font-size: 11.3px; font-weight: 300; line-height: 1.42; color: #443c31; margin-top: 4px">Pesquisa com usuários e concepção de uma nova página de planos para simplificar a escolha e apoiar a decisão de contratação.</p></div>
+<div><b style="display: block; font-size: 12.1px; font-weight: 600; line-height: 1.25">Sistema LMS de Educação</b><span style="display: block; margin-top: 3px; font-family: 'IBM Plex Mono', monospace; font-size: 9.3px; letter-spacing: .1em; text-transform: uppercase; color: #1f4b3f">Franq · UX · Mobile App · Edtech</span><p style="font-size: 11.3px; font-weight: 300; line-height: 1.42; color: #443c31; margin-top: 4px">Design de ponta a ponta da agenda de eventos e trilhas de aprendizagem no app do Personal Banker.</p></div>
+<div><b style="display: block; font-size: 12.1px; font-weight: 600; line-height: 1.25">Renovação do Fluxo de Compra</b><span style="display: block; margin-top: 3px; font-family: 'IBM Plex Mono', monospace; font-size: 9.3px; letter-spacing: .1em; text-transform: uppercase; color: #1f4b3f">Natural Extremo · UX · UI · E-commerce</span><p style="font-size: 11.3px; font-weight: 300; line-height: 1.42; color: #443c31; margin-top: 4px">Redesign completo do funil de compras, melhorando conversão e experiência de checkout.</p></div>
+<div><b style="display: block; font-size: 12.1px; font-weight: 600; line-height: 1.25">Idealização Completa de Marketplace</b><span style="display: block; margin-top: 3px; font-family: 'IBM Plex Mono', monospace; font-size: 9.3px; letter-spacing: .1em; text-transform: uppercase; color: #1f4b3f">IslandHub · UX · UI · Marketplace</span><p style="font-size: 11.3px; font-weight: 300; line-height: 1.42; color: #443c31; margin-top: 4px">Concepção do zero de um marketplace: pesquisa, arquitetura de informação e protótipos.</p></div>
 </div>
 
-<p class="cv-foot"><span>Portfólio completo com estudos de caso</span><span>página 2 de 2</span></p>
-</section>
+<h2 style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: #1f4b3f; margin: 26px 0 12px; padding-bottom: 6px; border-bottom: 1px solid rgba(22,19,15,.16)">Formação e idiomas</h2>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: grid; grid-template-columns: 123px 1fr; gap: 16px; align-items: baseline"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.9px; color: #8a7f70">Graduação</span><div><b style="font-size: 12.3px; font-weight: 600">Ciências Econômicas</b><p style="font-size: 11.5px; font-weight: 300; color: #443c31">Universidade Federal de Santa Catarina (UFSC)</p></div></div>
+<div style="display: grid; grid-template-columns: 123px 1fr; gap: 16px; align-items: baseline"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.9px; color: #8a7f70">Especialização</span><div><b style="font-size: 12.3px; font-weight: 600">UX/UI Design</b><p style="font-size: 11.5px; font-weight: 300; color: #443c31">Design de interfaces, pesquisa com usuários e prototipação</p></div></div>
+<div style="display: grid; grid-template-columns: 123px 1fr; gap: 16px; align-items: baseline"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.9px; color: #8a7f70">Idiomas</span><div><b style="font-size: 12.3px; font-weight: 600">Português (nativo) · Inglês (profissional)</b></div></div>
+</div>
 
-</doc-page>
-<script src="doc-page.js"></script>
+<div style="margin-top: auto; padding-top: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: #8a7f70; display: flex; justify-content: space-between; gap: 16px"><span>Portfólio completo com estudos de caso</span><span>página 2 de 2</span></div>
+</div></div>
+</div>
+
 </body>
 </html>

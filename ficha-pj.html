@@ -1,490 +1,94 @@
-<!DOCTYPE html>
-<html lang="pt-BR" data-lang="pt">
+<!doctype html>
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Uma Nova Experiência para a Ficha do cliente PJ — Heloise Demétrio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg:#f4f1ea; --bg2:#eae5da; --amber:#1f4b3f; --amber-lt:#2f6d5b;
-      --amber-dim:rgba(31,75,63,0.12); --text:#16130f; --muted:#8a7f70;
-      --border:rgba(31,75,63,0.22);
-      --font-d:'Instrument Serif',serif; --font-b:'Manrope',sans-serif; --font-m:'IBM Plex Mono',monospace;
-    }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--font-b); overflow-x: hidden; }
-    #starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-    .nebula { position: fixed; pointer-events: none; border-radius: 50%; filter: blur(120px); z-index: 0; opacity: 0.14; }
-    .n1 { width:600px;height:600px;background:radial-gradient(circle,#1f4b3f 0%,transparent 70%);top:-200px;right:-200px; }
-    .n2 { width:400px;height:400px;background:radial-gradient(circle,#c9c0b0 0%,transparent 70%);bottom:20%;left:-100px; }
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 56px; background: rgba(244,241,234,0.93); border-bottom: 1px solid var(--border); }
-    .nav-logo { font-family:var(--font-d); font-size:1.1rem; font-weight:700; color:var(--amber); letter-spacing:0.12em; text-decoration:none; }
-    .nav-logo span { color:var(--text); opacity:0.5; }
-    .nav-back { display: flex; align-items: center; gap: 8px; font-family: var(--font-m); font-size: 0.7rem; letter-spacing: 0.15em; color: var(--muted); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
-    .nav-back:hover { color: var(--amber); }
-    .lang-toggle { display:flex; background:rgba(31,75,63,0.1); border:1px solid var(--border); border-radius:4px; overflow:hidden; }
-    .lang-toggle button { background:none; border:none; cursor:pointer; font-family:var(--font-m); font-size:0.65rem; letter-spacing:0.12em; padding:5px 10px; color:var(--text); opacity:0.5; transition:all 0.2s; }
-    .lang-toggle button.active { background:var(--amber); color:#f4f1ea; opacity:1; font-weight:700; }
-    .project-hero { min-height: 65vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 120px 80px 72px; position: relative; z-index: 1; border-bottom: 1px solid var(--border); }
-    .project-hero-top { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
-    .project-num-badge { font-family: var(--font-m); font-size: 0.68rem; letter-spacing: 0.25em; color: var(--amber); border: 1px solid var(--border); padding: 6px 14px; border-radius: 2px; }
-    .project-tag-badge { font-family: var(--font-m); font-size: 0.65rem; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; }
-    .project-hero-title { font-family: var(--font-d); font-size: clamp(2.4rem, 6vw, 5.5rem); font-weight: 900; line-height: 1.05; letter-spacing: 0.03em; max-width: 900px; animation: fadeUp 0.9s 0.2s both; }
-    .project-hero-subtitle { font-family: var(--font-b); font-size: 1.1rem; color: var(--muted); max-width: 640px; margin-top: 18px; line-height: 1.5; }
-    .project-hero-meta { margin-top: 36px; display: flex; gap: 48px; flex-wrap: wrap; }
-    .meta-label { font-family:var(--font-m); font-size:0.6rem; letter-spacing:0.25em; color:var(--amber); text-transform:uppercase; margin-bottom:6px; }
-    .meta-value { font-size:0.95rem; color:var(--text); }
-    .project-content { max-width: 900px; margin: 0 auto; padding: 80px 40px; position: relative; z-index: 1; }
-    .content-block { margin-bottom: 72px; }
-    .content-label { font-family: var(--font-m); font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--amber); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
-    .content-label::after { content:''; flex:1; height:1px; background:var(--border); }
-    .content-text { font-size: 1.05rem; line-height: 1.8; color: var(--text); font-weight: 300; }
-    .content-text + .content-text { margin-top: 16px; }
-    .image-grid { display: grid; gap: 16px; margin-bottom: 72px; }
-    .image-grid.cols-2 { grid-template-columns: 1fr 1fr; }
-    .project-shot { border: 1px solid var(--border); border-radius: 4px; overflow: hidden; background: var(--bg2); }
-    .project-shot img { width: 100%; display: block; }
-    .shot-caption { font-family: var(--font-m); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--muted); padding: 10px 14px; text-transform: uppercase; }
-    .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .result-card { background: rgba(22,19,15,0.028); border: 1px solid var(--border); border-radius: 4px; padding: 28px 24px; text-align: center; }
-    .result-number { font-family:var(--font-d); font-size:2.2rem; font-weight:700; color:var(--amber); }
-    .result-label { font-family:var(--font-m); font-size:0.65rem; letter-spacing:0.1em; color:var(--muted); text-transform:uppercase; margin-top:8px; line-height:1.5; }
-    .tags-row { display: flex; flex-wrap: wrap; gap: 10px; }
-    .proj-tag { font-family: var(--font-m); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); border: 1px solid var(--border); background: var(--amber-dim); padding: 6px 12px; border-radius: 2px; }
-    .next-project { position: relative; z-index: 1; padding: 72px 80px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: inherit; transition: background 0.3s; }
-    .next-project:hover { background: var(--amber-dim); }
-    .next-label { font-family:var(--font-m); font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
-    .next-title { font-family:var(--font-d); font-size:2rem; font-weight:700; color:var(--text); }
-    .next-arrow { font-size:3rem; color:var(--amber); }
-    footer { position:relative;z-index:1; padding:28px 56px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
-    .footer-copy { font-family:var(--font-m); font-size:0.62rem; letter-spacing:0.15em; color:var(--muted); }
-    .footer-sig { font-family:var(--font-d); font-size:0.75rem; color:var(--amber); opacity:0.6; }
-    .compare-block { margin-bottom: 72px; }
-    .compare-frame { position: relative; width: 100%; aspect-ratio: 16/10; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; background: var(--bg2); cursor: ew-resize; user-select: none; box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(31,75,63,0.06); }
-    .compare-img { position: absolute; inset: 0; }
-    .compare-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
-    .compare-before { clip-path: inset(0 50% 0 0); transition: clip-path 0.05s linear; }
-    .compare-handle { position: absolute; top: 0; bottom: 0; left: 50%; width: 3px; background: var(--amber); box-shadow: 0 0 12px var(--amber), 0 0 30px rgba(31,75,63,0.5); transform: translateX(-50%); pointer-events: none; }
-    .compare-handle-grip { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 40px; height: 40px; border-radius: 50%; background: var(--amber); color: #f4f1ea; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 700; box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
-    .compare-tag { position: absolute; top: 16px; font-family: var(--font-m); font-size: 0.65rem; letter-spacing: 0.2em; padding: 6px 14px; border-radius: 2px; text-transform: uppercase; background: rgba(244,241,234,0.75); border: 1px solid var(--border); color: var(--text); pointer-events: none; backdrop-filter: blur(4px); }
-    .compare-tag-before { left: 16px; }
-    .compare-tag-after { right: 16px; color: var(--amber); border-color: var(--amber); }
-    .compare-hint { text-align: center; margin-top: 16px; font-family: var(--font-m); font-size: 0.68rem; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; }
-    .browser-mock { position: relative; padding: 40px 20px 0; margin-bottom: 24px; }
-    .ghost-panel { position: absolute; left: 50%; border-radius: 10px; background: linear-gradient(180deg, rgba(31,75,63,0.06), rgba(12,12,30,0.6)); border: 1px solid var(--border); }
-    .ghost-2 { top: 0; width: 70%; height: 60px; transform: translateX(-50%); }
-    .ghost-1 { top: 18px; width: 84%; height: 60px; transform: translateX(-50%); }
-    .browser-window { position: relative; z-index: 2; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px var(--amber-dim); background: var(--bg2); }
-    .browser-chrome { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: #14141f; border-bottom: 1px solid var(--border); }
-    .chrome-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .chrome-red { background: #ff5f57; } .chrome-yellow { background: #febc2e; } .chrome-green { background: #28c840; }
-    .chrome-url { margin-left: 12px; font-family: var(--font-m); font-size: 0.7rem; color: var(--muted); background: rgba(22,19,15,0.035); padding: 4px 12px; border-radius: 4px; flex: 1; }
-    .browser-stage { position: relative; }
-    .browser-stage img { width: 100%; display: block; }
-    .doc-hotspot { position: absolute; display: none; border: none; background: transparent; cursor: pointer; padding: 0; }
-    .doc-hotspot.active { display: block; }
-    .doc-hotspot-ring { position: absolute; inset: -6px; border: 2px solid var(--amber); border-radius: 6px; box-shadow: 0 0 0 4px rgba(31,75,63,0.15); animation: hotspotPulse 1.8s ease-in-out infinite; }
-    @keyframes hotspotPulse { 0%,100%{ opacity:0.55; transform:scale(1); } 50%{ opacity:1; transform:scale(1.04); } }
-    .doc-scrim { position: absolute; inset: 0; background: rgba(10,10,20,0.45); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; z-index: 5; }
-    .doc-scrim.show { opacity: 1; pointer-events: auto; }
-    .doc-modal { position: absolute; top: 0; right: 0; bottom: 0; width: 46%; background: #fff; color: #1a1a24; box-shadow: -20px 0 50px rgba(0,0,0,0.35); transform: translateX(100%); transition: transform 0.4s cubic-bezier(.32,.72,0,1); z-index: 6; display: flex; flex-direction: column; font-family: 'DM Sans', sans-serif; }
-    .doc-modal.open { transform: translateX(0); }
-    .doc-modal-header { display: flex; align-items: center; justify-content: space-between; padding: 3% 6%; border-bottom: 1px solid #eee; }
-    .doc-modal-header h3 { font-size: clamp(0.85rem,1.6vw,1.3rem); font-weight: 700; }
-    .doc-modal-close { background: none; border: none; font-size: 1rem; color: #888; cursor: pointer; }
-    .doc-modal-body { padding: 3% 6%; overflow-y: auto; flex: 1; }
-    .doc-field { margin-bottom: 5%; }
-    .doc-field label { display: block; font-size: clamp(0.55rem,1vw,0.8rem); font-weight: 600; margin-bottom: 2%; color: #1a1a24; }
-    .doc-select { display: flex; align-items: center; justify-content: space-between; border: 1px solid #d8d8e0; border-radius: 6px; padding: 3% 4%; font-size: clamp(0.5rem,0.95vw,0.78rem); color: #9a9aa8; }
-    .doc-dropzone { position: relative; border: 2px dashed #c7c7f5; border-radius: 8px; background: #fafaff; min-height: 90px; display: flex; align-items: center; justify-content: center; padding: 4%; text-align: center; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
-    .doc-dropzone:hover { background: #f2f2ff; border-color: #6366f1; }
-    .doc-dropzone-idle, .doc-dropzone-uploading, .doc-dropzone-success { display: none; flex-direction: column; align-items: center; gap: 6px; width: 100%; }
-    .doc-dropzone-idle.show, .doc-dropzone-uploading.show, .doc-dropzone-success.show { display: flex; }
-    .doc-upload-icon { display: inline-flex; width: clamp(20px,2.6vw,32px); height: clamp(20px,2.6vw,32px); color: #6366f1; }
-    .doc-upload-icon svg { width: 100%; height: 100%; }
-    .doc-upload-icon svg path { stroke: #6366f1; }
-    .doc-dropzone p { font-size: clamp(0.55rem,1vw,0.82rem); color: #444; }
-    .doc-dropzone-sub { font-size: clamp(0.45rem,0.8vw,0.68rem); color: #999; }
-    .doc-file-icon { font-size: clamp(1rem,2vw,1.5rem); }
-    .doc-file-name { font-size: clamp(0.55rem,1vw,0.8rem); color: #333; font-weight: 600; }
-    .doc-progress-track { width: 80%; height: 6px; border-radius: 4px; background: #e8e8f5; overflow: hidden; }
-    .doc-progress-fill { width: 0%; height: 100%; background: #6366f1; border-radius: 4px; transition: width 0.1s linear; }
-    .doc-progress-pct { font-size: clamp(0.45rem,0.8vw,0.65rem); color: #6366f1; font-weight: 700; }
-    .doc-success-check { width: clamp(28px,4vw,42px); height: clamp(28px,4vw,42px); border-radius: 50%; background: #22c55e; color: #fff; display: flex; align-items: center; justify-content: center; font-size: clamp(0.9rem,1.8vw,1.3rem); animation: successPop 0.4s cubic-bezier(.34,1.56,.64,1); }
-    @keyframes successPop { from{ transform:scale(0); } to{ transform:scale(1); } }
-    .doc-textarea { border: 1px solid #d8d8e0; border-radius: 6px; padding: 3% 4%; font-size: clamp(0.5rem,0.95vw,0.78rem); color: #b5b5c0; min-height: 50px; }
-    .doc-modal-footer { display: flex; justify-content: flex-end; gap: 10px; padding: 3% 6%; border-top: 1px solid #eee; }
-    .doc-btn { font-family: 'DM Sans', sans-serif; font-size: clamp(0.5rem,1vw,0.8rem); font-weight: 600; padding: 2.5% 5%; border-radius: 6px; cursor: pointer; border: 1px solid transparent; display: flex; align-items: center; gap: 6px; }
-    .doc-btn-ghost { background: #fff; border-color: #d8d8e0; color: #333; }
-    .doc-btn-primary { background: #6366f1; color: #fff; transition: background 0.2s, transform 0.15s; }
-    .doc-btn-primary:hover { background: #4f52d6; }
-    .doc-btn-primary.pulse { animation: btnPulse 0.6s ease; }
-    @keyframes btnPulse { 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.05); } }
-    .doc-btn-icon { font-size: 0.9em; display: inline-flex; width: 1em; height: 1em; }
-    .doc-btn-icon svg { width: 100%; height: 100%; }
-    @media(max-width:768px){ .doc-modal{ width:78%; } }
-    .tab-pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 72px; }
-    .tab-pill { font-family: var(--font-m); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: rgba(22,19,15,0.028); border: 1px solid var(--border); padding: 8px 16px; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
-    .tab-pill:hover { color: var(--text); border-color: var(--amber); }
-    .tab-pill.active { color: #f4f1ea; background: var(--amber); border-color: var(--amber); font-weight: 700; }
-    .reveal { opacity:0; transform:translateY(32px); transition:opacity 0.8s ease, transform 0.8s ease; }
-    .reveal.visible { opacity:1; transform:none; }
-    @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
-    @media(max-width:768px){
-      nav { padding:16px 24px; }
-      .project-hero { padding:100px 24px 48px; }
-      .project-content { padding:48px 24px; }
-      .results-grid { grid-template-columns:1fr; }
-      .image-grid.cols-2 { grid-template-columns:1fr; }
-      .next-project { padding:48px 24px; flex-direction:column; gap:20px; align-items:flex-start; }
-      footer { padding:20px 24px; flex-direction:column; gap:8px; text-align:center; }
-      .chrome-url { font-size:0.6rem; }
-    }
-  </style>
-
-<style id="v2-theme">
-:root{--bg:#f4f1ea;--bg2:#eae5da;--amber:#1f4b3f;--amber-lt:#2f6d5b;--amber-dim:rgba(31,75,63,.07);--text:#16130f;--muted:#8a7f70;--border:rgba(22,19,15,.14);--font-d:'Instrument Serif',serif;--font-b:'Manrope',sans-serif;--font-m:'IBM Plex Mono',monospace}
-#starfield,.nebula{display:none!important}
-body{background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
-nav{background:rgba(244,241,234,.93)!important;backdrop-filter:blur(10px)}
-h1,h2,h3,h4,.project-hero-title,.next-title,.result-number,.nav-logo,[class*="-title"]{font-weight:400!important;letter-spacing:0}
-.nav-logo{font-family:var(--font-d);color:var(--ink,#16130f)}
-.project-hero-title{letter-spacing:-.01em}
-.image-placeholder,.project-shot,.result-card,.combo-desktop,.combo-phone{background:#fbf9f5}
-.result-card,.project-shot{box-shadow:0 8px 24px rgba(22,19,15,.05)}
-.next-project:hover{background:rgba(31,75,63,.06)!important}
-.nav-back{white-space:nowrap}
-.nav-logo{font-size:1.05rem;letter-spacing:.01em!important}
-.project-num-badge,.meta-label,.content-label,.project-tag-badge{font-family:var(--font-m)}
-a{color:#1f4b3f}a:hover{color:#2f6d5b}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ficha do cliente PJ · Estudo de caso</title>
+<meta name="description" content="Heloise Demétrio Prudencio — Product Designer em produtos financeiros digitais. Economista pela UFSC, do discovery ao acompanhamento de resultados.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#f4f1ea}
+*{box-sizing:border-box}
+h1,h2,h3,h4,p,ul,ol,li,dl,dd,dt,figure,blockquote,pre{margin:0;padding:0}
+a{color:#1f4b3f;text-decoration:none}a:hover{color:#2f6d5b}
+.nl:hover{color:#1f4b3f !important}
+.btn{transition:background .2s,color .2s}
+.btn:hover{background:#f4f1ea !important;color:#16130f !important}
+.next{transition:background .3s}
+.next:hover{background:rgba(31,75,63,.06)}
+.fl:hover{color:#f4f1ea !important}
+.pill{transition:background .2s,color .2s,border-color .2s}
+.pill:hover{border-color:#1f4b3f !important}
 </style>
 </head>
 <body>
-<div class="nebula n1"></div>
-<div class="nebula n2"></div>
-<canvas id="starfield"></canvas>
-
-<nav>
-  <a href="../index.html" class="nav-logo">Heloise Demétrio</a>
-  <div style="display:flex;align-items:center;gap:24px">
-    <a href="../index.html#projetos" class="nav-back">← <span data-pt="Todos os projetos" data-en="All projects">Todos os projetos</span></a>
-    <div class="lang-toggle">
-      <button id="btn-pt" class="active" onclick="setLang('pt')">PT</button>
-      <button id="btn-en" onclick="setLang('en')">EN</button>
-    </div>
-  </div>
-</nav>
-
-<section class="project-hero">
-  <div class="project-hero-top">
-    <span class="project-num-badge">01 / 06</span>
-    <span class="project-tag-badge" data-pt="UX · UI · Fintech" data-en="UX · UI · Fintech">UX · UI · Fintech</span>
-  </div>
-  <h1 class="project-hero-title" data-pt="Uma Nova Experiência para a Ficha do cliente PJ" data-en="Uma Nova Experiência para a Ficha do cliente PJ">Uma Nova Experiência para a Ficha do cliente PJ</h1>
-  <p class="project-hero-subtitle" data-pt="Reestruturação da visualização de dados do cliente para tornar a análise mais orientada à venda." data-en="Reestruturação da visualização de dados do cliente para tornar a análise mais orientada à venda.">Reestruturação da visualização de dados do cliente para tornar a análise mais orientada à venda.</p>
-  <div class="project-hero-meta">
-    <div class="meta-item"><p class="meta-label" data-pt="Empresa" data-en="Company">Empresa</p><p class="meta-value">Franq</p></div>
-    <div class="meta-item"><p class="meta-label" data-pt="Ano" data-en="Year">Ano</p><p class="meta-value">2024</p></div>
-    <div class="meta-item"><p class="meta-label" data-pt="Área" data-en="Area">Área</p><p class="meta-value" data-pt="UX · UI · Produto Web" data-en="UX · UI · Web Product">UX · UI · Produto Web</p></div>
-    <div class="meta-item"><p class="meta-label" data-pt="Papel" data-en="Role">Papel</p><p class="meta-value">UX Designer</p></div>
-  </div>
-</section>
-
-<div class="project-content">
-
-  <div class="content-block reveal">
-    <p class="content-label" data-pt="Contexto" data-en="Context">Contexto</p>
-    <p class="content-text" data-pt="A Ficha do Cliente PJ é onde o Personal Banker acompanha score, documentos e produtos elegíveis de cada empresa. A versão antiga concentrava tudo em três colunas fixas: diagnóstico, lista de documentos e ofertas, sem nenhuma organização por contexto de uso. Isso obrigava o PB a rolar a página inteira para achar uma informação específica, e não deixava claro o que era prioridade em cada momento da relação com o cliente." data-en="The PJ Client Profile is where the Personal Banker tracks score, documents and eligible products for each company. The old version crammed everything into three fixed columns: diagnosis, document list and offers, with no organization by context of use. This forced the PB to scroll the entire page to find a specific piece of information, and never made clear what was the priority at each stage of the client relationship.">A Ficha do Cliente PJ é onde o Personal Banker acompanha score, documentos e produtos elegíveis de cada empresa. A versão antiga concentrava tudo em três colunas fixas: diagnóstico, lista de documentos e ofertas, sem nenhuma organização por contexto de uso. Isso obrigava o PB a rolar a página inteira para achar uma informação específica, e não deixava claro o que era prioridade em cada momento da relação com o cliente.</p>
-  </div>
-
-  <div class="compare-block reveal" style="transition-delay:0.1s">
-    <div class="compare-frame" id="compare-frame">
-      <div class="compare-img compare-after"><img src="../assets/ficha-pj/nova-01-visao360.jpg" alt="Depois — Visão 360"></div>
-      <div class="compare-img compare-before" id="compare-before"><img src="../assets/ficha-pj/antiga.jpg" alt="Antes — Ficha do cliente"></div>
-      <div class="compare-handle" id="compare-handle"><span class="compare-handle-grip">↔</span></div>
-      <span class="compare-tag compare-tag-before" data-pt="ANTES" data-en="BEFORE">ANTES</span>
-      <span class="compare-tag compare-tag-after" data-pt="DEPOIS" data-en="AFTER">DEPOIS</span>
-    </div>
-    <p class="compare-hint" data-pt="Arraste ou passe o mouse para comparar" data-en="Drag or hover to compare">Arraste ou passe o mouse para comparar</p>
-  </div>
-
-  <div class="content-block reveal">
-    <p class="content-label" data-pt="Processo" data-en="Process">Processo</p>
-    <p class="content-text" data-pt="Para entender como a ficha era utilizada no dia a dia, realizei um levantamento com os PBs e CSs das tarefas executadas com maior frequência. A partir desses insights, identifiquei a necessidade de reorganizar a experiência e propus uma estrutura baseada em cinco abas: Visão 360, reunindo as principais informações do cliente em um resumo executivo; Produtos, concentrando o catálogo de ofertas; Operações, exibindo o pipeline de propostas em andamento; Defesa de Crédito, destinada ao preenchimento das justificativas; e Documentos, funcionando como um repositório centralizado de arquivos." data-en="To understand how the profile was used day to day, I conducted a survey with PBs and CSs on their most frequently performed tasks. Based on these insights, I identified the need to reorganize the experience and proposed a structure based on five tabs: Overview 360, bringing together the client's key information in an executive summary; Products, concentrating the offer catalog; Operations, displaying the ongoing proposal pipeline; Credit Defense, dedicated to filling out justifications; and Documents, functioning as a centralized file repository.">Para entender como a ficha era utilizada no dia a dia, realizei um levantamento com os PBs e CSs das tarefas executadas com maior frequência. A partir desses insights, identifiquei a necessidade de reorganizar a experiência e propus uma estrutura baseada em cinco abas: Visão 360, reunindo as principais informações do cliente em um resumo executivo; Produtos, concentrando o catálogo de ofertas; Operações, exibindo o pipeline de propostas em andamento; Defesa de Crédito, destinada ao preenchimento das justificativas; e Documentos, funcionando como um repositório centralizado de arquivos.</p>
-    <p class="content-text" data-pt="Além da reorganização da informação, prototipei todos os estados da interface, vazio, pendência e sucesso, garantindo consistência em diferentes cenários de uso. Também redesenhei os fluxos de envio e visualização de documentos utilizando modais, permitindo que o PB anexasse e consultasse arquivos sem precisar sair da ficha, preservando o contexto da navegação e reduzindo interrupções na tarefa." data-en="Beyond reorganizing the information, I prototyped every interface state, empty, pending and success, ensuring consistency across different usage scenarios. I also redesigned the document upload and viewing flows using modals, allowing the PB to attach and consult files without leaving the profile, preserving navigation context and reducing task interruptions.">Além da reorganização da informação, prototipei todos os estados da interface, vazio, pendência e sucesso, garantindo consistência em diferentes cenários de uso. Também redesenhei os fluxos de envio e visualização de documentos utilizando modais, permitindo que o PB anexasse e consultasse arquivos sem precisar sair da ficha, preservando o contexto da navegação e reduzindo interrupções na tarefa.</p>
-  </div>
-
-  <div class="content-block reveal">
-    <p class="content-label" data-pt="Solução" data-en="Solution">Solução</p>
-    <p class="content-text" data-pt="A nova ficha passou a ser estruturada em cinco abas, cada uma respondendo a uma necessidade específica do PB: 'Como está este cliente hoje?', 'O que posso oferecer?', 'O que já está em andamento?', 'Como aumentar as chances de aprovação?' e 'Quais documentos já foram enviados?'." data-en="The new profile came to be structured into five tabs, each answering a specific need of the PB: 'How is this client doing today?', 'What can I offer?', 'What's already in progress?', 'How do I increase approval chances?' and 'Which documents have already been sent?'.">A nova ficha passou a ser estruturada em cinco abas, cada uma respondendo a uma necessidade específica do PB: "Como está este cliente hoje?", "O que posso oferecer?", "O que já está em andamento?", "Como aumentar as chances de aprovação?" e "Quais documentos já foram enviados?".</p>
-    <p class="content-text" data-pt="Na Visão 360, informações críticas como score, pendências e estrutura societária receberam maior destaque, permitindo uma avaliação rápida da situação do cliente. Já os novos fluxos de upload e visualização de documentos simplificaram significativamente o processo de anexar e consultar arquivos, tornando a experiência mais ágil, intuitiva e eficiente." data-en="In the 360 Overview, critical information such as score, pending items and ownership structure gained greater prominence, allowing for a quick assessment of the client's situation. The new document upload and viewing flows significantly simplified the process of attaching and consulting files, making the experience more agile, intuitive and efficient.">Na Visão 360, informações críticas como score, pendências e estrutura societária receberam maior destaque, permitindo uma avaliação rápida da situação do cliente. Já os novos fluxos de upload e visualização de documentos simplificaram significativamente o processo de anexar e consultar arquivos, tornando a experiência mais ágil, intuitiva e eficiente.</p>
-  </div>
-
-  <div class="tab-pills" id="tab-pills">
-    <button class="tab-pill active" data-tab="0" data-pt="Visão 360" data-en="Overview 360">Visão 360</button>
-    <button class="tab-pill" data-tab="1" data-pt="Produtos" data-en="Products">Produtos</button>
-    <button class="tab-pill" data-tab="2" data-pt="Operações" data-en="Operations">Operações</button>
-    <button class="tab-pill" data-tab="3" data-pt="Defesa de Crédito" data-en="Credit Defense">Defesa de Crédito</button>
-    <button class="tab-pill" data-tab="4" data-pt="Documentos" data-en="Documents">Documentos</button>
-  </div>
-
-  <div class="browser-mock reveal" style="transition-delay:0.1s">
-    <div class="ghost-panel ghost-2"></div>
-    <div class="ghost-panel ghost-1"></div>
-    <div class="browser-window" id="browser-window">
-      <div class="browser-chrome">
-        <span class="chrome-dot chrome-red"></span><span class="chrome-dot chrome-yellow"></span><span class="chrome-dot chrome-green"></span>
-        <span class="chrome-url" id="tab-url">app.franq.com.br/ficha-pj/visao-360</span>
-      </div>
-      <div class="browser-stage">
-        <img id="tab-img" src="../assets/ficha-pj/nova-01-visao360.jpg" alt="Visão 360">
-        <button class="doc-hotspot" id="doc-hotspot" title="Enviar Documento" style="left:83.5%;top:20.5%;width:13%;height:3.6%"><span class="doc-hotspot-ring"></span></button>
-
-        <div class="doc-scrim" id="doc-scrim"></div>
-        <div class="doc-modal" id="doc-modal">
-          <div class="doc-modal-header">
-            <h3 data-pt="Enviar Documento" data-en="Send Document">Enviar Documento</h3>
-            <button class="doc-modal-close" id="doc-modal-close">✕</button>
-          </div>
-          <div class="doc-modal-body" id="doc-modal-body">
-            <div class="doc-field">
-              <label data-pt="Tipo de documento" data-en="Document type">Tipo de documento</label>
-              <div class="doc-select"><span data-pt="Selecione o tipo de documento" data-en="Select the document type">Selecione o tipo de documento</span><span>⌄</span></div>
-            </div>
-            <div class="doc-field">
-              <label data-pt="Categoria" data-en="Category">Categoria</label>
-              <div class="doc-select"><span data-pt="Selecione a categoria" data-en="Select the category">Selecione a categoria</span><span>⌄</span></div>
-            </div>
-            <div class="doc-field">
-              <label data-pt="Arquivo" data-en="File">Arquivo</label>
-              <div class="doc-dropzone" id="doc-dropzone">
-                <div class="doc-dropzone-idle" id="doc-dropzone-idle">
-                  <span class="doc-upload-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3V15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17 8L12 3L7 8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
-                  <p data-pt="Arraste o arquivo aqui ou clique para selecionar" data-en="Drag the file here or click to select">Arraste o arquivo aqui ou clique para selecionar</p>
-                  <span class="doc-dropzone-sub" data-pt="PDF, JPG, PNG — Máximo 10MB" data-en="PDF, JPG, PNG — Max 10MB">PDF, JPG, PNG — Máximo 10MB</span>
-                </div>
-                <div class="doc-dropzone-uploading" id="doc-dropzone-uploading">
-                  <span class="doc-file-icon">📄</span>
-                  <p class="doc-file-name">contrato_social_2024.pdf</p>
-                  <div class="doc-progress-track"><div class="doc-progress-fill" id="doc-progress-fill"></div></div>
-                  <span class="doc-progress-pct" id="doc-progress-pct">0%</span>
-                </div>
-                <div class="doc-dropzone-success" id="doc-dropzone-success">
-                  <span class="doc-success-check">✓</span>
-                  <p data-pt="Documento enviado com sucesso!" data-en="Document sent successfully!">Documento enviado com sucesso!</p>
-                  <span class="doc-dropzone-sub">contrato_social_2024.pdf · 2.1 MB</span>
-                </div>
-              </div>
-            </div>
-            <div class="doc-field">
-              <label data-pt="Observação (opcional)" data-en="Note (optional)">Observação (opcional)</label>
-              <div class="doc-textarea" data-pt="Ex: Balanço referente ao exercício 2023" data-en="E.g.: Balance sheet for fiscal year 2023">Ex: Balanço referente ao exercício 2023</div>
-            </div>
-          </div>
-          <div class="doc-modal-footer">
-            <button class="doc-btn doc-btn-ghost" id="doc-cancel-btn" data-pt="Cancelar" data-en="Cancel">Cancelar</button>
-            <button class="doc-btn doc-btn-primary" id="doc-send-btn"><span class="doc-btn-icon"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M17 8L12 3L7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><span data-pt="Enviar Documento" data-en="Send Document">Enviar Documento</span></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <p class="shot-caption" id="tab-caption" style="text-align:center;margin-bottom:72px" data-pt="Visão 360 — score, pendências e estrutura societária em um único painel" data-en="360 Overview — score, pending items and ownership structure in a single panel">Visão 360 — score, pendências e estrutura societária em um único painel</p>
-
-  <div class="image-grid cols-2 reveal" style="transition-delay:0.1s">
-    <figure class="project-shot">
-      <img src="../assets/ficha-pj/nova-06-operacoes.jpg" alt="Modal de envio de documento">
-      <figcaption class="shot-caption" data-pt="Modal — envio de documento sem sair da ficha" data-en="Modal — document upload without leaving the profile">Modal — envio de documento sem sair da ficha</figcaption>
-    </figure>
-    <figure class="project-shot">
-      <img src="../assets/ficha-pj/nova-07-produtos.jpg" alt="Modal de visualização de documento">
-      <figcaption class="shot-caption" data-pt="Modal — visualização e download do documento enviado" data-en="Modal — viewing and downloading the submitted document">Modal — visualização e download do documento enviado</figcaption>
-    </figure>
-  </div>
-
-  <div class="content-block reveal">
-    <p class="content-label" data-pt="Resultados" data-en="Results">Resultados</p>
-    <p class="content-text" data-pt="A reestruturação por abas trouxe clareza imediata sobre onde encontrar cada tipo de informação, reduzindo o tempo que o PB gasta procurando dados espalhados e tornando a ficha um verdadeiro painel de gestão do relacionamento com o cliente PJ." data-en="The tab restructuring brought immediate clarity on where to find each type of information, reducing the time PBs spend searching for scattered data and turning the profile into a true relationship-management panel for PJ clients.">A reestruturação por abas trouxe clareza imediata sobre onde encontrar cada tipo de informação, reduzindo o tempo que o PB gasta procurando dados espalhados e tornando a ficha um verdadeiro painel de gestão do relacionamento com o cliente PJ.</p>
-    <div class="results-grid" style="margin-top:24px">
-      <div class="result-card"><div class="result-number">5</div><div class="result-label" data-pt="Abas de contexto dedicado" data-en="Dedicated context tabs">Abas de contexto dedicado</div></div>
-      <div class="result-card"><div class="result-number">-40%</div><div class="result-label" data-pt="Rolagem para encontrar informação" data-en="Scrolling to find information">Rolagem para encontrar informação</div></div>
-      <div class="result-card"><div class="result-number">2</div><div class="result-label" data-pt="Modais para upload e visualização" data-en="Modals for upload and viewing">Modais para upload e visualização</div></div>
-    </div>
-  </div>
-
-  <div class="content-block reveal" style="margin-bottom:0">
-    <p class="content-label" data-pt="Ferramentas & Skills" data-en="Tools & Skills">Ferramentas & Skills</p>
-    <div class="tags-row">
-      <span class="proj-tag" data-pt="Redesign" data-en="Redesign">Redesign</span><span class="proj-tag" data-pt="Arquitetura de informação" data-en="Information architecture">Arquitetura de informação</span><span class="proj-tag" data-pt="Navegação por abas" data-en="Tab navigation">Navegação por abas</span><span class="proj-tag">Design System</span><span class="proj-tag" data-pt="Fluxos modais" data-en="Modal flows">Fluxos modais</span><span class="proj-tag">B2B SaaS</span>
-    </div>
-  </div>
-
+<div style="font-family: 'Manrope', sans-serif; color: #16130f; background: #f4f1ea; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased">
+<header style="position: sticky; top: 0; z-index: 50; background: rgba(244,241,234,.92); border-bottom: 1px solid rgba(22,19,15,.07)"><nav style="max-width: 1120px; margin: 0 auto; padding: 8px clamp(16px, 4vw, 40px); display: flex; align-items: center; justify-content: space-between; gap: 8px 24px; min-height: 62px; flex-wrap: wrap"><a href="index.html" style="color: #16130f; font-family: 'Instrument Serif', serif; font-size: 18px">Heloise Demétrio</a><div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap"><a class="nl" href="index.html" style="display: inline-flex; align-items: center; min-height: 44px; color: #443c31; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase">← Todos os projetos</a><div style="display: flex; border: 1px solid rgba(22,19,15,.14); border-radius: 2px; overflow: hidden; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em"><span aria-current="true" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; background: #16130f; color: #f4f1ea">PT</span><a href="ficha-pj-en.html" lang="en" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; color: #443c31">EN</a></div></div></nav></header>
+<section style="padding: 72px 0 48px"><div style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px)"><dl style="display: flex; flex-wrap: wrap; gap: 20px 56px; margin-bottom: 40px"><div><dt style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: #8a7f70; margin-bottom: 4px">Setor</dt><dd style="font-size: 15px">Fintech · B2B</dd></div><div><dt style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: #8a7f70; margin-bottom: 4px">Cliente</dt><dd style="font-size: 15px">Franq</dd></div><div><dt style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: #8a7f70; margin-bottom: 4px">Ano</dt><dd style="font-size: 15px">2024</dd></div><div><dt style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: #8a7f70; margin-bottom: 4px">Plataforma</dt><dd style="font-size: 15px">Web</dd></div></dl><h1 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(40px, 5.2vw, 66px); line-height: 1.06; letter-spacing: -.01em; max-width: 20ch; text-wrap: balance">Ficha do cliente PJ. <i style="color: #1f4b3f">Um painel de relacionamento, não uma lista de dados.</i></h1></div></section>
+<div style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px)"><div style="background: #eae5da; border-radius: 8px; padding: clamp(20px, 5vw, 64px) clamp(20px, 6vw, 80px) clamp(28px, 5vw, 64px)"><div style="border: 1px solid rgba(22,19,15,.14); border-radius: 6px; overflow: hidden; background: #ffffff; box-shadow: 0 24px 50px rgba(22,19,15,.12); "><div style="display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: #f4f1ea; border-bottom: 1px solid rgba(22,19,15,.1)"><span style="width: 9px; height: 9px; border-radius: 50%; background: #e0786b"></span><span style="width: 9px; height: 9px; border-radius: 50%; background: #e3b34f"></span><span style="width: 9px; height: 9px; border-radius: 50%; background: #6fb36c"></span><span style="margin-left: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #8a7f70; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">app.franq.com.br/ficha-pj/visao-360</span></div><img src="assets/img/ficha-pj_nova-01-visao360.jpg" alt="Depois — nova Ficha PJ, aba Visão 360" width="2400" height="1525" style="display: block; width: 100%; height: auto"></div></div></div>
+<section style="padding: 96px 0 72px"><div style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); display: flex; flex-wrap: wrap; gap: 24px 56px"><div style="flex: 0 0 200px"></div><div style="flex: 1 1 520px; min-width: 0; max-width: 760px"><h2 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(30px, 3.6vw, 46px); line-height: 1.12; text-wrap: balance">De três colunas fixas a cinco abas que respondem às perguntas do Personal Banker.</h2><p style="margin-top: 28px; font-size: 17px; line-height: 1.8; font-weight: 300; color: #443c31; text-wrap: pretty">A Ficha do Cliente PJ é onde o Personal Banker acompanha score, documentos e produtos elegíveis de cada empresa. A versão antiga concentrava tudo em três colunas fixas: diagnóstico, lista de documentos e ofertas, sem nenhuma organização por contexto de uso. Isso obrigava o PB a rolar a página inteira para achar uma informação específica, e não deixava claro o que era prioridade em cada momento da relação com o cliente.</p></div></div></section>
+<section style="padding: 0 0 96px"><div style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px)"><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 40px 48px; border-top: 1px solid rgba(22,19,15,.14); padding-top: 32px"><div><h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 26px; line-height: 1.2; margin-bottom: 14px">Problema</h3><p style="font-size: 15.5px; line-height: 1.75; font-weight: 300; color: #443c31; text-wrap: pretty">A ficha concentrava diagnóstico, documentos e ofertas em três colunas fixas, sem organização por contexto de uso. O PB precisava rolar a página inteira para achar uma informação, e não ficava claro o que era prioridade em cada momento da relação com o cliente.</p></div><div><h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 26px; line-height: 1.2; margin-bottom: 14px">Solução</h3><p style="font-size: 15.5px; line-height: 1.75; font-weight: 300; color: #443c31; text-wrap: pretty">Uma ficha organizada em cinco abas — Visão 360, Produtos, Operações, Defesa de Crédito e Documentos —, cada uma respondendo a uma pergunta do PB, com envio e visualização de documentos em modais, sem sair da tela.</p></div><div><h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 26px; line-height: 1.2; margin-bottom: 14px">Meu papel</h3><p style="font-size: 15.5px; line-height: 1.75; font-weight: 300; color: #443c31; text-wrap: pretty">UX Designer, responsável pelo levantamento com PBs e CSs, reorganização da arquitetura de informação, prototipação de todos os estados da interface e redesenho dos fluxos de documentos.</p></div></div></div></section>
+<section style="padding: 96px 0; border-top: 1px solid rgba(22,19,15,.07)"><div style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); display: flex; flex-wrap: wrap; gap: 24px 56px"><div style="flex: 0 0 200px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start"><p style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #1f4b3f">Processo de design</p></div><div style="flex: 1 1 520px; min-width: 0; max-width: 760px"><p style="font-family: 'Instrument Serif', serif; font-size: clamp(26px, 3vw, 36px); line-height: 1.25; text-wrap: pretty">Comecei pelo uso real da ficha no dia a dia, e só depois pela tela. O trabalho seguiu quatro fases: Descobrir, Definir, Desenhar e Entregar.</p><ol style="list-style: none; margin-top: 48px; display: flex; flex-direction: column; gap: 28px"><li style="padding-top: 20px; border-top: 1px solid rgba(22,19,15,.14)"><p style="font-size: 19px; line-height: 1.5; font-weight: 500">Descobrir: levantar as tarefas mais frequentes de PBs e CSs e onde a ficha antiga atrapalhava.</p><p style="margin-top: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .1em; color: #8a7f70">Levantamento com PBs e CSs / Análise da ficha antiga</p></li><li style="padding-top: 20px; border-top: 1px solid rgba(22,19,15,.14)"><p style="font-size: 19px; line-height: 1.5; font-weight: 500">Definir: transformar as tarefas em perguntas, e as perguntas em uma estrutura de abas.</p><p style="margin-top: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .1em; color: #8a7f70">Perguntas do PB / Arquitetura de informação</p></li><li style="padding-top: 20px; border-top: 1px solid rgba(22,19,15,.14)"><p style="font-size: 19px; line-height: 1.5; font-weight: 500">Desenhar: prototipar as abas, todos os estados da interface e os fluxos de documentos em modal.</p><p style="margin-top: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .1em; color: #8a7f70">Estados vazio, pendência e sucesso / Fluxos modais</p></li><li style="padding-top: 20px; border-top: 1px solid rgba(22,19,15,.14)"><p style="font-size: 19px; line-height: 1.5; font-weight: 500">Entregar: interface final construída sobre o design system da Franq.</p><p style="margin-top: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .1em; color: #8a7f70">Protótipo final</p></li></ol></div></div></section>
+<section style="padding: 96px 0; border-top: 1px solid rgba(22,19,15,.07)"><div style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px)"><div style="display: flex; flex-wrap: wrap; gap: 8px 56px; align-items: baseline; margin-bottom: 64px"><span style="flex: 0 0 200px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .16em; color: #1f4b3f">01</span><h2 style="flex: 1 1 520px; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(34px, 4vw, 52px); line-height: 1.05">Descobrir</h2></div><div style="display: flex; flex-wrap: wrap; gap: 8px 56px; margin-top: 0px; margin-bottom: 0px"><div style="flex: 0 0 200px"></div><div style="flex: 1 1 520px; min-width: 0; max-width: 760px"><h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 28px; line-height: 1.2; margin-bottom: 16px">Levantamento com PBs e CSs</h3><p style="font-size: 17px; line-height: 1.8; font-weight: 300; color: #443c31; text-wrap: pretty; margin-top: 0px">Para entender como a ficha era utilizada no dia a dia, realizei um levantamento com os PBs e CSs das tarefas executadas com maior frequência. A partir desses insights, identifiquei a necessidade de reorganizar a experiência.</p></div></div><div style="display: flex; flex-wrap: wrap; gap: 8px 56px; margin-top: 88px; margin-bottom: 0px"><div style="flex: 0 0 200px"></div><div style="flex: 1 1 520px; min-width: 0; max-width: 760px"><h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 28px; line-height: 1.2; margin-bottom: 16px">A ficha antiga</h3><p style="font-size: 17px; line-height: 1.8; font-weight: 300; color: #443c31; text-wrap: pretty; margin-top: 0px">A versão antiga concentrava tudo em três colunas fixas: diagnóstico, lista de documentos e ofertas, sem nenhuma organização por contexto de uso. Compare com a nova versão:</p></div></div><figure style="margin-top: 40px"><div style="background: #eae5da; border-radius: 8px; padding: clamp(16px, 4vw, 48px)"><div data-compare-frame style="position: relative; aspect-ratio: 2400 / 1525; overflow: hidden; border: 1px solid rgba(22,19,15,.14); border-radius: 6px; background: #ffffff; cursor: ew-resize; box-shadow: 0 24px 50px rgba(22,19,15,.12)"><img src="assets/img/ficha-pj_nova-01-visao360.jpg" alt="Depois — nova Ficha PJ, aba Visão 360" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block"><img src="assets/img/ficha-pj_antiga.jpg" alt="Antes — Ficha do cliente antiga" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; clip-path: inset(0 50% 0 0)" data-before><div aria-hidden="true" data-handle style="position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; margin-left: -1px; background: #1f4b3f"><span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; border-radius: 50%; background: #1f4b3f; color: #f4f1ea; display: flex; align-items: center; justify-content: center; font-size: 16px">↔</span></div><span style="position: absolute; top: 14px; left: 14px; padding: 4px 10px; background: rgba(22,19,15,.82); color: #f4f1ea; border-radius: 2px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .18em">ANTES</span><span style="position: absolute; top: 14px; right: 14px; padding: 4px 10px; background: #1f4b3f; color: #f4f1ea; border-radius: 2px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .18em">DEPOIS</span></div></div><label style="display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .08em; color: #8a7f70">Arraste ou passe o mouse para comparar<input type="range" min="0" max="100" value="50" data-slider aria-label="Comparar antes e depois" style="width: min(100%, 360px); min-height: 32px; accent-color: #1f4b3f"></label></figure></div></section><section style="padding: 96px 0; border-top: 1px solid rgba(22,19,15,.07)"><div style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px)"><div style="display: flex; flex-wrap: wrap; gap: 8px 56px; align-items: baseline; margin-bottom: 64px"><span style="flex: 0 0 200px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .16em; color: #1f4b3f">02</span><h2 style="flex: 1 1 520px; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(34px, 4vw, 52px); line-height: 1.05">Definir</h2></div><div style="display: flex; flex-wrap: wrap; gap: 8px 56px; margin-top: 0px; margin-bottom: 0px"><div style="flex: 0 0 200px"></div><div style="flex: 1 1 520px; min-width: 0; max-width: 760px"><h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 28px; line-height: 1.2; margin-bottom: 16px">Cinco perguntas, cinco abas</h3><p style="font-size: 17px; line-height: 1.8; font-weight: 300; color: #443c31; text-wrap: pretty; margin-top: 0px">A nova ficha passou a ser estruturada em cinco abas, cada uma respondendo a uma necessidade específica do PB: "Como está este cliente hoje?", "O que posso oferecer?", "O que já está em andamento?", "Como aumentar as chances de aprovação?" e "Quais documentos já foram enviados?".</p><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 12px; margin-top: 28px"><div style="padding: 20px 22px; border: 1px solid rgba(22,19,15,.14); border-radius: 4px; background: #fbf9f5; display: flex; flex-direction: column; gap: 10px"><p style="font-family: 'Instrument Serif', serif; font-size: 20px; line-height: 1.25">“Como está este cliente hoje?”</p><p style="margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #1f4b3f">→ Visão 360</p></div><div style="padding: 20px 22px; border: 1px solid rgba(22,19,15,.14); border-radius: 4px; background: #fbf9f5; display: flex; flex-direction: column; gap: 10px"><p style="font-family: 'Instrument Serif', serif; font-size: 20px; line-height: 1.25">“O que posso oferecer?”</p><p style="margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #1f4b3f">→ Produtos</p></div><div style="padding: 20px 22px; border: 1px solid rgba(22,19,15,.14); border-radius: 4px; background: #fbf9f5; display: flex; flex-direction: column; gap: 10px"><p style="font-family: 'Instrument Serif', serif; font-size: 20px; line-height: 1.25">“O que já está em andamento?”</p><p style="margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #1f4b3f">→ Operações</p></div><div style="padding: 20px 22px; border: 1px solid rgba(22,19,15,.14); border-radius: 4px; background: #fbf9f5; display: flex; flex-direction: column; gap: 10px"><p style="font-family: 'Instrument Serif', serif; font-size: 20px; line-height: 1.25">“Como aumentar as chances de aprovação?”</p><p style="margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #1f4b3f">→ Defesa de Crédito</p></div><div style="padding: 20px 22px; border: 1px solid rgba(22,19,15,.14); border-radius: 4px; background: #fbf9f5; display: flex; flex-direction: column; gap: 10px"><p style="font-family: 'Instrument Serif', serif; font-size: 20px; line-height: 1.25">“Quais documentos já foram enviados?”</p><p style="margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #1f4b3f">→ Documentos</p></div></div></div></div><div style="display: flex; flex-wrap: wrap; gap: 8px 56px; margin-top: 88px; margin-bottom: 0px"><div style="flex: 0 0 200px"></div><div style="flex: 1 1 520px; min-width: 0; max-width: 760px"><h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 28px; line-height: 1.2; margin-bottom: 16px">Arquitetura de informação</h3><p style="font-size: 17px; line-height: 1.8; font-weight: 300; color: #443c31; text-wrap: pretty; margin-top: 0px">A ficha mantém um painel lateral fixo com os dados da empresa e o score, e organiza o restante em cinco abas. A estrutura abaixo foi reconstruída a partir das telas finais.</p></div></div><div style="margin-top: 40px; background: #eae5da; border-radius: 8px; padding: clamp(16px, 4vw, 48px)"><p style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: #443c31; margin-bottom: 24px">Arquitetura de informação · Ficha PJ</p><div style="display: flex; flex-direction: column; align-items: center"><span style="padding: 10px 20px; border-radius: 4px; background: #1f4b3f; color: #f4f1ea; font-size: 14px; font-weight: 600">Ficha da empresa</span><span aria-hidden="true" style="width: 1px; height: 24px; background: rgba(22,19,15,.3)"></span><div style="width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 16px; border-top: 1px solid rgba(22,19,15,.3); padding-top: 24px"><div style="display: flex; flex-direction: column; gap: 8px; align-items: stretch"><span style="padding: 9px 14px; border-radius: 4px; background: #fbf9f5; border: 1px solid rgba(31,75,63,.35); font-size: 14px; font-weight: 600; text-align: center">Painel lateral</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Dados da empresa</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Score Franq</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Dados bancários</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Contatos adicionais</span></div><div style="display: flex; flex-direction: column; gap: 8px; align-items: stretch"><span style="padding: 9px 14px; border-radius: 4px; background: #fbf9f5; border: 1px solid rgba(31,75,63,.35); font-size: 14px; font-weight: 600; text-align: center">Visão 360</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Score</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Pendências</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Estrutura societária</span></div><div style="display: flex; flex-direction: column; gap: 8px; align-items: stretch"><span style="padding: 9px 14px; border-radius: 4px; background: #fbf9f5; border: 1px solid rgba(31,75,63,.35); font-size: 14px; font-weight: 600; text-align: center">Produtos</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Recomendados</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Crédito</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Seguros</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Financiamentos</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Consórcio</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Câmbio</span></div><div style="display: flex; flex-direction: column; gap: 8px; align-items: stretch"><span style="padding: 9px 14px; border-radius: 4px; background: #fbf9f5; border: 1px solid rgba(31,75,63,.35); font-size: 14px; font-weight: 600; text-align: center">Operações</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Pipeline de propostas</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Linha do tempo</span></div><div style="display: flex; flex-direction: column; gap: 8px; align-items: stretch"><span style="padding: 9px 14px; border-radius: 4px; background: #fbf9f5; border: 1px solid rgba(31,75,63,.35); font-size: 14px; font-weight: 600; text-align: center">Defesa de Crédito</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Defesa geral da empresa</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Por produto</span></div><div style="display: flex; flex-direction: column; gap: 8px; align-items: stretch"><span style="padding: 9px 14px; border-radius: 4px; background: #fbf9f5; border: 1px solid rgba(31,75,63,.35); font-size: 14px; font-weight: 600; text-align: center">Documentos</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Obrigatórios pendentes</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Constitutivos</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Financeiros</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Bancários</span><span style="padding: 7px 12px; border-radius: 4px; background: rgba(251,249,245,.7); font-size: 13px; text-align: center">Certidões</span></div></div></div></div></div></section><section style="padding: 96px 0; border-top: 1px solid rgba(22,19,15,.07)"><div style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px)"><div style="display: flex; flex-wrap: wrap; gap: 8px 56px; align-items: baseline; margin-bottom: 64px"><span style="flex: 0 0 200px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .16em; color: #1f4b3f">03</span><h2 style="flex: 1 1 520px; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(34px, 4vw, 52px); line-height: 1.05">Desenhar</h2></div><div style="display: flex; flex-wrap: wrap; gap: 8px 56px; margin-top: 0px; margin-bottom: 0px"><div style="flex: 0 0 200px"></div><div style="flex: 1 1 520px; min-width: 0; max-width: 760px"><h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 28px; line-height: 1.2; margin-bottom: 16px">Uma aba para cada pergunta</h3><p style="font-size: 17px; line-height: 1.8; font-weight: 300; color: #443c31; text-wrap: pretty; margin-top: 0px">Na Visão 360, informações críticas como score, pendências e estrutura societária receberam maior destaque, permitindo uma avaliação rápida da situação do cliente. Já os novos fluxos de upload e visualização de documentos simplificaram significativamente o processo de anexar e consultar arquivos, tornando a experiência mais ágil, intuitiva e eficiente.</p><p style="font-size: 17px; line-height: 1.8; font-weight: 300; color: #443c31; text-wrap: pretty; margin-top: 16px">Navegue pelas abas abaixo. Na aba Documentos, clique em “Enviar Documento” para ver o fluxo de envio.</p></div></div><figure style="margin-top: 40px"><div style="background: #eae5da; border-radius: 8px; padding: clamp(16px, 4vw, 48px)">
+<div role="group" aria-label="Abas da ficha" data-tabs="[{&quot;label&quot;: &quot;Visão 360&quot;, &quot;url&quot;: &quot;app.franq.com.br/ficha-pj/visao-360&quot;, &quot;img&quot;: &quot;assets/img/ficha-pj_nova-01-visao360.jpg&quot;, &quot;caption&quot;: &quot;Visão 360 — score, pendências e estrutura societária em um único painel&quot;}, {&quot;label&quot;: &quot;Produtos&quot;, &quot;url&quot;: &quot;app.franq.com.br/ficha-pj/produtos&quot;, &quot;img&quot;: &quot;assets/img/ficha-pj_nova-02-doc-viewer.jpg&quot;, &quot;caption&quot;: &quot;Produtos — catálogo de ofertas elegíveis, a consultar e solicitadas&quot;}, {&quot;label&quot;: &quot;Operações&quot;, &quot;url&quot;: &quot;app.franq.com.br/ficha-pj/operacoes&quot;, &quot;img&quot;: &quot;assets/img/ficha-pj_nova-03-enviar-doc.jpg&quot;, &quot;caption&quot;: &quot;Operações — pipeline de propostas e linha do tempo de atividades&quot;}, {&quot;label&quot;: &quot;Defesa de Crédito&quot;, &quot;url&quot;: &quot;app.franq.com.br/ficha-pj/defesa-credito&quot;, &quot;img&quot;: &quot;assets/img/ficha-pj_nova-04-documentos.jpg&quot;, &quot;caption&quot;: &quot;Defesa de Crédito — formulário guiado para justificar a proposta&quot;}, {&quot;label&quot;: &quot;Documentos&quot;, &quot;url&quot;: &quot;app.franq.com.br/ficha-pj/documentos&quot;, &quot;img&quot;: &quot;assets/img/ficha-pj_nova-05-defesa-credito.jpg&quot;, &quot;caption&quot;: &quot;Documentos — repositório com status de validade de cada arquivo&quot;}]" style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px">
+<button class="pill" type="button" aria-pressed="true" data-tab="0" style="min-height: 44px; padding: 0 18px; border-radius: 2px; border: 1px solid #1f4b3f; background: #1f4b3f; color: #f4f1ea; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; cursor: pointer">Visão 360</button>
+<button class="pill" type="button" aria-pressed="false" data-tab="1" style="min-height: 44px; padding: 0 18px; border-radius: 2px; border: 1px solid rgba(22,19,15,.14); background: transparent; color: #443c31; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; cursor: pointer">Produtos</button>
+<button class="pill" type="button" aria-pressed="false" data-tab="2" style="min-height: 44px; padding: 0 18px; border-radius: 2px; border: 1px solid rgba(22,19,15,.14); background: transparent; color: #443c31; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; cursor: pointer">Operações</button>
+<button class="pill" type="button" aria-pressed="false" data-tab="3" style="min-height: 44px; padding: 0 18px; border-radius: 2px; border: 1px solid rgba(22,19,15,.14); background: transparent; color: #443c31; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; cursor: pointer">Defesa de Crédito</button>
+<button class="pill" type="button" aria-pressed="false" data-tab="4" style="min-height: 44px; padding: 0 18px; border-radius: 2px; border: 1px solid rgba(22,19,15,.14); background: transparent; color: #443c31; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; cursor: pointer">Documentos</button>
 </div>
-
-<a href="kanban-ganhos.html" class="next-project">
-  <div>
-    <p class="next-label" data-pt="Próximo projeto" data-en="Next project">Próximo projeto</p>
-    <p class="next-title" data-pt="Nova Experiência para Gestão de Comissões" data-en="Nova Experiência para Gestão de Comissões">Nova Experiência para Gestão de Comissões</p>
-  </div>
-  <span class="next-arrow">→</span>
-</a>
-
-<footer>
-  <p class="footer-copy">© 2026 Heloise Demétrio Prudencio</p>
-  <p class="footer-copy">Florianópolis · SC · BR</p>
-</footer>
-
-<script>
-function setLang(lang){
-  document.documentElement.dataset.lang=lang;
-  localStorage.setItem('hd-lang',lang);
-  document.getElementById('btn-pt').classList.toggle('active',lang==='pt');
-  document.getElementById('btn-en').classList.toggle('active',lang==='en');
-  document.querySelectorAll('[data-pt]').forEach(el=>{el.textContent=el.dataset[lang]||el.dataset.pt;});
-  const tabs=[
-    {url:'app.franq.com.br/ficha-pj/visao-360', pt:'Visão 360 — score, pendências e estrutura societária em um único painel', en:'360 Overview — score, pending items and ownership structure in a single panel'},
-    {url:'app.franq.com.br/ficha-pj/produtos', pt:'Produtos — catálogo de ofertas elegíveis, a consultar e solicitadas', en:'Products — catalog of eligible, consultable and requested offers'},
-    {url:'app.franq.com.br/ficha-pj/operacoes', pt:'Operações — pipeline de propostas e linha do tempo de atividades', en:'Operations — proposal pipeline and activity timeline'},
-    {url:'app.franq.com.br/ficha-pj/defesa-credito', pt:'Defesa de Crédito — formulário guiado para justificar a proposta', en:'Credit Defense — guided form to justify the proposal'},
-    {url:'app.franq.com.br/ficha-pj/documentos', pt:'Documentos — repositório com status de validade de cada arquivo', en:'Documents — repository with validity status for each file'}
-  ];
-  const active=document.querySelector('.tab-pill.active');
-  const idx=active?parseInt(active.dataset.tab):0;
-  document.getElementById('tab-caption').textContent = lang==='pt'?tabs[idx].pt:tabs[idx].en;
-}
-window.setLang=setLang;
-const savedLang=localStorage.getItem('hd-lang')||'pt';
-
-const tabImages=[
-  'assets/ficha-pj/nova-01-visao360.jpg',
-  'assets/ficha-pj/nova-02-doc-viewer.jpg',
-  'assets/ficha-pj/nova-03-enviar-doc.jpg',
-  'assets/ficha-pj/nova-04-documentos.jpg',
-  'assets/ficha-pj/nova-05-defesa-credito.jpg'
-];
-const tabCache=tabImages.map(src=>{const i=new Image();i.src=src;return i;});
-document.querySelectorAll('.tab-pill').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.tab-pill').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const idx=parseInt(btn.dataset.tab);
-    document.getElementById('tab-img').src=tabImages[idx];
-    document.getElementById('doc-hotspot').classList.toggle('active', idx===4);
-    closeDocModal(true);
-    setLang(document.documentElement.dataset.lang||'pt');
-  });
-});
-
-setLang(savedLang);
-const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.12});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-(function(){
-  const hotspot=document.getElementById('doc-hotspot');
-  const scrim=document.getElementById('doc-scrim');
-  const modal=document.getElementById('doc-modal');
-  const closeBtn=document.getElementById('doc-modal-close');
-  const cancelBtn=document.getElementById('doc-cancel-btn');
-  const sendBtn=document.getElementById('doc-send-btn');
-  const dropzone=document.getElementById('doc-dropzone');
-  const idle=document.getElementById('doc-dropzone-idle');
-  const uploading=document.getElementById('doc-dropzone-uploading');
-  const success=document.getElementById('doc-dropzone-success');
-  const fill=document.getElementById('doc-progress-fill');
-  const pct=document.getElementById('doc-progress-pct');
-  let uploadTimer=null;
-
-  function resetDoc(){
-    idle.classList.add('show'); uploading.classList.remove('show'); success.classList.remove('show');
-    fill.style.width='0%'; pct.textContent='0%';
-    sendBtn.classList.remove('pulse');
-    clearTimeout(uploadTimer);
-  }
-  window.openDocModal=function(){
-    resetDoc();
-    scrim.classList.add('show');
-    modal.classList.add('open');
-  };
-  window.closeDocModal=function(silent){
-    scrim.classList.remove('show');
-    modal.classList.remove('open');
-    if(!silent) setTimeout(resetDoc, 400);
-  };
-  if(hotspot) hotspot.addEventListener('click', ()=>openDocModal());
-  if(scrim) scrim.addEventListener('click', ()=>closeDocModal());
-  if(closeBtn) closeBtn.addEventListener('click', ()=>closeDocModal());
-  if(cancelBtn) cancelBtn.addEventListener('click', ()=>closeDocModal());
-
-  function startUpload(){
-    if(uploading.classList.contains('show')||success.classList.contains('show')) return;
-    idle.classList.remove('show');
-    uploading.classList.add('show');
-    let p=0;
-    uploadTimer=setInterval(()=>{
-      p+=Math.random()*18+8;
-      if(p>=100){
-        p=100;
-        clearInterval(uploadTimer);
-        fill.style.width='100%'; pct.textContent='100%';
-        sendBtn.classList.add('pulse');
-        setTimeout(()=>{
-          uploading.classList.remove('show');
-          success.classList.add('show');
-          setTimeout(()=>closeDocModal(), 1600);
-        }, 350);
-        return;
-      }
-      fill.style.width=p+'%'; pct.textContent=Math.floor(p)+'%';
-    }, 220);
-  }
-  if(dropzone) dropzone.addEventListener('click', startUpload);
-  if(sendBtn) sendBtn.addEventListener('click', ()=>{ if(!uploading.classList.contains('show') && !success.classList.contains('show')) startUpload(); });
-})();
-
-(function(){
-  const frame=document.getElementById('compare-frame');
-  const before=document.getElementById('compare-before');
-  const handle=document.getElementById('compare-handle');
-  if(!frame) return;
-  let dragging=false;
-  function setPos(clientX){
-    const rect=frame.getBoundingClientRect();
-    let pct=((clientX-rect.left)/rect.width)*100;
-    pct=Math.max(0,Math.min(100,pct));
-    before.style.clipPath='inset(0 '+(100-pct)+'% 0 0)';
-    handle.style.left=pct+'%';
-  }
-  frame.addEventListener('mousemove',e=>{ if(!dragging) setPos(e.clientX); });
-  frame.addEventListener('mouseleave',()=>{ if(!dragging){ before.style.clipPath='inset(0 50% 0 0)'; handle.style.left='50%'; } });
-  frame.addEventListener('mousedown',e=>{ dragging=true; setPos(e.clientX); });
-  window.addEventListener('mouseup',()=>{ dragging=false; });
-  window.addEventListener('mousemove',e=>{ if(dragging) setPos(e.clientX); });
-  frame.addEventListener('touchstart',e=>{ dragging=true; setPos(e.touches[0].clientX); },{passive:true});
-  frame.addEventListener('touchmove',e=>{ setPos(e.touches[0].clientX); },{passive:true});
-  frame.addEventListener('touchend',()=>{ dragging=false; });
-})();
-(function(){
-  const canvas=document.getElementById('starfield');
-  const ctx=canvas.getContext('2d');
-  let W,H,stars=[];
-  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
-  function build(){stars=Array.from({length:180},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+0.2,speed:Math.random()*0.1+0.02,tw:Math.random()*Math.PI*2,tws:Math.random()*0.012+0.004,amber:Math.random()<0.1}));}
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    stars.forEach(s=>{
-      s.tw+=s.tws; const a=0.3+Math.sin(s.tw)*0.5;
-      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-      ctx.fillStyle=s.amber?'rgba(31,75,63,'+a+')':'rgba(237,232,223,'+a+')';ctx.fill();
-      s.y+=s.speed; if(s.y>H){s.y=0;s.x=Math.random()*W;}
-    });
-    requestAnimationFrame(draw);
-  }
-  window.addEventListener('resize',()=>{resize();build();});
-  resize();build();requestAnimationFrame(draw);
-})();
-</script>
+<div style="border: 1px solid rgba(22,19,15,.14); border-radius: 6px; overflow: hidden; background: #ffffff; box-shadow: 0 24px 50px rgba(22,19,15,.12)">
+<div style="display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: #f4f1ea; border-bottom: 1px solid rgba(22,19,15,.1)"><span style="width: 9px; height: 9px; border-radius: 50%; background: #e0786b"></span><span style="width: 9px; height: 9px; border-radius: 50%; background: #e3b34f"></span><span style="width: 9px; height: 9px; border-radius: 50%; background: #6fb36c"></span><span style="margin-left: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #8a7f70; white-space: nowrap; overflow: hidden; text-overflow: ellipsis" data-tab-url>app.franq.com.br/ficha-pj/visao-360</span></div>
+<div style="position: relative; aspect-ratio: 2400 / 1525">
+<img data-tab-img src="assets/img/ficha-pj_nova-01-visao360.jpg" alt="Visão 360" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block">
+<div data-docs-hotspot style="display: none">
+<button type="button" data-action="open-modal" aria-label="Enviar documento (demonstração)" style="position: absolute; left: 83.5%; top: 20.5%; width: 13%; height: 3.6%; min-height: 20px; border: 2px solid #1f4b3f; border-radius: 6px; background: rgba(31,75,63,.12); box-shadow: 0 0 0 6px rgba(31,75,63,.18); cursor: pointer"></button>
+</div>
+<div data-modal style="display: none">
+<div style="position: absolute; inset: 0; background: rgba(22,19,15,.45)" data-action="close-modal"></div>
+<div role="dialog" aria-modal="true" aria-label="Enviar Documento" style="position: absolute; top: 0; right: 0; bottom: 0; width: min(100%, 50%); min-width: 260px; background: #ffffff; display: flex; flex-direction: column; color: #1d1f2b">
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid #eceef3"><h3 style="font-size: 15px; font-weight: 600">Enviar Documento</h3><button type="button" data-action="close-modal" aria-label="Fechar" style="width: 36px; height: 36px; border: 0; background: none; font-size: 16px; color: #555a6e; cursor: pointer">✕</button></div>
+<div style="flex: 1; overflow: auto; padding: 14px 18px; display: flex; flex-direction: column; gap: 12px; font-size: 12px">
+<div style="display: flex; flex-direction: column; gap: 5px"><span style="font-weight: 600">Tipo de documento</span><div style="display: flex; justify-content: space-between; padding: 8px 10px; border: 1px solid #dfe2ea; border-radius: 6px; color: #6b7083"><span>Selecione o tipo de documento</span><span aria-hidden="true">⌄</span></div></div>
+<div style="display: flex; flex-direction: column; gap: 5px"><span style="font-weight: 600">Categoria</span><div style="display: flex; justify-content: space-between; padding: 8px 10px; border: 1px solid #dfe2ea; border-radius: 6px; color: #6b7083"><span>Selecione a categoria</span><span aria-hidden="true">⌄</span></div></div>
+<div style="display: flex; flex-direction: column; gap: 5px"><span style="font-weight: 600">Arquivo</span>
+<div style="border: 1.5px dashed #b9bfe9; border-radius: 8px; background: #f7f8fe; padding: 16px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center">
+<div data-phase="idle" style="display: contents">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5a62d6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3V15"></path><path d="M17 8L12 3L7 8"></path><path d="M21 15V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V15"></path></svg>
+<p style="font-weight: 600">Arraste o arquivo aqui ou clique para selecionar</p>
+<span style="color: #6b7083; font-size: 11px">PDF, JPG, PNG — Máximo 10MB</span>
+</div>
+<div data-phase="uploading" style="display: none">
+<p style="font-weight: 600">contrato_social_2024.pdf</p>
+<div style="width: 100%; height: 6px; border-radius: 3px; background: #e4e6f5; overflow: hidden"><div style="height: 6px; background: #5a62d6; width: 0%" data-pct-bar></div></div>
+<span style="color: #6b7083; font-size: 11px" data-pct-text>0%</span>
+</div>
+<div data-phase="success" style="display: none">
+<span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 50%; background: #2e8b57; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 15px">✓</span>
+<p style="font-weight: 600">Documento enviado com sucesso!</p>
+<span style="color: #6b7083; font-size: 11px">contrato_social_2024.pdf · 2.1 MB</span>
+</div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 5px"><span style="font-weight: 600">Observação (opcional)</span><div style="padding: 8px 10px; min-height: 48px; border: 1px solid #dfe2ea; border-radius: 6px; color: #6b7083">Ex: Balanço referente ao exercício 2023</div></div>
+</div>
+<div style="display: flex; gap: 10px; padding: 12px 18px; border-top: 1px solid #eceef3">
+<button type="button" data-action="close-modal" style="flex: 1; min-height: 40px; border: 1px solid #dfe2ea; border-radius: 6px; background: #ffffff; color: #1d1f2b; font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer">Cancelar</button>
+<button type="button" data-action="send-doc" style="flex: 1; min-height: 40px; border: 0; border-radius: 6px; background: #5a62d6; color: #ffffff; font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer">Enviar Documento</button>
+</div>
+</div>
+</div>
+</div>
+</div></div>
+<figcaption style="text-align: center; margin-top: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .08em; color: #8a7f70" data-tab-caption>Visão 360 — score, pendências e estrutura societária em um único painel</figcaption>
+</figure><div style="display: flex; flex-wrap: wrap; gap: 8px 56px; margin-top: 88px; margin-bottom: 0px"><div style="flex: 0 0 200px"></div><div style="flex: 1 1 520px; min-width: 0; max-width: 760px"><h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 28px; line-height: 1.2; margin-bottom: 16px">Estados e fluxos de documentos</h3><p style="font-size: 17px; line-height: 1.8; font-weight: 300; color: #443c31; text-wrap: pretty; margin-top: 0px">Além da reorganização da informação, prototipei todos os estados da interface, vazio, pendência e sucesso, garantindo consistência em diferentes cenários de uso. Também redesenhei os fluxos de envio e visualização de documentos utilizando modais, permitindo que o PB anexasse e consultasse arquivos sem precisar sair da ficha, preservando o contexto da navegação e reduzindo interrupções na tarefa.</p></div></div><div style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: 16px"><div style="background: #eae5da; border-radius: 8px; padding: clamp(16px, 3vw, 32px)"><img src="assets/img/ficha-pj_nova-06-operacoes.jpg" alt="Modal de envio de documento" width="2400" height="1523" style="display: block; width: 100%; height: auto; border-radius: 4px; box-shadow: 0 16px 32px rgba(22,19,15,.1)"><p style="margin-top: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .08em; color: #8a7f70">Modal — envio de documento sem sair da ficha</p></div><div style="background: #eae5da; border-radius: 8px; padding: clamp(16px, 3vw, 32px)"><img src="assets/img/ficha-pj_nova-07-produtos.jpg" alt="Modal de visualização de documento" width="2400" height="1523" style="display: block; width: 100%; height: auto; border-radius: 4px; box-shadow: 0 16px 32px rgba(22,19,15,.1)"><p style="margin-top: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .08em; color: #8a7f70">Modal — visualização e download do documento enviado</p></div></div></div></section><section style="padding: 96px 0; border-top: 1px solid rgba(22,19,15,.07)"><div style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px)"><div style="display: flex; flex-wrap: wrap; gap: 8px 56px; align-items: baseline; margin-bottom: 64px"><span style="flex: 0 0 200px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .16em; color: #1f4b3f">04</span><h2 style="flex: 1 1 520px; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(34px, 4vw, 52px); line-height: 1.05">Entregar</h2></div><div style="display: flex; flex-wrap: wrap; gap: 8px 56px; margin-top: 0px; margin-bottom: 0px"><div style="flex: 0 0 200px"></div><div style="flex: 1 1 520px; min-width: 0; max-width: 760px"><h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 28px; line-height: 1.2; margin-bottom: 16px">Protótipo final</h3><p style="font-size: 17px; line-height: 1.8; font-weight: 300; color: #443c31; text-wrap: pretty; margin-top: 0px">A interface final foi construída sobre o design system da Franq. As cinco abas compartilham o mesmo painel lateral com dados da empresa e score, para que o PB nunca perca o contexto do cliente ao trocar de tarefa.</p></div></div><div style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: 16px"><div style="background: #eae5da; border-radius: 8px; padding: clamp(16px, 3vw, 32px)"><img src="assets/img/ficha-pj_nova-02-doc-viewer.jpg" alt="Aba Produtos" width="2400" height="1525" style="display: block; width: 100%; height: auto; border-radius: 4px; box-shadow: 0 16px 32px rgba(22,19,15,.1)"><p style="margin-top: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .08em; color: #8a7f70">Produtos</p></div><div style="background: #eae5da; border-radius: 8px; padding: clamp(16px, 3vw, 32px)"><img src="assets/img/ficha-pj_nova-03-enviar-doc.jpg" alt="Aba Operações" width="2400" height="1525" style="display: block; width: 100%; height: auto; border-radius: 4px; box-shadow: 0 16px 32px rgba(22,19,15,.1)"><p style="margin-top: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .08em; color: #8a7f70">Operações</p></div><div style="background: #eae5da; border-radius: 8px; padding: clamp(16px, 3vw, 32px)"><img src="assets/img/ficha-pj_nova-04-documentos.jpg" alt="Aba Defesa de Crédito" width="2400" height="1525" style="display: block; width: 100%; height: auto; border-radius: 4px; box-shadow: 0 16px 32px rgba(22,19,15,.1)"><p style="margin-top: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .08em; color: #8a7f70">Defesa de Crédito</p></div><div style="background: #eae5da; border-radius: 8px; padding: clamp(16px, 3vw, 32px)"><img src="assets/img/ficha-pj_nova-05-defesa-credito.jpg" alt="Aba Documentos" width="2400" height="1525" style="display: block; width: 100%; height: auto; border-radius: 4px; box-shadow: 0 16px 32px rgba(22,19,15,.1)"><p style="margin-top: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .08em; color: #8a7f70">Documentos</p></div></div></div></section>
+<section style="padding: 96px 0; border-top: 1px solid rgba(22,19,15,.07)"><div style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px)"><div style="display: flex; flex-wrap: wrap; gap: 8px 56px; margin-top: 0px; margin-bottom: 0px"><div style="flex: 0 0 200px"><p style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #1f4b3f">Como medir o sucesso</p></div><div style="flex: 1 1 520px; min-width: 0; max-width: 760px"><h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 28px; line-height: 1.2">O que o mercado mostra</h3><p style="font-size: 17px; line-height: 1.8; font-weight: 300; color: #443c31; text-wrap: pretty; margin-top: 12px">Quando a informação está espalhada, o custo aparece em tempo: procurar dado é uma das atividades que mais consomem a semana de quem trabalha com conhecimento.</p></div></div><div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px"><div style="padding: 28px; border: 1px solid rgba(31,75,63,.22); border-radius: 4px; background: #fbf9f5; display: flex; flex-direction: column; gap: 12px"><p style="font-family: 'Instrument Serif', serif; font-size: 48px; line-height: 1; color: #1f4b3f">1,8 h/dia</p><p style="font-size: 15px; line-height: 1.6; font-weight: 300; color: #443c31; text-wrap: pretty">é o tempo médio que profissionais do conhecimento gastam procurando e reunindo informações no trabalho — quase um dia por semana.</p><a href="https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/the-social-economy" target="_blank" rel="noopener" style="margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .06em; line-height: 1.6; color: #1f4b3f; text-decoration: underline; text-underline-offset: 3px">McKinsey Global Institute · The social economy, 2012 ↗</a></div></div><div style="display: flex; flex-wrap: wrap; gap: 8px 56px; margin-top: 72px; margin-bottom: 0px"><div style="flex: 0 0 200px"></div><div style="flex: 1 1 520px; min-width: 0; max-width: 760px"><h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 28px; line-height: 1.2">Indicadores que o projeto deve mover</h3><p style="font-size: 17px; line-height: 1.8; font-weight: 300; color: #443c31; text-wrap: pretty; margin-top: 12px">Os indicadores abaixo traduzem os objetivos do projeto em sinais mensuráveis, com a forma de medir cada um.</p><ul style="list-style: none; margin-top: 20px; border-top: 1px solid rgba(22,19,15,.14)"><li style="display: flex; flex-wrap: wrap; gap: 4px 24px; padding: 16px 0; border-bottom: 1px solid rgba(22,19,15,.07)"><span style="flex: 1 1 260px; font-size: 15.5px; font-weight: 600">Tempo até a informação</span><span style="flex: 1 1 300px; font-size: 15px; font-weight: 300; color: #443c31">Teste de tarefa cronometrado: quanto o PB leva para achar score, pendências ou um documento, antes e depois.</span></li><li style="display: flex; flex-wrap: wrap; gap: 4px 24px; padding: 16px 0; border-bottom: 1px solid rgba(22,19,15,.07)"><span style="flex: 1 1 260px; font-size: 15.5px; font-weight: 600">Rolagem por sessão</span><span style="flex: 1 1 300px; font-size: 15px; font-weight: 300; color: #443c31">Profundidade de scroll medida no analytics da ficha.</span></li><li style="display: flex; flex-wrap: wrap; gap: 4px 24px; padding: 16px 0; border-bottom: 1px solid rgba(22,19,15,.07)"><span style="flex: 1 1 260px; font-size: 15.5px; font-weight: 600">Uso das abas</span><span style="flex: 1 1 300px; font-size: 15px; font-weight: 300; color: #443c31">Quais abas são mais acessadas e em que ordem, por perfil (PB e CS).</span></li><li style="display: flex; flex-wrap: wrap; gap: 4px 24px; padding: 16px 0; border-bottom: 1px solid rgba(22,19,15,.07)"><span style="flex: 1 1 260px; font-size: 15.5px; font-weight: 600">Documentos enviados pelo modal</span><span style="flex: 1 1 300px; font-size: 15px; font-weight: 300; color: #443c31">Uploads concluídos sem sair da ficha e taxa de abandono do fluxo.</span></li><li style="display: flex; flex-wrap: wrap; gap: 4px 24px; padding: 16px 0; border-bottom: 1px solid rgba(22,19,15,.07)"><span style="flex: 1 1 260px; font-size: 15.5px; font-weight: 600">Dúvidas sobre documentos</span><span style="flex: 1 1 300px; font-size: 15px; font-weight: 300; color: #443c31">Chamados e mensagens ao CS sobre status de documentos.</span></li></ul></div></div></div></section>
+<section style="padding: 96px 0; border-top: 1px solid rgba(22,19,15,.07)"><div style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px)"><div style="display: flex; flex-wrap: wrap; gap: 8px 56px; margin-top: 0px; margin-bottom: 0px"><div style="flex: 0 0 200px"><p style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #1f4b3f">Resultado</p></div><div style="flex: 1 1 520px; min-width: 0; max-width: 760px"><h2 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(28px, 3.2vw, 40px); line-height: 1.15; text-wrap: balance">Uma ficha que responde antes de ser perguntada — e o que ela me ensinou</h2><p style="margin-top: 22px; font-size: 17px; line-height: 1.8; font-weight: 300; color: #443c31; text-wrap: pretty">A reestruturação por abas trouxe clareza imediata sobre onde encontrar cada tipo de informação, reduzindo o tempo que o PB gasta procurando dados espalhados e tornando a ficha um verdadeiro painel de gestão do relacionamento com o cliente PJ.</p><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 16px; margin-top: 28px"><div style="border: 1px solid rgba(31,75,63,.22); border-radius: 4px; padding: 24px 20px; text-align: center; background: #fbf9f5"><p style="font-family: 'Instrument Serif', serif; font-size: 40px; line-height: 1.1; color: #1f4b3f">5</p><p style="margin-top: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #8a7f70">Abas de contexto dedicado</p></div><div style="border: 1px solid rgba(31,75,63,.22); border-radius: 4px; padding: 24px 20px; text-align: center; background: #fbf9f5"><p style="font-family: 'Instrument Serif', serif; font-size: 40px; line-height: 1.1; color: #1f4b3f">-40%</p><p style="margin-top: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #8a7f70">Rolagem para encontrar informação</p></div><div style="border: 1px solid rgba(31,75,63,.22); border-radius: 4px; padding: 24px 20px; text-align: center; background: #fbf9f5"><p style="font-family: 'Instrument Serif', serif; font-size: 40px; line-height: 1.1; color: #1f4b3f">2</p><p style="margin-top: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #8a7f70">Modais para upload e visualização</p></div></div><p style="margin-top: 22px; font-size: 17px; line-height: 1.8; font-weight: 300; color: #443c31; text-wrap: pretty">Reorganizar a ficha a partir das perguntas do PB reforçou alguns princípios:</p><ol style="margin-top: 22px; list-style: none; display: flex; flex-direction: column; gap: 14px; font-size: 17px; line-height: 1.7; font-weight: 300; color: #443c31"><li style="display: flex; gap: 16px"><span style="flex: none; width: 28px; font-family: 'Instrument Serif', serif; font-size: 22px; color: #1f4b3f">1.</span><span><strong style="font-weight: 600; color: #16130f">Pergunta antes de layout.</strong> Organizar pela pergunta do usuário, não pelo tipo de dado.</span></li><li style="display: flex; gap: 16px"><span style="flex: none; width: 28px; font-family: 'Instrument Serif', serif; font-size: 22px; color: #1f4b3f">2.</span><span><strong style="font-weight: 600; color: #16130f">Contexto fixo, tarefa variável.</strong> O painel lateral mantém o cliente à vista enquanto o PB troca de aba.</span></li><li style="display: flex; gap: 16px"><span style="flex: none; width: 28px; font-family: 'Instrument Serif', serif; font-size: 22px; color: #1f4b3f">3.</span><span><strong style="font-weight: 600; color: #16130f">Estado vazio também é design.</strong> Pendência e sucesso dizem qual é a próxima ação.</span></li><li style="display: flex; gap: 16px"><span style="flex: none; width: 28px; font-family: 'Instrument Serif', serif; font-size: 22px; color: #1f4b3f">4.</span><span><strong style="font-weight: 600; color: #16130f">Modal quando a tarefa é curta.</strong> Anexar um documento não deveria tirar ninguém da ficha.</span></li><li style="display: flex; gap: 16px"><span style="flex: none; width: 28px; font-family: 'Instrument Serif', serif; font-size: 22px; color: #1f4b3f">5.</span><span><strong style="font-weight: 600; color: #16130f">Ouvir quem usa todo dia.</strong> PBs e CSs sabiam onde a ficha atrapalhava antes de qualquer métrica.</span></li></ol></div></div></div></section>
+<a class="next" href="comissoes.html" style="display: block; border-top: 1px solid rgba(22,19,15,.14); color: inherit"><div style="max-width: 1120px; margin: 0 auto; padding: 64px clamp(16px, 4vw, 40px); display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap"><div><p style="margin-bottom: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .25em; text-transform: uppercase; color: #8a7f70">Próximo projeto</p><p style="font-family: 'Instrument Serif', serif; font-size: 32px; line-height: 1.15; color: #16130f">Nova Experiência para Gestão de Comissões</p></div><span aria-hidden="true" style="font-size: 44px; color: #1f4b3f">→</span></div></a>
+<footer style="background: #16130f; color: #f4f1ea"><div style="max-width: 1120px; margin: 0 auto; padding: 88px clamp(16px, 4vw, 40px) 40px"><p style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #b8ad9c">Contato</p><h2 style="margin-top: 16px; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(36px, 4.6vw, 60px); line-height: 1.08">Vamos conversar</h2><a class="btn" href="contato.html" style="display: inline-flex; align-items: center; gap: 10px; min-height: 48px; margin-top: 32px; padding: 12px 24px; border: 1px solid #f4f1ea; border-radius: 999px; color: #f4f1ea; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase">Falar comigo <span aria-hidden="true">↗</span></a><div style="margin-top: 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 32px; padding-top: 32px; border-top: 1px solid rgba(244,241,234,.16)"><div style="display: flex; flex-direction: column; gap: 4px"><a class="fl" href="index.html" style="display: inline-flex; align-items: center; min-height: 36px; color: #cfc6b8; font-size: 15px">Início</a><a class="fl" href="index.html" style="display: inline-flex; align-items: center; min-height: 36px; color: #cfc6b8; font-size: 15px">Projetos</a><a class="fl" href="sobre.html" style="display: inline-flex; align-items: center; min-height: 36px; color: #cfc6b8; font-size: 15px">Sobre</a><a class="fl" href="contato.html" style="display: inline-flex; align-items: center; min-height: 36px; color: #cfc6b8; font-size: 15px">Contato</a></div><div style="display: flex; flex-direction: column; gap: 4px"><a class="fl" href="https://www.linkedin.com/in/heloise-dem%C3%A9trio-prudencio-855693175/" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: space-between; min-height: 36px; color: #cfc6b8; font-size: 15px">LinkedIn <span aria-hidden="true">↗</span></a><a class="fl" href="https://wa.me/5548999327699" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: space-between; min-height: 36px; color: #cfc6b8; font-size: 15px">WhatsApp <span aria-hidden="true">↗</span></a></div></div><div style="margin-top: 56px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em; color: #a39886"><p>© 2026 Heloise Demétrio Prudencio</p><p>Florianópolis · SC · BR</p></div></div></footer>
+</div>
+<script src="assets/site.js"></script>
 </body>
 </html>
